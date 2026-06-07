@@ -68,6 +68,7 @@ const locale = Astro.currentLocale ?? config.site.lang;
 
 const {
   title,
+  metaTitle,
   description,
   ogImage: initOgImage,
   canonicalURL,
@@ -105,7 +106,7 @@ const ogImage = ogImageUrl
 ---
 
 <PostLayout
-  title={`${title} | ${config.site.title}`}
+  title={`${metaTitle ?? title} | ${config.site.title}`}
   description={description}
   ogImage={ogImage}
   canonicalURL={canonicalURL}

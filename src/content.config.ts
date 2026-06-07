@@ -14,6 +14,7 @@ const posts = defineCollection({
       pubDatetime: z.date(),
       modDatetime: z.date().optional().nullable(),
       title: z.string(),
+      metaTitle: z.string().optional(),
       featured: z.boolean().optional(),
       draft: z.boolean().optional(),
       category: z.enum(CATEGORY_SLUGS).optional(),
