@@ -1,0 +1,87 @@
+name: Import Human Mechanism
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/import-human-mechanism.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import-build-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout psyho-media
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download prepared project
+        run: |
+          curl -fL -A "Mozilla/5.0" "https://files.catbox.moe/4qbifh.gz" -o "$RUNNER_TEMP/project.tar.gz"
+          mkdir -p "$RUNNER_TEMP/project"
+          tar -xzf "$RUNNER_TEMP/project.tar.gz" -C "$RUNNER_TEMP/project"
+
+      - name: Replace site contents
+        run: |
+          python3 - <<'PY'
+          import os
+          import pathlib
+          import shutil
+          root = pathlib.Path.cwd()
+          project = pathlib.Path(os.environ['RUNNER_TEMP']) / 'project'
+          for child in list(root.iterdir()):
+              if child.name in {'.git', '.github'}:
+                  continue
+              if child.is_dir():
+                  shutil.rmtree(child)
+              else:
+                  child.unlink()
+          for child in project.iterdir():
+              if child.name == '.github':
+                  continue
+              target = root / child.name
+              if child.is_dir():
+                  shutil.copytree(child, target, dirs_exist_ok=True)
+              else:
+                  shutil.copy2(child, target)
+          required = [
+              root / 'package.json',
+              root / 'src' / 'pages' / 'index.astro',
+              root / 'src' / 'components' / 'Card.astro',
+              root / 'src' / 'styles' / 'global.css',
+              root / 'src' / 'data' / 'contentSystem.ts',
+              root / 'public' / 'covers' / 'fragment-silence.svg',
+          ]
+          missing = [str(path) for path in required if not path.exists()]
+          if missing:
+              raise SystemExit('Missing after import: ' + ', '.join(missing))
+          PY
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build project
+        run: pnpm build
+
+      - name: Commit imported project
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && { echo "No imported changes staged"; exit 1; }
+          git commit -m "Refine Human Mechanism editorial UI"
+          git push origin main
