@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Емоційна залежність</title>
+  <desc id="desc">Обкладинка фундаментального матеріалу про емоційну залежність.</desc>
+  <rect width="1200" height="675" fill="#241f1c"/>
+  <path d="M440 180c82-78 220-26 220 88 0 114-220 238-220 238S220 382 220 268c0-114 138-166 220-88Z" fill="none" stroke="#e8d7c8" stroke-width="10"/>
+  <path d="M710 170h142v382H710z" fill="none" stroke="#8f1f2e" stroke-width="10"/>
+  <path d="M660 345h70" stroke="#8f1f2e" stroke-width="10" stroke-linecap="round"/>
+  <text x="78" y="610" fill="#f4eadf" font-family="Arial, sans-serif" font-size="76" font-weight="900">ЕМОЦІЙНА ЗАЛЕЖНІСТЬ</text>
+</svg>
