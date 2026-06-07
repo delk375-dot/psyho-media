@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Повернення</title>
+  <desc id="desc">Обкладинка про повернення після розриву.</desc>
+  <rect width="1200" height="675" fill="#241f1c"/>
+  <path d="M720 185 845 310 720 435" fill="none" stroke="#e8d7c8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M845 310H430c-88 0-132 42-132 104 0 58 46 99 118 99h70" fill="none" stroke="#8f1f2e" stroke-width="11" stroke-linecap="round"/>
+  <text x="84" y="590" fill="#f4eadf" font-family="Arial, sans-serif" font-size="88" font-weight="900">ПОВЕРНЕННЯ</text>
+</svg>
