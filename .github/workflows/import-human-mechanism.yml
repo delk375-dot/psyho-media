@@ -21,7 +21,7 @@ jobs:
 
       - name: Download prepared project
         run: |
-          curl -fL -A "Mozilla/5.0" "https://files.catbox.moe/794rtd.gz" -o "$RUNNER_TEMP/project.tar.gz"
+          curl -fL -A "Mozilla/5.0" "https://files.catbox.moe/dgrber.gz" -o "$RUNNER_TEMP/project.tar.gz"
           mkdir -p "$RUNNER_TEMP/project"
           tar -xzf "$RUNNER_TEMP/project.tar.gz" -C "$RUNNER_TEMP/project"
 
