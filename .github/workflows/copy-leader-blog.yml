@@ -13,7 +13,6 @@ permissions:
 jobs:
   copy-build-and-commit:
     runs-on: ubuntu-latest
-    if: ${{ !contains(github.event.head_commit.message, 'Copy AstroPaper project from leader-blog') }}
     steps:
       - name: Checkout psyho-media
         uses: actions/checkout@v4
