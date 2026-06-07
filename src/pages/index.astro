@@ -20,14 +20,23 @@ const posts = await getCollection("posts", ({ data }) => !data.draft);
 const sortedPosts = getSortedPosts(posts);
 const homePath = getRelativeLocaleUrl(locale, "");
 
-const byType = (type: string, limit = 4) =>
-  sortedPosts.filter(post => post.data.contentType === type).slice(0, limit);
+const byType = (type: string, limit = 4, skipIds = new Set<string>()) =>
+  sortedPosts
+    .filter(post => post.data.contentType === type && !skipIds.has(post.id))
+    .slice(0, limit);
 
-const latestPosts = sortedPosts.slice(0, 5);
-const viralNotes = byType("viral_note", 4);
+const viralNotes = byType("viral_note", 3);
 const fragments = byType("psychological_fragment", 6);
-const deepAnalysis = byType("deep_analysis", 4);
+const deepAnalysis = byType("deep_analysis", 3);
 const pillarArticles = byType("pillar_article", 4);
+const lanePostIds = new Set(
+  [...viralNotes, ...fragments, ...deepAnalysis, ...pillarArticles].map(
+    post => post.id
+  )
+);
+const latestPosts = sortedPosts
+  .filter(post => !lanePostIds.has(post.id))
+  .slice(0, 5);
 const popularCategories = CATEGORIES.filter(category =>
   [
     "relationships",
@@ -51,7 +60,7 @@ const popularCategories = CATEGORIES.filter(category =>
     data-home-path={homePath}
     class="app-layout"
   >
-    <section id="hero" class="relative overflow-hidden border-border border-b pt-16 pb-14 sm:pt-24 sm:pb-20">
+    <section id="hero" class="relative overflow-hidden border-border border-b pt-12 pb-10 sm:pt-18 sm:pb-14">
       <div class="relative z-10 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.72fr)] lg:items-center">
         <div class="max-w-3xl">
           <p class="section-kicker">Психологія повсякденних драм</p>
@@ -60,10 +69,13 @@ const popularCategories = CATEGORIES.filter(category =>
             Людський механізм
           </h1>
 
-          <p class="mt-8 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
-            Медіа про те, чому люди зникають, ревнують, маніпулюють, мовчать,
-            закохуються не в тих, бояться грошей, втрачають бажання і воюють за
-            любов, статус та контроль.
+          <p class="hero-statement mt-7 max-w-2xl">
+            Люди рідко говорять прямо. Особливо коли бояться втратити контроль.
+          </p>
+
+          <p class="mt-5 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg sm:leading-8">
+            Психологія ревнощів, мовчання, залежності, бажання, грошей і
+            прихованих мотивів, які керують повсякденними драмами.
           </p>
 
           <div class="mt-10 flex flex-wrap gap-3 sm:mt-12">
@@ -91,10 +103,10 @@ const popularCategories = CATEGORIES.filter(category =>
       </div>
     </section>
 
-    <section id="search-queries" class="border-border border-b py-14 sm:py-20">
+    <section id="search-queries" class="border-border border-b py-10 sm:py-14">
       <div class="max-w-2xl">
-        <p class="section-kicker">Пошукові входи</p>
-        <h2 class="section-title">Люди найчастіше шукають</h2>
+        <p class="section-kicker">Пошукові тривоги</p>
+        <h2 class="section-title">Питання, які люди шукають ночами</h2>
       </div>
 
       <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -110,7 +122,7 @@ const popularCategories = CATEGORIES.filter(category =>
       </ul>
     </section>
 
-    <section id="latest-research" class="content-lane border-border border-b py-14 sm:py-20">
+    <section id="latest-research" class="content-lane border-border border-b py-10 sm:py-14">
       <div class="lane-header">
         <div>
           <p class="section-kicker">Останні публікації</p>
@@ -126,11 +138,11 @@ const popularCategories = CATEGORIES.filter(category =>
       </ul>
     </section>
 
-    <section id="viral-notes" class="content-lane border-border border-b py-14 sm:py-20">
+    <section id="viral-notes" class="content-lane border-border border-b py-10 sm:py-14">
       <div class="lane-header">
         <div>
           <FormatBadge contentType="viral_note" />
-          <h2 class="section-title mt-3">Viral Notes</h2>
+          <h2 class="section-title mt-3">Вірусні замітки</h2>
           <p class="section-copy">{CONTENT_FORMATS.viral_note.description}</p>
         </div>
       </div>
@@ -139,11 +151,11 @@ const popularCategories = CATEGORIES.filter(category =>
       </ul>
     </section>
 
-    <section id="fragments" class="border-border border-b py-14 sm:py-20">
+    <section id="fragments" class="border-border border-b py-10 sm:py-14">
       <div class="lane-header">
         <div>
           <FormatBadge contentType="psychological_fragment" />
-          <h2 class="section-title mt-3">Psychological Fragments</h2>
+          <h2 class="section-title mt-3">Психологічні фрагменти</h2>
           <p class="section-copy">{CONTENT_FORMATS.psychological_fragment.description}</p>
         </div>
       </div>
@@ -151,7 +163,7 @@ const popularCategories = CATEGORIES.filter(category =>
         {fragments.map(post => (
           <li>
             <a href={getPostUrl(post.id, post.filePath, locale)} class="fragment-card block min-h-full">
-              <span class="fragment-card-format">Fragment</span>
+              <span class="fragment-card-format">Фрагмент</span>
               <strong>{post.data.title}</strong>
               <span>{post.data.description}</span>
             </a>
@@ -160,9 +172,9 @@ const popularCategories = CATEGORIES.filter(category =>
       </ul>
     </section>
 
-    <section id="popular-topics" class="border-border border-b py-14 sm:py-20">
+    <section id="popular-topics" class="border-border border-b py-10 sm:py-14">
       <div class="max-w-2xl">
-        <p class="section-kicker">Topic clusters</p>
+        <p class="section-kicker">Популярні теми</p>
         <h2 class="section-title">Популярні теми</h2>
         <p class="section-copy">
           Кластери для внутрішньої перелінковки, SEO і AI search: кожна тема веде
@@ -192,11 +204,11 @@ const popularCategories = CATEGORIES.filter(category =>
       </ul>
     </section>
 
-    <section id="deep-analysis" class="content-lane border-border border-b py-14 sm:py-20">
+    <section id="deep-analysis" class="content-lane border-border border-b py-10 sm:py-14">
       <div class="lane-header">
         <div>
           <FormatBadge contentType="deep_analysis" />
-          <h2 class="section-title mt-3">Deep Analysis</h2>
+          <h2 class="section-title mt-3">Глибокі розбори</h2>
           <p class="section-copy">{CONTENT_FORMATS.deep_analysis.description}</p>
         </div>
       </div>
@@ -205,11 +217,11 @@ const popularCategories = CATEGORIES.filter(category =>
       </ul>
     </section>
 
-    <section id="pillar-articles" class="content-lane border-border border-b py-14 sm:py-20">
+    <section id="pillar-articles" class="content-lane border-border border-b py-10 sm:py-14">
       <div class="lane-header">
         <div>
           <FormatBadge contentType="pillar_article" />
-          <h2 class="section-title mt-3">Pillar Articles</h2>
+          <h2 class="section-title mt-3">Фундаментальні розбори</h2>
           <p class="section-copy">{CONTENT_FORMATS.pillar_article.description}</p>
         </div>
         <LinkButton href={getRelativeLocaleUrl(locale, "topics")}>
@@ -221,7 +233,7 @@ const popularCategories = CATEGORIES.filter(category =>
       </ul>
     </section>
 
-    <section id="services" class="border-border border-b py-14 sm:py-20">
+    <section id="services" class="border-border border-b py-10 sm:py-14">
       <div class="max-w-2xl">
         <p class="section-kicker">Практика</p>
         <h2 class="section-title">Практичні формати</h2>

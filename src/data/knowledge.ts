@@ -132,7 +132,7 @@ export const COLLECTIONS = [
     slug: "relationship-psychology",
     title: "Психологія стосунків",
     description:
-      "Pillar-матеріали про близькість, дистанцію, ревнощі, зради, мовчання і залежність.",
+      "Фундаментальні матеріали про близькість, дистанцію, ревнощі, зради, мовчання і залежність.",
     hubs: ["relationship-dramas", "attachment-and-distance"],
   },
   {

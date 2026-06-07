@@ -16,26 +16,26 @@ export const CONTENT_FORMATS: Record<
   }
 > = {
   viral_note: {
-    label: "Viral Note",
-    shortLabel: "Note",
+    label: "Вірусна замітка",
+    shortLabel: "Замітка",
     description: "Коротка психологічна замітка, яка чіпляє одну болючу ситуацію.",
     range: "2 000-5 000 знаків",
   },
   deep_analysis: {
-    label: "Deep Analysis",
-    shortLabel: "Deep",
+    label: "Глибокий розбір",
+    shortLabel: "Розбір",
     description: "Середній розбір механізму поведінки, конфлікту або стосунків.",
     range: "7 000-12 000 знаків",
   },
   pillar_article: {
-    label: "Pillar",
-    shortLabel: "Pillar",
+    label: "Фундаментальний розбір",
+    shortLabel: "Фундамент",
     description: "Фундаментальний матеріал для SEO, AI search і topic clusters.",
     range: "15 000-40 000+ знаків",
   },
   psychological_fragment: {
-    label: "Fragment",
-    shortLabel: "Fragment",
+    label: "Психологічний фрагмент",
+    shortLabel: "Фрагмент",
     description: "Короткий сильний психологічний фрагмент або парадокс.",
     range: "300-1 200 знаків",
   },

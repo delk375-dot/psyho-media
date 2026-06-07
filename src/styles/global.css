@@ -49,6 +49,10 @@
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
+
+  :where(h1, h2, h3, .section-title, .hero-statement) {
+    font-family: Georgia, "Times New Roman", Times, serif;
+  }
 }
 
 @utility max-w-app {
@@ -105,7 +109,7 @@
 
 .human-hero-mark {
   position: relative;
-  min-height: 26rem;
+  min-height: 22rem;
   border-inline-start: 1px solid var(--border);
 }
 
@@ -126,6 +130,14 @@
   top: 14rem;
   height: 1px;
   background: var(--border);
+}
+
+.hero-statement {
+  color: var(--foreground);
+  font-size: clamp(1.55rem, 4vw, 2.45rem);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.12;
 }
 
 .human-hero-line::before,
@@ -188,7 +200,7 @@
 
 .section-title {
   font-size: clamp(1.75rem, 4vw, 2.25rem);
-  font-weight: 700;
+  font-weight: 650;
   letter-spacing: 0;
   line-height: 1.15;
 }
@@ -219,6 +231,20 @@
   font-size: 0.68rem;
   font-weight: 850;
   letter-spacing: 0.12em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.emotional-label {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  border-inline-start: 2px solid var(--accent);
+  color: color-mix(in srgb, var(--foreground) 74%, var(--accent));
+  padding-inline-start: 0.45rem;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
   line-height: 1.35;
   text-transform: uppercase;
 }
@@ -422,6 +448,13 @@
   color: var(--background);
 }
 
+.post-card h2,
+.post-card h3 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: 650;
+  line-height: 1.18;
+}
+
 .article-visual img {
   display: block;
   width: 100%;
@@ -542,18 +575,52 @@
     margin-top: 1rem;
   }
 
+  .section-title {
+    font-size: 1.58rem;
+  }
+
+  .section-copy {
+    line-height: 1.65;
+  }
+
   body::before {
     opacity: 0.2;
     background-size: 56px 56px, 56px 56px, 160px 160px, 180px 180px;
   }
 
   .article-visual {
-    min-height: 8.5rem;
+    width: 6.9rem;
+    height: 6.9rem;
+    min-height: 0;
+    aspect-ratio: 1;
+  }
+
+  .article-visual img {
+    min-height: 0;
+    object-fit: cover;
+  }
+
+  .post-card p {
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .post-card a.text-accent {
+    font-size: 1.02rem;
+    line-height: 1.2;
   }
 
   .article-visual-title {
-    inset-inline-end: 2.25rem;
-    font-size: 1.22rem;
+    inset-inline: 0.55rem;
+    bottom: 1.6rem;
+    font-size: 0.82rem;
+  }
+
+  .article-visual-label {
+    inset-inline: 0.6rem;
+    bottom: 0.5rem;
+    font-size: 0.52rem;
+    letter-spacing: 0.12em;
   }
 
   .article-cover-panel {

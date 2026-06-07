@@ -14,6 +14,20 @@ const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 const { title, description, ogImage, category, contentType, ...props } = data;
 const postUrl = getPostUrl(id, filePath, Astro.currentLocale);
 const imageSource = typeof ogImage === "string" ? ogImage : ogImage?.src;
+const emotionalLabels: Record<string, string> = {
+  relationships: "БЛИЗЬКІСТЬ",
+  betrayal: "ЗРАДА",
+  manipulation: "КОНТРОЛЬ",
+  "toxic-people": "ТОКСИЧНІСТЬ",
+  jealousy: "РЕВНОЩІ",
+  "sex-attraction": "СЕКС",
+  "money-status": "СТАТУС",
+  "emotional-dependence": "ЗАЛЕЖНІСТЬ",
+  conflicts: "КОНФЛІКТ",
+  "self-worth": "СОРОМ",
+  family: "РОДИНА",
+  "silence-ghosting": "ІГНОР",
+};
 const visualLabels: Record<string, string> = {
   relationships: "стосунки",
   betrayal: "зради",
@@ -55,6 +69,7 @@ const visualSymbols: Record<string, string> = {
 const visualKey = category ?? contentType ?? "article";
 const visualLabel = visualLabels[visualKey] ?? visualKey.replaceAll("-", " ");
 const visualSymbol = visualSymbols[visualKey] ?? "◆";
+const emotionalLabel = category ? emotionalLabels[category] : undefined;
 const coverTitle = title
   .replace(/["“”]/g, "")
   .split(/\s+/)
@@ -63,8 +78,8 @@ const coverTitle = title
   .join(" ");
 ---
 
-<li class="border-border border-t py-6 first:border-t-0 sm:py-8">
-  <div class="grid gap-4 sm:grid-cols-[10.5rem_minmax(0,1fr)] sm:gap-6">
+<li class="post-card border-border border-t py-4 first:border-t-0 sm:py-7">
+  <div class="post-card-grid grid grid-cols-[6.9rem_minmax(0,1fr)] gap-4 sm:grid-cols-[10.5rem_minmax(0,1fr)] sm:gap-6">
     <a
       href={postUrl}
       class="article-visual focus-visible:no-underline"
@@ -84,7 +99,10 @@ const coverTitle = title
     </a>
 
     <div class="min-w-0">
-      <FormatBadge contentType={contentType} />
+      <div class="flex flex-wrap items-center gap-2">
+        {emotionalLabel && <span class="emotional-label">{emotionalLabel}</span>}
+        <FormatBadge contentType={contentType} />
+      </div>
       <a
         href={postUrl}
         class:list={[
