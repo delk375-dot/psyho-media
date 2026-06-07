@@ -1,0 +1,61 @@
+name: Import Human Mechanism
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/import-human-mechanism.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import-build-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout psyho-media
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download prepared project
+        run: |
+          curl -L "https://tmpfiles.org/dl/wSwgKlFvrP19/psyho-media-human-mechanism.zip" -o "$RUNNER_TEMP/project.zip"
+          unzip -q "$RUNNER_TEMP/project.zip" -d "$RUNNER_TEMP/project"
+
+      - name: Replace repository contents except workflow files
+        run: |
+          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name .github -exec rm -rf {} +
+          find .github -mindepth 1 ! -path '.github/workflows' ! -path '.github/workflows/*' -exec rm -rf {} +
+          rsync -a --exclude='.git' --exclude='.github/workflows' "$RUNNER_TEMP/project/leader-blog-main/" .
+          test -f package.json
+          test -d src
+          test -d public
+          test -f public/default-og.svg
+          test -f public/covers/ghosting-cover.svg
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build project
+        run: pnpm build
+
+      - name: Commit imported project
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && { echo "No imported changes staged"; exit 1; }
+          git commit -m "Rebuild site as Human Mechanism media"
+          git push origin main
