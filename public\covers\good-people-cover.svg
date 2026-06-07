@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Чому хороших людей часто не хочуть">
+  <rect width="1200" height="675" fill="#f7efe4"/>
+  <circle cx="830" cy="260" r="136" fill="#e8d8c8" stroke="#8c2334" stroke-width="16"/>
+  <path d="M830 154v252M704 280h252" stroke="#211917" stroke-width="14"/>
+  <path d="M95 130h495M95 200h390M95 270h450" stroke="#211917" stroke-width="22"/>
+  <text x="95" y="520" font-family="Inter,Arial,sans-serif" font-size="82" font-weight="900" fill="#211917">ХОРОШИХ НЕ ХОЧУТЬ?</text>
+  <text x="98" y="594" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="800" letter-spacing="7" fill="#8c2334">ДОБРОТА НЕ ЗАВЖДИ ДОСТАТНЯ ДЛЯ ПОТЯГУ</text>
+</svg>

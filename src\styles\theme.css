@@ -1,0 +1,34 @@
+/* Register design tokens for Tailwind v4 */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --font-app: "Inter", "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Light theme values */
+:root,
+[data-theme="light"] {
+  --background: #f7efe4;
+  --foreground: #1f1a17;
+  --accent: #8c2334;
+  --accent-foreground: #fff7ee;
+  --muted: #e8d8c8;
+  --muted-foreground: #62554d;
+  --border: #cbb9aa;
+}
+
+/* Dark theme values */
+[data-theme="dark"] {
+  --background: #151111;
+  --foreground: #f0e3d4;
+  --accent: #c35a67;
+  --accent-foreground: #fff7ee;
+  --muted: #2a211f;
+  --muted-foreground: #baa99d;
+  --border: #4a3a34;
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Гроші і сором">
+  <rect width="1200" height="675" fill="#211917"/>
+  <rect x="760" y="110" width="250" height="360" fill="#e8d8c8"/>
+  <path d="M830 190h110M830 260h110M830 330h110" stroke="#8c2334" stroke-width="16"/>
+  <text x="122" y="300" font-family="Inter,Arial,sans-serif" font-size="190" font-weight="900" fill="#8c2334">₴</text>
+  <text x="120" y="530" font-family="Inter,Arial,sans-serif" font-size="88" font-weight="900" fill="#fff7ee">ГРОШІ І СОРОМ</text>
+  <text x="124" y="594" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="800" letter-spacing="7" fill="#cbb9aa">БІДНІСТЬ НЕ Є МОРАЛЬНОЮ ПОРАЗКОЮ</text>
+</svg>

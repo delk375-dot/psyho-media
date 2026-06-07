@@ -1,0 +1,28 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import { GLOSSARY_TERMS } from "@/data/knowledge";
+import config from "@/config";
+---
+
+<Layout
+  title={`Питання | ${config.site.title}`}
+  description="Короткі пояснення понять і болючих питань Людського механізму: гостинг, газлайтинг, тривога прив'язаності і грошовий сором."
+>
+  <Header />
+  <Breadcrumb />
+  <Main pageTitle="Питання" pageDesc="Короткі пояснення понять, з яких люди часто починають шукати відповідь на свою ситуацію.">
+    <dl class="grid gap-4 sm:grid-cols-2">
+      {GLOSSARY_TERMS.map(term => (
+        <div class="border-border bg-muted/30 border p-4">
+          <dt class="text-lg font-semibold">{term.title}</dt>
+          <dd class="mt-2 text-muted-foreground">{term.description}</dd>
+        </div>
+      ))}
+    </dl>
+  </Main>
+  <Footer />
+</Layout>

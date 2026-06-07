@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Чому люди зникають без пояснення">
+  <rect width="1200" height="675" fill="#f7efe4"/>
+  <rect x="70" y="70" width="1060" height="535" fill="#211917"/>
+  <path d="M195 180h465v96H195zM195 328h305v96H195z" fill="#ead8c8"/>
+  <path d="M742 146h210v210H742z" fill="none" stroke="#8c2334" stroke-width="18"/>
+  <path d="M742 356l-82 70h164z" fill="#8c2334"/>
+  <text x="105" y="548" font-family="Inter,Arial,sans-serif" font-size="78" font-weight="900" fill="#fff7ee">ЗНИКЛИ БЕЗ ПОЯСНЕННЯ</text>
+  <text x="105" y="128" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="800" letter-spacing="8" fill="#cbb9aa">ЛЮДСЬКИЙ МЕХАНІЗМ</text>
+</svg>

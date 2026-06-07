@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Токсичні люди">
+  <rect width="1200" height="675" fill="#211917"/>
+  <path d="M650 100c120 0 210 86 210 200 0 168-120 250-210 250S440 468 440 300c0-114 90-200 210-200z" fill="#e8d8c8"/>
+  <path d="M440 300h420M560 235h1M740 235h1" stroke="#8c2334" stroke-width="26" stroke-linecap="round"/>
+  <text x="75" y="530" font-family="Inter,Arial,sans-serif" font-size="92" font-weight="900" fill="#fff7ee">ТОКСИЧНІ ЛЮДИ</text>
+  <text x="80" y="594" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="800" letter-spacing="7" fill="#cbb9aa">ЧОМУ ВОНИ ЗДАЮТЬСЯ СИЛЬНИМИ</text>
+</svg>

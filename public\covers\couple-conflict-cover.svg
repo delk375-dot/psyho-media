@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Конфлікт у парі">
+  <rect width="1200" height="675" fill="#f7efe4"/>
+  <path d="M250 135h260v250H250zM690 135h260v250H690z" fill="#211917"/>
+  <path d="M510 260h180" stroke="#8c2334" stroke-width="28"/>
+  <path d="M600 160l-45 85h85l-50 105" fill="none" stroke="#e8d8c8" stroke-width="18"/>
+  <text x="78" y="535" font-family="Inter,Arial,sans-serif" font-size="84" font-weight="900" fill="#211917">СВАРКА НЕ ПРО ЦЕ</text>
+  <text x="82" y="598" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="800" letter-spacing="7" fill="#8c2334">КОНФЛІКТ У ПАРІ</text>
+</svg>

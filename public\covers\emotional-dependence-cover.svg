@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Емоційна залежність">
+  <rect width="1200" height="675" fill="#f7efe4"/>
+  <path d="M170 300c140-160 270 160 410 0s270 160 410 0" fill="none" stroke="#8c2334" stroke-width="28"/>
+  <path d="M170 380c140-160 270 160 410 0s270 160 410 0" fill="none" stroke="#211917" stroke-width="12"/>
+  <text x="82" y="545" font-family="Inter,Arial,sans-serif" font-size="82" font-weight="900" fill="#211917">ЕМОЦІЙНА ЗАЛЕЖНІСТЬ</text>
+  <text x="86" y="604" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="800" letter-spacing="7" fill="#8c2334">ТРИМАТИСЬ ЗА ТОГО, ХТО РАНИТЬ</text>
+</svg>

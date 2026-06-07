@@ -1,0 +1,28 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import { SERVICE_CTA } from "@/data/knowledge";
+import config from "@/config";
+---
+
+<Layout
+  title={`Практика | ${config.site.title}`}
+  description="Майбутні практичні формати Людського механізму: консультація, розбір стосунків, комунікаційний аудит, діагностика конфлікту і робота з грошовою тривогою."
+>
+  <Header />
+  <Breadcrumb />
+  <Main pageTitle="Практика" pageDesc="Майбутні формати роботи з конкретними ситуаціями: стосунками, розривами, конфліктами, переписками і грошовою тривогою.">
+    <ul class="grid gap-4 sm:grid-cols-2">
+      {SERVICE_CTA.map(service => (
+        <li class="border-border bg-muted/30 border p-4">
+          <h2 class="text-xl font-semibold">{service.title}</h2>
+          <p class="mt-2 text-muted-foreground">{service.description}</p>
+        </li>
+      ))}
+    </ul>
+  </Main>
+  <Footer />
+</Layout>

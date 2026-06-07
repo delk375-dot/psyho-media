@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Маніпуляція: чому люди рідко говорять прямо">
+  <rect width="1200" height="675" fill="#211917"/>
+  <path d="M180 170c160-90 300-90 420 0s260 90 420 0" fill="none" stroke="#e8d8c8" stroke-width="20"/>
+  <path d="M180 315c160-90 300-90 420 0s260 90 420 0" fill="none" stroke="#8c2334" stroke-width="20"/>
+  <circle cx="600" cy="315" r="82" fill="#f7efe4"/>
+  <path d="M560 315h80M600 275v80" stroke="#8c2334" stroke-width="14"/>
+  <text x="82" y="540" font-family="Inter,Arial,sans-serif" font-size="82" font-weight="900" fill="#fff7ee">РІДКО ГОВОРЯТЬ ПРЯМО</text>
+  <text x="86" y="120" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="800" letter-spacing="8" fill="#cbb9aa">МАНІПУЛЯЦІЇ</text>
+</svg>
