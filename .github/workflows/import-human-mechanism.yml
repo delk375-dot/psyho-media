@@ -43,18 +43,47 @@ jobs:
 
       - name: Replace repository contents except workflow files
         run: |
-          mkdir -p "$RUNNER_TEMP/workflows-keep"
-          cp -a .github/workflows "$RUNNER_TEMP/workflows-keep/"
-          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-          cp -a "$RUNNER_TEMP/project/." .
-          rm -rf .github/workflows
-          mkdir -p .github
-          cp -a "$RUNNER_TEMP/workflows-keep/workflows" .github/
-          test -f package.json
-          test -d src
-          test -d public
-          test -f public/default-og.svg
-          test -f public/covers/ghosting-cover.svg
+          python3 - <<'PY'
+          import os
+          import pathlib
+          import shutil
+          root = pathlib.Path.cwd()
+          runner_temp = pathlib.Path(os.environ['RUNNER_TEMP'])
+          project = runner_temp / 'project'
+          keep = runner_temp / 'workflows-keep'
+          workflows = root / '.github' / 'workflows'
+          if workflows.exists():
+              shutil.copytree(workflows, keep / 'workflows', dirs_exist_ok=True)
+          for child in list(root.iterdir()):
+              if child.name == '.git':
+                  continue
+              if child.is_dir():
+                  shutil.rmtree(child)
+              else:
+                  child.unlink()
+          for child in project.iterdir():
+              target = root / child.name
+              if child.is_dir():
+                  shutil.copytree(child, target, dirs_exist_ok=True)
+              else:
+                  shutil.copy2(child, target)
+          source_workflows = root / '.github' / 'workflows'
+          if source_workflows.exists():
+              shutil.rmtree(source_workflows)
+          (root / '.github').mkdir(exist_ok=True)
+          if (keep / 'workflows').exists():
+              shutil.copytree(keep / 'workflows', source_workflows, dirs_exist_ok=True)
+          required = [
+              root / 'package.json',
+              root / 'src',
+              root / 'public',
+              root / 'public' / 'default-og.svg',
+              root / 'public' / 'covers' / 'ghosting-cover.svg',
+          ]
+          missing = [str(path) for path in required if not path.exists()]
+          if missing:
+              raise SystemExit('Missing after import: ' + ', '.join(missing))
+          PY
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
