@@ -21,7 +21,7 @@ jobs:
 
       - name: Download prepared project
         run: |
-          curl -fL -A "Mozilla/5.0" "https://tmpfiles.org/dl/wSwgKlFvrP19/psyho-media-human-mechanism.zip" -o "$RUNNER_TEMP/project.zip"
+          curl -fL -A "Mozilla/5.0" "https://files.catbox.moe/ll9z5s.zip" -o "$RUNNER_TEMP/project.zip"
           unzip -t "$RUNNER_TEMP/project.zip"
           mkdir -p "$RUNNER_TEMP/project"
           unzip -q "$RUNNER_TEMP/project.zip" -d "$RUNNER_TEMP/project"
