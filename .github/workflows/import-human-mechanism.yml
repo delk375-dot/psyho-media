@@ -21,24 +21,9 @@ jobs:
 
       - name: Download prepared project
         run: |
-          python3 - <<'PY'
-          import pathlib
-          import urllib.request
-          import zipfile
-          url = "https://files.catbox.moe/ll9z5s.zip"
-          target = pathlib.Path(__import__('os').environ['RUNNER_TEMP']) / 'project.zip'
-          req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-          with urllib.request.urlopen(req, timeout=60) as response:
-              data = response.read()
-          target.write_bytes(data)
-          if len(data) < 1000000:
-              raise SystemExit('Downloaded artifact is too small')
-          with zipfile.ZipFile(target) as archive:
-              bad = archive.testzip()
-              if bad:
-                  raise SystemExit(f'Bad zip member: {bad}')
-              archive.extractall(pathlib.Path(__import__('os').environ['RUNNER_TEMP']) / 'project')
-          PY
+          curl -fL -A "Mozilla/5.0" "https://files.catbox.moe/794rtd.gz" -o "$RUNNER_TEMP/project.tar.gz"
+          mkdir -p "$RUNNER_TEMP/project"
+          tar -xzf "$RUNNER_TEMP/project.tar.gz" -C "$RUNNER_TEMP/project"
 
       - name: Replace site contents
         run: |
@@ -46,32 +31,27 @@ jobs:
           import os
           import pathlib
           import shutil
-          import traceback
           root = pathlib.Path.cwd()
           project = pathlib.Path(os.environ['RUNNER_TEMP']) / 'project'
-          try:
-              for child in list(root.iterdir()):
-                  if child.name in {'.git', '.github'}:
-                      continue
-                  if child.is_dir():
-                      shutil.rmtree(child)
-                  else:
-                      child.unlink()
-              for child in project.iterdir():
-                  if child.name == '.github':
-                      continue
-                  target = root / child.name
-                  if child.is_dir():
-                      shutil.copytree(child, target, dirs_exist_ok=True)
-                  else:
-                      shutil.copy2(child, target)
-              required = [root / 'package.json', root / 'src', root / 'public', root / 'public' / 'default-og.svg', root / 'public' / 'covers' / 'ghosting-cover.svg']
-              missing = [str(path) for path in required if not path.exists()]
-              if missing:
-                  raise RuntimeError('Missing after import: ' + ', '.join(missing))
-              (root / 'import-error.txt').write_text('replace-ok\n', encoding='utf-8')
-          except Exception:
-              (root / 'import-error.txt').write_text(traceback.format_exc(), encoding='utf-8')
+          for child in list(root.iterdir()):
+              if child.name in {'.git', '.github'}:
+                  continue
+              if child.is_dir():
+                  shutil.rmtree(child)
+              else:
+                  child.unlink()
+          for child in project.iterdir():
+              if child.name == '.github':
+                  continue
+              target = root / child.name
+              if child.is_dir():
+                  shutil.copytree(child, target, dirs_exist_ok=True)
+              else:
+                  shutil.copy2(child, target)
+          required = [root / 'package.json', root / 'src', root / 'public', root / 'public' / 'default-og.svg', root / 'public' / 'covers' / 'ghosting-cover.svg']
+          missing = [str(path) for path in required if not path.exists()]
+          if missing:
+              raise SystemExit('Missing after import: ' + ', '.join(missing))
           PY
 
       - name: Setup pnpm
@@ -88,7 +68,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build project
-        run: pnpm build > build-log.txt 2>&1 || true
+        run: pnpm build
 
       - name: Commit imported project
         run: |
@@ -96,5 +76,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           git diff --cached --quiet && { echo "No imported changes staged"; exit 1; }
-          git commit -m "Diagnose Human Mechanism build"
+          git commit -m "Rebuild site as Human Mechanism media"
           git push origin main
