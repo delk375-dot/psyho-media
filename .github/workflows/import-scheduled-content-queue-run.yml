@@ -76,3 +76,5 @@ jobs:
           git status --short
           git commit -m "Create scheduled content queue"
           git push
+
+# trigger: scheduled-content-queue
