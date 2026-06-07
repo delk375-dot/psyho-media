@@ -61,6 +61,32 @@ it will not appear before that time. On Cloudflare Pages, it appears only after 
 
 This means a future article may need a manual deploy, a scheduled deploy trigger, or another repository update after the planned publication time.
 
+## Automatic rebuilds
+
+GitHub Actions runs automatic rebuild triggers shortly after the standard publishing slots:
+
+- `09:05` Ukraine time (`06:05` UTC)
+- `14:05` Ukraine time (`11:05` UTC)
+- `19:05` Ukraine time (`16:05` UTC)
+
+The workflow is stored in:
+
+```txt
+.github/workflows/scheduled-rebuild.yml
+```
+
+GitHub cron runs in UTC, so the cron values are written as `06:05`, `11:05`, and `16:05` UTC for the Ukraine summer offset (`UTC+3`). If the publication schedule changes, update the cron values in this workflow.
+
+The preferred rebuild mechanism is the Cloudflare Pages deploy hook stored in the repository secret:
+
+```txt
+CLOUDFLARE_DEPLOY_HOOK_URL
+```
+
+When this secret exists, the workflow calls the deploy hook and does not print the secret. If the secret is not configured, the workflow creates an empty commit on `main` to trigger the existing GitHub-connected Cloudflare Pages build.
+
+You can also trigger the rebuild manually from GitHub Actions with `workflow_dispatch`.
+
 ## How to prepare three articles for one day
 
 Create three post files with these `pubDatetime` values:
