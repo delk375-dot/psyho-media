@@ -31,7 +31,6 @@ jobs:
           with urllib.request.urlopen(req, timeout=60) as response:
               data = response.read()
           target.write_bytes(data)
-          print(f"downloaded={len(data)}")
           if len(data) < 1000000:
               raise SystemExit('Downloaded artifact is too small')
           with zipfile.ZipFile(target) as archive:
@@ -47,33 +46,38 @@ jobs:
           import os
           import pathlib
           import shutil
+          import traceback
           root = pathlib.Path.cwd()
           project = pathlib.Path(os.environ['RUNNER_TEMP']) / 'project'
-          for child in list(root.iterdir()):
-              if child.name in {'.git', '.github'}:
-                  continue
-              if child.is_dir():
-                  shutil.rmtree(child)
-              else:
-                  child.unlink()
-          for child in project.iterdir():
-              if child.name == '.github':
-                  continue
-              target = root / child.name
-              if child.is_dir():
-                  shutil.copytree(child, target, dirs_exist_ok=True)
-              else:
-                  shutil.copy2(child, target)
-          required = [
-              root / 'package.json',
-              root / 'src',
-              root / 'public',
-              root / 'public' / 'default-og.svg',
-              root / 'public' / 'covers' / 'ghosting-cover.svg',
-          ]
-          missing = [str(path) for path in required if not path.exists()]
-          if missing:
-              raise SystemExit('Missing after import: ' + ', '.join(missing))
+          try:
+              for child in list(root.iterdir()):
+                  if child.name in {'.git', '.github'}:
+                      continue
+                  if child.is_dir():
+                      shutil.rmtree(child)
+                  else:
+                      child.unlink()
+              for child in project.iterdir():
+                  if child.name == '.github':
+                      continue
+                  target = root / child.name
+                  if child.is_dir():
+                      shutil.copytree(child, target, dirs_exist_ok=True)
+                  else:
+                      shutil.copy2(child, target)
+              required = [
+                  root / 'package.json',
+                  root / 'src',
+                  root / 'public',
+                  root / 'public' / 'default-og.svg',
+                  root / 'public' / 'covers' / 'ghosting-cover.svg',
+              ]
+              missing = [str(path) for path in required if not path.exists()]
+              if missing:
+                  raise RuntimeError('Missing after import: ' + ', '.join(missing))
+              (root / 'import-error.txt').write_text('replace-ok\n', encoding='utf-8')
+          except Exception:
+              (root / 'import-error.txt').write_text(traceback.format_exc(), encoding='utf-8')
           PY
 
       - name: Setup pnpm
@@ -98,5 +102,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           git diff --cached --quiet && { echo "No imported changes staged"; exit 1; }
-          git commit -m "Rebuild site as Human Mechanism media"
+          git commit -m "Diagnose Human Mechanism import"
           git push origin main
