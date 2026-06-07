@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Статус</title>
+  <desc id="desc">Мінімалістична обкладинка фрагмента про статус.</desc>
+  <rect width="1200" height="675" fill="#2b2420"/>
+  <path d="M290 418h420M350 330h420M410 242h420" stroke="#e8d7c8" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="840" cy="242" r="34" fill="#8f1f2e"/>
+  <text x="92" y="558" fill="#f4eadf" font-family="Arial, sans-serif" font-size="124" font-weight="900">СТАТУС</text>
+</svg>

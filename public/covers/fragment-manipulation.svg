@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Маніпуляція</title>
+  <desc id="desc">Мінімалістична обкладинка фрагмента про маніпуляцію.</desc>
+  <rect width="1200" height="675" fill="#241f1c"/>
+  <path d="M238 180c110 80 230 80 360 0s250-80 362 0" fill="none" stroke="#8f1f2e" stroke-width="12"/>
+  <path d="M238 314c110 80 230 80 360 0s250-80 362 0" fill="none" stroke="#e8d7c8" stroke-width="8"/>
+  <text x="80" y="555" fill="#f4eadf" font-family="Arial, sans-serif" font-size="100" font-weight="900">МАНІПУЛЯЦІЯ</text>
+</svg>

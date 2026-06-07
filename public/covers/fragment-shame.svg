@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Сором</title>
+  <desc id="desc">Мінімалістична обкладинка фрагмента про сором.</desc>
+  <rect width="1200" height="675" fill="#2b2420"/>
+  <path d="M600 170c98 0 178 80 178 178 0 76-48 142-116 168H538c-68-26-116-92-116-168 0-98 80-178 178-178Z" fill="none" stroke="#e8d7c8" stroke-width="10"/>
+  <path d="M492 346h216" stroke="#8f1f2e" stroke-width="12" stroke-linecap="round"/>
+  <text x="92" y="558" fill="#f4eadf" font-family="Arial, sans-serif" font-size="126" font-weight="900">СОРОМ</text>
+</svg>

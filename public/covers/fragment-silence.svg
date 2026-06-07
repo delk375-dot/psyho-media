@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Мовчання</title>
+  <desc id="desc">Мінімалістична обкладинка фрагмента про мовчання.</desc>
+  <rect width="1200" height="675" fill="#241f1c"/>
+  <path d="M120 322h760" stroke="#8f1f2e" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="928" cy="322" r="42" fill="none" stroke="#e8d7c8" stroke-width="10"/>
+  <text x="92" y="522" fill="#f4eadf" font-family="Arial, sans-serif" font-size="112" font-weight="900">МОВЧАННЯ</text>
+</svg>

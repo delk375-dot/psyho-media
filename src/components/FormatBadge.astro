@@ -1,0 +1,19 @@
+---
+import { getFormatMeta } from "@/data/contentSystem";
+
+type Props = {
+  contentType?: string;
+  class?: string;
+};
+
+const { contentType, class: className = "" } = Astro.props;
+const format = getFormatMeta(contentType);
+---
+
+{
+  format && (
+    <span class:list={["format-badge", className]} title={format.description}>
+      {format.label}
+    </span>
+  )
+}

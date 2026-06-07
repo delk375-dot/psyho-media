@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Страх втрати</title>
+  <desc id="desc">Мінімалістична обкладинка фрагмента про страх втрати.</desc>
+  <rect width="1200" height="675" fill="#241f1c"/>
+  <path d="M548 186h104v220H548z" fill="none" stroke="#e8d7c8" stroke-width="10"/>
+  <path d="M494 442h212" stroke="#8f1f2e" stroke-width="14" stroke-linecap="round"/>
+  <text x="74" y="558" fill="#f4eadf" font-family="Arial, sans-serif" font-size="96" font-weight="900">СТРАХ ВТРАТИ</text>
+</svg>

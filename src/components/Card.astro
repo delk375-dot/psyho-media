@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import { getPostUrl } from "@/utils/getPostPaths";
 import { toTransitionName } from "@/utils/toTransitionName";
 import Datetime from "./Datetime.astro";
+import FormatBadge from "./FormatBadge.astro";
 
 type Props = {
   variant?: "h2" | "h3";
@@ -27,6 +28,9 @@ const visualLabels: Record<string, string> = {
   family: "родина",
   "silence-ghosting": "ігнор",
   pillar_article: "розбір",
+  viral_note: "замітка",
+  deep_analysis: "аналіз",
+  psychological_fragment: "фрагмент",
   article: "психологія",
 };
 const visualSymbols: Record<string, string> = {
@@ -43,6 +47,9 @@ const visualSymbols: Record<string, string> = {
   family: "⌂",
   "silence-ghosting": "…",
   pillar_article: "⚙",
+  viral_note: "!",
+  deep_analysis: "§",
+  psychological_fragment: "…",
   article: "◆",
 };
 const visualKey = category ?? contentType ?? "article";
@@ -77,10 +84,11 @@ const coverTitle = title
     </a>
 
     <div class="min-w-0">
+      <FormatBadge contentType={contentType} />
       <a
         href={postUrl}
         class:list={[
-          "text-accent inline-block text-lg font-medium",
+          "text-accent mt-2 inline-block text-lg font-medium",
           "decoration-dashed underline-offset-4 hover:underline",
           "focus-visible:no-underline focus-visible:underline-offset-0",
         ]}

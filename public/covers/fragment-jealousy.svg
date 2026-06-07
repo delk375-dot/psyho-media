@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Ревнощі</title>
+  <desc id="desc">Мінімалістична обкладинка фрагмента про ревнощі.</desc>
+  <rect width="1200" height="675" fill="#2a211f"/>
+  <path d="M600 176c92 0 168 74 168 166s-76 166-168 166-168-74-168-166 76-166 168-166Z" fill="none" stroke="#e8d7c8" stroke-width="10"/>
+  <circle cx="600" cy="342" r="52" fill="#8f1f2e"/>
+  <text x="92" y="560" fill="#f4eadf" font-family="Arial, sans-serif" font-size="118" font-weight="900">РЕВНОЩІ</text>
+</svg>

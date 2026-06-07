@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import PostLayout from "@/layouts/PostLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
@@ -8,10 +9,13 @@ import Tag from "@/components/Tag.astro";
 import RelatedArticles from "@/components/RelatedArticles.astro";
 import RecommendedReading from "@/components/RecommendedReading.astro";
 import CoachingCTA from "@/components/CoachingCTA.astro";
+import FormatBadge from "@/components/FormatBadge.astro";
 import { getPostSlug, getPostUrl } from "@/utils/getPostPaths";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { slugifyStr } from "@/utils/slugify";
 import { toTransitionName } from "@/utils/toTransitionName";
+import { getCategoryBySlug } from "@/data/categories";
+import { getClustersForCategory } from "@/data/contentSystem";
 import EditPost from "./_components/EditPost.astro";
 import ShareLinks from "./_components/ShareLinks.astro";
 import BackButton from "./_components/BackButton.astro";
@@ -80,6 +84,8 @@ const {
 const { Content } = await render(post);
 const allPosts = await getCollection("posts", ({ data }) => !data.draft);
 const articleVisualLabel = category ?? contentType ?? "analysis";
+const currentCategory = getCategoryBySlug(category);
+const topicClusters = getClustersForCategory(category);
 const coverImageUrl =
   typeof initOgImage === "string" ? initOgImage : initOgImage?.src;
 
@@ -115,6 +121,18 @@ const ogImage = ogImageUrl
     class:list={["app-layout", { "mt-8": !config.features.showBackButton }]}
     data-pagefind-body
   >
+    <div class="mb-4 flex flex-wrap items-center gap-3">
+      <FormatBadge contentType={contentType} />
+      {currentCategory && (
+        <a
+          href={getRelativeLocaleUrl(locale, `categories/${currentCategory.slug}`)}
+          class="format-badge format-badge-soft"
+        >
+          {currentCategory.title}
+        </a>
+      )}
+    </div>
+
     <h1
       style={{ viewTransitionName: toTransitionName(title) }}
       class="text-accent inline-block text-2xl font-bold sm:text-3xl"
@@ -176,6 +194,28 @@ const ogImage = ogImageUrl
     <ShareLinks />
 
     {cta && <CoachingCTA variant={cta} />}
+
+    {
+      topicClusters.length > 0 && (
+        <section class="topic-cluster-panel mt-10" aria-labelledby="topic-clusters">
+          <p class="section-kicker">Схожі теми</p>
+          <h2 id="topic-clusters" class="text-xl font-semibold">
+            Читати далі по цьому механізму
+          </h2>
+          <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+            {topicClusters.map(cluster => (
+              <li>
+                <a href={cluster.href} class="query-card block min-h-full">
+                  <span class="query-card-mark" aria-hidden="true"></span>
+                  <strong>{cluster.title}</strong>
+                  <span>{cluster.description}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
 
     <RecommendedReading currentPost={post} posts={allPosts} />
 

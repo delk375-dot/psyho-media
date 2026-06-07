@@ -22,7 +22,16 @@ const posts = defineCollection({
       series: z.string().optional(),
       collection: z.string().optional(),
       contentType: z
-        .enum(["article", "pillar_article", "case", "glossary", "framework"])
+        .enum([
+          "article",
+          "viral_note",
+          "deep_analysis",
+          "pillar_article",
+          "psychological_fragment",
+          "case",
+          "glossary",
+          "framework",
+        ])
         .default("article"),
       relatedPosts: z.array(z.string()).default([]),
       recommendedReading: z.array(z.string()).default([]),
