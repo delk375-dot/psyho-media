@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Значущість</title>
+  <desc id="desc">Обкладинка про сум за власним відчуттям значущості.</desc>
+  <rect width="1200" height="675" fill="#241f1c"/>
+  <circle cx="600" cy="302" r="118" fill="none" stroke="#e8d7c8" stroke-width="9"/>
+  <path d="M600 152v304M448 304h304" stroke="#8f1f2e" stroke-width="8" stroke-linecap="round"/>
+  <text x="86" y="590" fill="#f4eadf" font-family="Arial, sans-serif" font-size="88" font-weight="900">ЗНАЧУЩІСТЬ</text>
+</svg>
