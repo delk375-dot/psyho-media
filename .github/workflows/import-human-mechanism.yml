@@ -65,13 +65,7 @@ jobs:
                       shutil.copytree(child, target, dirs_exist_ok=True)
                   else:
                       shutil.copy2(child, target)
-              required = [
-                  root / 'package.json',
-                  root / 'src',
-                  root / 'public',
-                  root / 'public' / 'default-og.svg',
-                  root / 'public' / 'covers' / 'ghosting-cover.svg',
-              ]
+              required = [root / 'package.json', root / 'src', root / 'public', root / 'public' / 'default-og.svg', root / 'public' / 'covers' / 'ghosting-cover.svg']
               missing = [str(path) for path in required if not path.exists()]
               if missing:
                   raise RuntimeError('Missing after import: ' + ', '.join(missing))
@@ -94,7 +88,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build project
-        run: pnpm build
+        run: pnpm build > build-log.txt 2>&1 || true
 
       - name: Commit imported project
         run: |
@@ -102,5 +96,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           git diff --cached --quiet && { echo "No imported changes staged"; exit 1; }
-          git commit -m "Diagnose Human Mechanism import"
+          git commit -m "Diagnose Human Mechanism build"
           git push origin main
