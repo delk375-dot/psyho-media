@@ -1,0 +1,65 @@
+---
+type Props = {
+  class?: string;
+};
+
+const { class: className = "" } = Astro.props;
+---
+
+<div class:list={["influence-map", className]} aria-hidden="true">
+  <svg viewBox="0 0 720 520" role="img" focusable="false">
+    <defs>
+      <pattern id="map-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-opacity="0.08" stroke-width="1" />
+      </pattern>
+      <radialGradient id="map-fade" cx="45%" cy="45%" r="72%">
+        <stop offset="0%" stop-color="currentColor" stop-opacity="0.09" />
+        <stop offset="62%" stop-color="currentColor" stop-opacity="0.035" />
+        <stop offset="100%" stop-color="currentColor" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+
+    <rect width="720" height="520" fill="url(#map-grid)" />
+    <rect width="720" height="520" fill="url(#map-fade)" />
+
+    <g class="contours" fill="none" stroke="currentColor" stroke-linecap="round">
+      <path d="M446 42c63 8 112 34 151 78 42 47 67 106 72 170 4 55-12 104-48 145" />
+      <path d="M470 83c45 7 84 29 118 65 35 38 56 85 61 136 4 43-8 83-35 118" />
+      <path d="M492 128c31 7 58 22 82 48 26 29 41 63 45 102 4 34-5 65-26 91" />
+      <path d="M83 86c52-21 105-20 159 1 47 18 84 48 111 90" />
+      <path d="M105 126c43-15 86-12 128 8 36 17 64 43 85 78" />
+      <path d="M76 390c76-31 152-32 228-3 54 21 99 54 134 99" />
+    </g>
+
+    <g class="network" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M118 336 242 263 347 311 465 220 598 274" />
+      <path d="M242 263 274 139 421 92 465 220" />
+      <path d="M347 311 401 420 544 385 598 274" />
+      <path d="M242 263 401 420" />
+      <path d="M421 92 598 274 650 142" />
+      <path d="M118 336 205 427 401 420" />
+    </g>
+
+    <g class="nodes" fill="currentColor">
+      <circle cx="118" cy="336" r="4" />
+      <circle cx="242" cy="263" r="5" />
+      <circle cx="274" cy="139" r="3.5" />
+      <circle cx="347" cy="311" r="4" />
+      <circle cx="401" cy="420" r="4" />
+      <circle cx="421" cy="92" r="5" />
+      <circle cx="465" cy="220" r="4.5" />
+      <circle cx="544" cy="385" r="3.5" />
+      <circle cx="598" cy="274" r="5" />
+      <circle cx="650" cy="142" r="3.5" />
+    </g>
+
+    <g class="labels" fill="currentColor">
+      <text x="438" y="88">ВЛАДА</text>
+      <text x="487" y="214">СТАТУС</text>
+      <text x="612" y="269">КОНФЛІКТ</text>
+      <text x="438" y="434">СОЦІАЛЬНІ СИСТЕМИ</text>
+      <text x="556" y="398">ВПЛИВ</text>
+      <text x="532" y="136">ПЕРЕГОВОРИ</text>
+    </g>
+  </svg>
+</div>

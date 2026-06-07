@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Card from "@/components/Card.astro";
+import Footer from "@/components/Footer.astro";
+import { COLLECTIONS } from "@/data/knowledge";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import config from "@/config";
+
+type Props = {
+  collection: (typeof COLLECTIONS)[number];
+};
+
+export const getStaticPaths = (() =>
+  COLLECTIONS.map(collection => ({
+    params: { collection: collection.slug },
+    props: { collection },
+  }))) satisfies GetStaticPaths;
+
+const { collection } = Astro.props;
+const posts = await getCollection("posts", ({ data }) => !data.draft);
+const collectionPosts = getSortedPosts(
+  posts.filter(({ data }) => data.collection === collection.slug)
+);
+---
+
+<Layout title={`${collection.title} | ${config.site.title}`} description={collection.description}>
+  <Header />
+  <Breadcrumb />
+  <Main pageTitle={collection.title} pageDesc={collection.description}>
+    {collectionPosts.length > 0 ? (
+      <ul>{collectionPosts.map(post => <Card {...post} />)}</ul>
+    ) : (
+      <p class="text-muted-foreground">Колекція готова до наповнення майбутніми матеріалами.</p>
+    )}
+  </Main>
+  <Footer />
+</Layout>

@@ -1,0 +1,96 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getPostUrl } from "@/utils/getPostPaths";
+import { toTransitionName } from "@/utils/toTransitionName";
+import Datetime from "./Datetime.astro";
+
+type Props = {
+  variant?: "h2" | "h3";
+} & CollectionEntry<"posts">;
+
+const { variant: Heading = "h2", id, data, filePath } = Astro.props;
+
+const { title, description, ogImage, category, contentType, ...props } = data;
+const postUrl = getPostUrl(id, filePath, Astro.currentLocale);
+const imageSource = typeof ogImage === "string" ? ogImage : ogImage?.src;
+const visualLabels: Record<string, string> = {
+  leadership: "влада",
+  psychology: "психологія",
+  negotiations: "переговори",
+  manipulation: "маніпуляції",
+  "legal-psychology": "право",
+  "social-systems": "система",
+  conflicts: "конфлікт",
+  communication: "комунікація",
+  "status-and-power": "статус",
+  "organizational-psychology": "організація",
+  "toxic-politeness": "ввічливість",
+  "social-elevators": "ліфти",
+  pillar_article: "досьє",
+  article: "аналіз",
+};
+const visualSymbols: Record<string, string> = {
+  leadership: "♜",
+  psychology: "◉",
+  negotiations: "⇄",
+  manipulation: "◌",
+  "legal-psychology": "⚖",
+  "social-systems": "⌬",
+  conflicts: "×",
+  communication: "//",
+  "status-and-power": "◆",
+  "organizational-psychology": "▦",
+  "toxic-politeness": "!",
+  "social-elevators": "↟",
+  pillar_article: "⌬",
+  article: "◆",
+};
+const visualKey = category ?? contentType ?? "article";
+const visualLabel = visualLabels[visualKey] ?? visualKey.replaceAll("-", " ");
+const visualSymbol = visualSymbols[visualKey] ?? "◆";
+const coverTitle = title
+  .replace(/["“”]/g, "")
+  .split(/\s+/)
+  .filter(Boolean)
+  .slice(0, 6)
+  .join(" ");
+---
+
+<li class="border-border border-t py-6 first:border-t-0 sm:py-8">
+  <div class="grid gap-4 sm:grid-cols-[10.5rem_minmax(0,1fr)] sm:gap-6">
+    <a
+      href={postUrl}
+      class="article-visual focus-visible:no-underline"
+      aria-label={title}
+    >
+      {
+        imageSource ? (
+          <img src={imageSource} alt="" loading="lazy" decoding="async" />
+        ) : (
+          <>
+            <span class="article-visual-symbol" aria-hidden="true">{visualSymbol}</span>
+            <span class="article-visual-title">{coverTitle}</span>
+            <span class="article-visual-label">{visualLabel}</span>
+          </>
+        )
+      }
+    </a>
+
+    <div class="min-w-0">
+      <a
+        href={postUrl}
+        class:list={[
+          "text-accent inline-block text-lg font-medium",
+          "decoration-dashed underline-offset-4 hover:underline",
+          "focus-visible:no-underline focus-visible:underline-offset-0",
+        ]}
+      >
+        <Heading transition:name={toTransitionName(title)}>
+          {title}
+        </Heading>
+      </a>
+      <Datetime {...props} />
+      <p class="mt-2 leading-7 text-muted-foreground">{description}</p>
+    </div>
+  </div>
+</li>

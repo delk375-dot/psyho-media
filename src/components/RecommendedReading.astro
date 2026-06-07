@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Card from "@/components/Card.astro";
+import { getRelatedPosts } from "@/utils/getRelatedPosts";
+
+type Props = {
+  currentPost: CollectionEntry<"posts">;
+  posts: CollectionEntry<"posts">[];
+};
+
+const { currentPost, posts } = Astro.props;
+const recommendedPosts = getRelatedPosts(currentPost, posts, 3);
+---
+
+{
+  recommendedPosts.length > 0 && (
+    <aside class="border-border bg-muted/30 mt-10 border p-4" aria-labelledby="recommended-reading">
+      <h2 id="recommended-reading" class="text-xl font-semibold">
+        Рекомендовано для продовження
+      </h2>
+      <ul>
+        {recommendedPosts.map(post => (
+          <Card variant="h3" {...post} />
+        ))}
+      </ul>
+    </aside>
+  )
+}

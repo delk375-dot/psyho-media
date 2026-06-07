@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Card from "@/components/Card.astro";
+import Footer from "@/components/Footer.astro";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import config from "@/config";
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection("posts", ({ data }) => !data.draft && Boolean(data.series));
+  const series = [
+    ...new Set(
+      posts
+        .map(post => post.data.series)
+        .filter((value): value is string => typeof value === "string")
+    ),
+  ];
+  return series.map(seriesSlug => ({ params: { series: seriesSlug } }));
+}) satisfies GetStaticPaths;
+
+const { series } = Astro.params;
+const posts = await getCollection("posts", ({ data }) => !data.draft && data.series === series);
+const seriesPosts = getSortedPosts(posts);
+---
+
+<Layout title={`Серія: ${series} | ${config.site.title}`} description={`Матеріали серії ${series} на Тіньовій карті.`}>
+  <Header />
+  <Breadcrumb />
+  <Main pageTitle={`Серія: ${series}`} pageDesc="Послідовність матеріалів, які розкривають одну управлінську або психологічну проблему під різними кутами.">
+    <ul>{seriesPosts.map(post => <Card {...post} />)}</ul>
+  </Main>
+  <Footer />
+</Layout>
