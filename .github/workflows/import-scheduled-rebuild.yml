@@ -1,6 +1,11 @@
 name: Import scheduled rebuild
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/import-scheduled-rebuild.yml
   workflow_dispatch:
 
 permissions:
