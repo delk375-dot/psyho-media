@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Ясність</title>
+  <desc id="desc">Обкладинка про потяг до тих, хто не дає ясності.</desc>
+  <rect width="1200" height="675" fill="#241f1c"/>
+  <rect x="330" y="145" width="440" height="360" fill="none" stroke="#e8d7c8" stroke-width="9"/>
+  <path d="M770 145 915 248v360H475l-145-103" fill="none" stroke="#8f1f2e" stroke-width="9" opacity=".9"/>
+  <text x="88" y="590" fill="#f4eadf" font-family="Arial, sans-serif" font-size="96" font-weight="900">НЕЯСНІСТЬ</text>
+</svg>
