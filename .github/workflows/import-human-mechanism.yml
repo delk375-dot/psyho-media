@@ -21,10 +21,25 @@ jobs:
 
       - name: Download prepared project
         run: |
-          curl -fL -A "Mozilla/5.0" "https://files.catbox.moe/ll9z5s.zip" -o "$RUNNER_TEMP/project.zip"
-          unzip -t "$RUNNER_TEMP/project.zip"
-          mkdir -p "$RUNNER_TEMP/project"
-          unzip -q "$RUNNER_TEMP/project.zip" -d "$RUNNER_TEMP/project"
+          python3 - <<'PY'
+          import pathlib
+          import urllib.request
+          import zipfile
+          url = "https://files.catbox.moe/ll9z5s.zip"
+          target = pathlib.Path(__import__('os').environ['RUNNER_TEMP']) / 'project.zip'
+          req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+          with urllib.request.urlopen(req, timeout=60) as response:
+              data = response.read()
+          target.write_bytes(data)
+          print(f"downloaded={len(data)}")
+          if len(data) < 1000000:
+              raise SystemExit('Downloaded artifact is too small')
+          with zipfile.ZipFile(target) as archive:
+              bad = archive.testzip()
+              if bad:
+                  raise SystemExit(f'Bad zip member: {bad}')
+              archive.extractall(pathlib.Path(__import__('os').environ['RUNNER_TEMP']) / 'project')
+          PY
 
       - name: Replace repository contents except workflow files
         run: |
