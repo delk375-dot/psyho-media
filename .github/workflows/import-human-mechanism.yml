@@ -41,38 +41,29 @@ jobs:
               archive.extractall(pathlib.Path(__import__('os').environ['RUNNER_TEMP']) / 'project')
           PY
 
-      - name: Replace repository contents except workflow files
+      - name: Replace site contents
         run: |
           python3 - <<'PY'
           import os
           import pathlib
           import shutil
           root = pathlib.Path.cwd()
-          runner_temp = pathlib.Path(os.environ['RUNNER_TEMP'])
-          project = runner_temp / 'project'
-          keep = runner_temp / 'workflows-keep'
-          workflows = root / '.github' / 'workflows'
-          if workflows.exists():
-              shutil.copytree(workflows, keep / 'workflows', dirs_exist_ok=True)
+          project = pathlib.Path(os.environ['RUNNER_TEMP']) / 'project'
           for child in list(root.iterdir()):
-              if child.name == '.git':
+              if child.name in {'.git', '.github'}:
                   continue
               if child.is_dir():
                   shutil.rmtree(child)
               else:
                   child.unlink()
           for child in project.iterdir():
+              if child.name == '.github':
+                  continue
               target = root / child.name
               if child.is_dir():
                   shutil.copytree(child, target, dirs_exist_ok=True)
               else:
                   shutil.copy2(child, target)
-          source_workflows = root / '.github' / 'workflows'
-          if source_workflows.exists():
-              shutil.rmtree(source_workflows)
-          (root / '.github').mkdir(exist_ok=True)
-          if (keep / 'workflows').exists():
-              shutil.copytree(keep / 'workflows', source_workflows, dirs_exist_ok=True)
           required = [
               root / 'package.json',
               root / 'src',
