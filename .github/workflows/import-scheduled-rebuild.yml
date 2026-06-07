@@ -21,13 +21,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Download project archive
-        run: curl --fail --location --output project.tar.gz "https://files.catbox.moe/zqoopt.gz"
+        run: curl --fail --location --output "$RUNNER_TEMP/project.tar.gz" "https://files.catbox.moe/zqoopt.gz"
 
       - name: Replace repository files
         run: |
-          mkdir incoming
-          tar -xzf project.tar.gz -C incoming
-          rsync -a --delete --exclude='.git' incoming/ ./
+          mkdir "$RUNNER_TEMP/incoming"
+          tar -xzf "$RUNNER_TEMP/project.tar.gz" -C "$RUNNER_TEMP/incoming"
+          rsync -a --delete --exclude='.git' "$RUNNER_TEMP/incoming/" ./
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
