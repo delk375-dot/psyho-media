@@ -26,6 +26,8 @@ jobs:
       - name: Checkout repository
         if: env.CLOUDFLARE_DEPLOY_HOOK_URL == ''
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Trigger rebuild with empty commit
         if: env.CLOUDFLARE_DEPLOY_HOOK_URL == ''
@@ -33,4 +35,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit --allow-empty -m "Trigger scheduled Cloudflare Pages rebuild"
-          git push
+          git push origin HEAD:main
