@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Холодність</title>
+  <desc id="desc">Обкладинка про холодність, статус і помилкове враження сили.</desc>
+  <rect width="1200" height="675" fill="#241f1c"/>
+  <rect x="392" y="155" width="180" height="360" fill="#e8d7c8"/>
+  <rect x="628" y="155" width="180" height="360" fill="#e8d7c8" opacity=".26"/>
+  <path d="M600 120v430" stroke="#8f1f2e" stroke-width="10"/>
+  <text x="78" y="590" fill="#f4eadf" font-family="Arial, sans-serif" font-size="92" font-weight="900">ХОЛОДНІСТЬ</text>
+</svg>
