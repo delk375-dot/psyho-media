@@ -1,5 +1,4 @@
 ---
-import { getCollection } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
@@ -8,10 +7,11 @@ import Main from "@/components/Main.astro";
 import Card from "@/components/Card.astro";
 import Footer from "@/components/Footer.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
+import { getPublishedPosts } from "@/utils/getPublishedPosts";
 import config from "@/config";
 
 export const getStaticPaths = (async () => {
-  const posts = await getCollection("posts", ({ data }) => !data.draft && Boolean(data.series));
+  const posts = (await getPublishedPosts()).filter(post => Boolean(post.data.series));
   const series = [
     ...new Set(
       posts
@@ -23,7 +23,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { series } = Astro.params;
-const posts = await getCollection("posts", ({ data }) => !data.draft && data.series === series);
+const posts = (await getPublishedPosts()).filter(post => post.data.series === series);
 const seriesPosts = getSortedPosts(posts);
 ---
 

@@ -1,5 +1,4 @@
 ---
-import { getCollection } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
@@ -9,6 +8,7 @@ import Card from "@/components/Card.astro";
 import Footer from "@/components/Footer.astro";
 import { COLLECTIONS } from "@/data/knowledge";
 import { getSortedPosts } from "@/utils/getSortedPosts";
+import { getPublishedPosts } from "@/utils/getPublishedPosts";
 import config from "@/config";
 
 type Props = {
@@ -22,7 +22,7 @@ export const getStaticPaths = (() =>
   }))) satisfies GetStaticPaths;
 
 const { collection } = Astro.props;
-const posts = await getCollection("posts", ({ data }) => !data.draft);
+const posts = await getPublishedPosts();
 const collectionPosts = getSortedPosts(
   posts.filter(({ data }) => data.collection === collection.slug)
 );

@@ -1,15 +1,15 @@
 ---
-import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import Main from "@/components/Main.astro";
 import Footer from "@/components/Footer.astro";
+import { getPublishedPosts } from "@/utils/getPublishedPosts";
 import config from "@/config";
 
 const locale = Astro.currentLocale ?? config.site.lang;
-const posts = await getCollection("posts", ({ data }) => !data.draft && Boolean(data.series));
+const posts = (await getPublishedPosts()).filter(post => Boolean(post.data.series));
 const series = [
   ...new Set(
     posts
