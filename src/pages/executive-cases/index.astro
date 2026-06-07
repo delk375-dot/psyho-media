@@ -1,0 +1,28 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import { CASE_STUDIES } from "@/data/knowledge";
+import config from "@/config";
+---
+
+<Layout
+  title={`Кейси повсякденних драм | ${config.site.title}`}
+  description="Формати майбутніх кейсів про стосунки, мовчання, маніпуляції, гроші, конфлікти і приховані мотиви."
+>
+  <Header />
+  <Breadcrumb />
+  <Main pageTitle="Кейси повсякденних драм" pageDesc="Формат майбутніх розборів: ситуація, прихований механізм, психологічний ризик і питання, яке допомагає побачити справжню причину конфлікту.">
+    <ul class="grid gap-4 sm:grid-cols-2">
+      {CASE_STUDIES.map(item => (
+        <li class="border-border bg-muted/30 border p-4">
+          <h2 class="text-xl font-semibold">{item.title}</h2>
+          <p class="mt-2 text-muted-foreground">{item.description}</p>
+        </li>
+      ))}
+    </ul>
+  </Main>
+  <Footer />
+</Layout>
