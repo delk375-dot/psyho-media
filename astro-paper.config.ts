@@ -2,7 +2,7 @@ import { defineAstroPaperConfig } from "./src/types/config";
 
 export default defineAstroPaperConfig({
   site: {
-    url: "https://psyho-media.pages.dev/",
+    url: "https://psyho-media.pp.ua/",
     title: "Людський механізм",
     description:
       "Масове психологічне медіа про стосунки, ревнощі, зради, маніпуляції, токсичних людей, гроші, секс, конфлікти і приховані мотиви поведінки.",
