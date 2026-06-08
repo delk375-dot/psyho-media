@@ -1,0 +1,28 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#f7efe4"/>
+
+  <!-- Hook/chain metaphor — attached to absence -->
+  <!-- Chain links -->
+  <ellipse cx="600" cy="120" rx="32" ry="18" fill="none" stroke="#211917" stroke-width="3"/>
+  <ellipse cx="600" cy="160" rx="18" ry="30" fill="none" stroke="#211917" stroke-width="3"/>
+  <ellipse cx="600" cy="220" rx="32" ry="18" fill="none" stroke="#211917" stroke-width="3"/>
+  <ellipse cx="600" cy="260" rx="18" ry="30" fill="none" stroke="#211917" stroke-width="3"/>
+  <ellipse cx="600" cy="320" rx="32" ry="18" fill="none" stroke="#211917" stroke-width="3"/>
+
+  <!-- Last link broken / fading -->
+  <ellipse cx="600" cy="360" rx="18" ry="30" fill="none" stroke="#8f1f2e" stroke-width="2.5" stroke-dasharray="8,5"/>
+
+  <!-- Empty anchor at bottom — attached to nothing -->
+  <path d="M 570 395 L 600 430 L 630 395" fill="none" stroke="#8f1f2e" stroke-width="2" opacity="0.6" stroke-dasharray="5,4"/>
+  <line x1="600" y1="390" x2="600" y2="430" stroke="#8f1f2e" stroke-width="2" opacity="0.4" stroke-dasharray="4,4"/>
+
+  <!-- Shadow/reflection of absent person -->
+  <ellipse cx="600" cy="455" rx="60" ry="12" fill="#8f1f2e" opacity="0.08"/>
+
+  <!-- Title -->
+  <text x="600" y="496" font-family="Georgia, serif" font-size="24" fill="#211917" text-anchor="middle" font-style="italic">Чому ми прив'язуємось</text>
+  <text x="600" y="534" font-family="Georgia, serif" font-size="22" fill="#8f1f2e" text-anchor="middle">до нестачі відповіді</text>
+
+  <line x1="200" y1="562" x2="1000" y2="562" stroke="#8f1f2e" stroke-width="1" opacity="0.4"/>
+  <text x="600" y="585" font-family="Georgia, serif" font-size="14" fill="#8f1f2e" text-anchor="middle" opacity="0.7" letter-spacing="3">ЛЮДСЬКИЙ МЕХАНІЗМ</text>
+</svg>

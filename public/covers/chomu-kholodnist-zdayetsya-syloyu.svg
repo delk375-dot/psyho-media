@@ -1,0 +1,33 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#f7efe4"/>
+
+  <!-- Ice/glass surface — cold, smooth, impenetrable -->
+  <rect x="340" y="160" width="520" height="260" rx="4" fill="none" stroke="#211917" stroke-width="2"/>
+
+  <!-- Frost crack lines — subtle coldness -->
+  <line x1="460" y1="160" x2="430" y2="420" stroke="#211917" stroke-width="1" opacity="0.12"/>
+  <line x1="600" y1="160" x2="590" y2="420" stroke="#211917" stroke-width="1" opacity="0.08"/>
+  <line x1="730" y1="160" x2="770" y2="420" stroke="#211917" stroke-width="1" opacity="0.12"/>
+  <line x1="340" y1="255" x2="860" y2="270" stroke="#211917" stroke-width="1" opacity="0.08"/>
+  <line x1="340" y1="340" x2="860" y2="325" stroke="#211917" stroke-width="1" opacity="0.08"/>
+
+  <!-- Silhouette inside — person behind glass, cold and distant -->
+  <ellipse cx="600" cy="235" rx="35" ry="38" fill="#8f1f2e" opacity="0.15"/>
+  <path d="M 530 420 Q 530 310 600 290 Q 670 310 670 420" fill="#8f1f2e" opacity="0.1"/>
+
+  <!-- Reflection glare — the illusion of depth -->
+  <path d="M 380 190 Q 420 200 410 240" stroke="#f7efe4" stroke-width="8" opacity="0.6" fill="none" stroke-linecap="round"/>
+
+  <!-- Snowflake motif — minimal -->
+  <line x1="940" y1="200" x2="940" y2="280" stroke="#8f1f2e" stroke-width="1.5" opacity="0.3"/>
+  <line x1="900" y1="240" x2="980" y2="240" stroke="#8f1f2e" stroke-width="1.5" opacity="0.3"/>
+  <line x1="912" y1="212" x2="968" y2="268" stroke="#8f1f2e" stroke-width="1" opacity="0.2"/>
+  <line x1="968" y1="212" x2="912" y2="268" stroke="#8f1f2e" stroke-width="1" opacity="0.2"/>
+
+  <!-- Title -->
+  <text x="600" y="498" font-family="Georgia, serif" font-size="26" fill="#211917" text-anchor="middle" font-style="italic">Чому холодність</text>
+  <text x="600" y="536" font-family="Georgia, serif" font-size="22" fill="#8f1f2e" text-anchor="middle">здається силою</text>
+
+  <line x1="200" y1="563" x2="1000" y2="563" stroke="#8f1f2e" stroke-width="1" opacity="0.4"/>
+  <text x="600" y="586" font-family="Georgia, serif" font-size="14" fill="#8f1f2e" text-anchor="middle" opacity="0.7" letter-spacing="3">ЛЮДСЬКИЙ МЕХАНІЗМ</text>
+</svg>

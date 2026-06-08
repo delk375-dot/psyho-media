@@ -1,0 +1,28 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#f7efe4"/>
+
+  <!-- Empty speech bubble — message not answered -->
+  <rect x="340" y="140" width="520" height="220" rx="24" ry="24" fill="none" stroke="#8f1f2e" stroke-width="2.5"/>
+  <!-- Bubble tail -->
+  <path d="M 420 360 L 380 420 L 480 360 Z" fill="none" stroke="#8f1f2e" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- Dots inside bubble — imagination filling the void -->
+  <circle cx="480" cy="250" r="8" fill="#8f1f2e" opacity="0.2"/>
+  <circle cx="600" cy="250" r="8" fill="#8f1f2e" opacity="0.4"/>
+  <circle cx="720" cy="250" r="8" fill="#8f1f2e" opacity="0.2"/>
+
+  <!-- Faint fantasy shapes emerging from bubble -->
+  <path d="M 500 170 Q 520 130 560 160 Q 600 120 640 155 Q 680 130 700 165" stroke="#8f1f2e" stroke-width="1" fill="none" opacity="0.15" stroke-dasharray="4,4"/>
+  <path d="M 460 190 Q 490 155 530 180" stroke="#8f1f2e" stroke-width="1" fill="none" opacity="0.12" stroke-dasharray="3,5"/>
+
+  <!-- Unread indicator -->
+  <circle cx="830" cy="155" r="22" fill="#8f1f2e"/>
+  <text x="830" y="163" font-family="Georgia, serif" font-size="20" fill="#f7efe4" text-anchor="middle" font-weight="bold">1</text>
+
+  <!-- Title -->
+  <text x="600" y="498" font-family="Georgia, serif" font-size="27" fill="#211917" text-anchor="middle" font-style="italic">Чому ігнор</text>
+  <text x="600" y="536" font-family="Georgia, serif" font-size="22" fill="#8f1f2e" text-anchor="middle">створює фантазію</text>
+
+  <line x1="200" y1="566" x2="1000" y2="566" stroke="#8f1f2e" stroke-width="1" opacity="0.4"/>
+  <text x="600" y="589" font-family="Georgia, serif" font-size="14" fill="#8f1f2e" text-anchor="middle" opacity="0.7" letter-spacing="3">ЛЮДСЬКИЙ МЕХАНІЗМ</text>
+</svg>

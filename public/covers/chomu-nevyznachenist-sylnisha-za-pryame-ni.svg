@@ -1,0 +1,40 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#f7efe4"/>
+
+  <!-- Two paths: clear "NO" vs blurred uncertainty -->
+
+  <!-- Left: clear direct path — the honest "ні" -->
+  <line x1="200" y1="315" x2="520" y2="315" stroke="#211917" stroke-width="3"/>
+  <polygon points="520,300 560,315 520,330" fill="#211917"/>
+  <text x="380" y="295" font-family="Georgia, serif" font-size="52" fill="#211917" text-anchor="middle" opacity="0.15" font-style="italic">ні</text>
+
+  <!-- Center divider -->
+  <line x1="600" y1="140" x2="600" y2="490" stroke="#8f1f2e" stroke-width="1" stroke-dasharray="6,4" opacity="0.5"/>
+
+  <!-- Right: branching uncertain path — "може", "побачимо", "не знаю" -->
+  <line x1="640" y1="315" x2="760" y2="315" stroke="#8f1f2e" stroke-width="2"/>
+  <!-- Branch up -->
+  <path d="M 760 315 Q 820 280 900 250" stroke="#8f1f2e" stroke-width="2" fill="none" stroke-dasharray="7,4"/>
+  <polygon points="892,238 910,252 896,262" fill="#8f1f2e" opacity="0.6"/>
+  <!-- Branch middle -->
+  <path d="M 760 315 Q 840 315 960 315" stroke="#8f1f2e" stroke-width="2" fill="none" stroke-dasharray="7,4"/>
+  <polygon points="952,302 970,315 952,328" fill="#8f1f2e" opacity="0.5"/>
+  <!-- Branch down -->
+  <path d="M 760 315 Q 820 350 900 385" stroke="#8f1f2e" stroke-width="2" fill="none" stroke-dasharray="7,4"/>
+  <polygon points="892,373 910,387 895,397" fill="#8f1f2e" opacity="0.4"/>
+
+  <!-- Labels -->
+  <text x="920" y="246" font-family="Georgia, serif" font-size="18" fill="#8f1f2e" opacity="0.7" font-style="italic">може</text>
+  <text x="975" y="311" font-family="Georgia, serif" font-size="18" fill="#8f1f2e" opacity="0.6" font-style="italic">побачимо</text>
+  <text x="905" y="396" font-family="Georgia, serif" font-size="18" fill="#8f1f2e" opacity="0.5" font-style="italic">не знаю</text>
+
+  <!-- Clarity label on left -->
+  <text x="380" y="370" font-family="Georgia, serif" font-size="15" fill="#211917" text-anchor="middle" opacity="0.5" letter-spacing="2">ЯСНІСТЬ</text>
+
+  <!-- Title -->
+  <text x="600" y="506" font-family="Georgia, serif" font-size="22" fill="#211917" text-anchor="middle" font-style="italic">Чому невизначеність</text>
+  <text x="600" y="542" font-family="Georgia, serif" font-size="21" fill="#8f1f2e" text-anchor="middle">сильніша за пряме «ні»</text>
+
+  <line x1="200" y1="568" x2="1000" y2="568" stroke="#8f1f2e" stroke-width="1" opacity="0.4"/>
+  <text x="600" y="591" font-family="Georgia, serif" font-size="14" fill="#8f1f2e" text-anchor="middle" opacity="0.7" letter-spacing="3">ЛЮДСЬКИЙ МЕХАНІЗМ</text>
+</svg>
