@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   verify:
@@ -27,7 +27,7 @@ jobs:
         run: |
           mkdir "$RUNNER_TEMP/incoming"
           tar -xzf "$RUNNER_TEMP/project.tar.gz" -C "$RUNNER_TEMP/incoming"
-          rsync -a --delete --exclude='.git' "$RUNNER_TEMP/incoming/" ./
+          rsync -a --delete --exclude='.git' --exclude='.github' "$RUNNER_TEMP/incoming/" ./
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -55,4 +55,13 @@ jobs:
           ! grep -R "chomu-lyudy-povertayutsya-pislya-rozryvu" dist/sitemap* dist/rss.xml
           ! grep -R "emotsiyna-zalezhnist-chomu-lyudy-trymayutsya-za-tykh-khto-robyt-bolyache" dist/sitemap* dist/rss.xml
 
-# trigger: seo-foundation-v2
+      - name: Commit SEO foundation
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git status --short
+          git commit -m "Improve SEO and social metadata foundation"
+          git push
+
+# trigger: seo-foundation-commit
