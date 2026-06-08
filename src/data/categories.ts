@@ -11,6 +11,11 @@ const CATEGORY_SLUG_VALUES = [
   "self-worth",
   "family",
   "silence-ghosting",
+  "fairytales",
+  "social-bugs",
+  "human-scenarios",
+  "dark-mechanisms",
+  "behavior-science",
 ] as const;
 
 export type CategorySlug = (typeof CATEGORY_SLUG_VALUES)[number];
@@ -128,6 +133,51 @@ export const CATEGORIES = [
     intent: "silence-and-ghosting",
     keywords: ["ігнор", "мовчання", "ghosting", "невизначеність"],
     hubs: ["attachment-and-distance", "manipulation-and-control"],
+  },
+  {
+    slug: "fairytales",
+    title: "Психологічні казки",
+    description:
+      "Метафоричні психологічні притчі, архетипи і мудрість через сюжет — не для дітей, а для дорослих.",
+    intent: "psychological-metaphor",
+    keywords: ["психологічні казки", "притчі", "архетипи", "метафора", "мудрість"],
+    hubs: ["self-worth-lab", "attachment-and-distance"],
+  },
+  {
+    slug: "social-bugs",
+    title: "Соціальні баги",
+    description:
+      "Іронія, абсурд і людські глюки: поведінкові парадокси, які смішні і впізнавані одночасно.",
+    intent: "social-absurdism",
+    keywords: ["соціальні баги", "абсурд", "парадокси", "поведінка", "іронія"],
+    hubs: ["manipulation-and-control", "conflict-lab"],
+  },
+  {
+    slug: "human-scenarios",
+    title: "Людські сценарії",
+    description:
+      "Психологія через сюжет: реальні і вигадані ситуації з моральною неоднозначністю і емоційною напругою.",
+    intent: "narrative-psychology",
+    keywords: ["людські сценарії", "сюжет", "напруга", "стосунки", "моральний вибір"],
+    hubs: ["relationship-dramas", "attachment-and-distance"],
+  },
+  {
+    slug: "dark-mechanisms",
+    title: "Темні механізми",
+    description:
+      "Прихований контроль, газлайтинг, емоційне маніпулювання і психологічний жах повсякденного.",
+    intent: "dark-psychology",
+    keywords: ["темні механізми", "газлайтинг", "контроль", "маніпуляція", "токсичність"],
+    hubs: ["manipulation-and-control", "conflict-lab"],
+  },
+  {
+    slug: "behavior-science",
+    title: "Лабораторія поведінки",
+    description:
+      "Реальні дослідження, поведінкова наука і психологічні експерименти — без академічної сухості.",
+    intent: "behavioral-science",
+    keywords: ["поведінкова наука", "дослідження", "експерименти", "Каннеман", "Готтман"],
+    hubs: ["attachment-and-distance", "self-worth-lab"],
   },
 ] satisfies ReadonlyArray<{
   slug: CategorySlug;

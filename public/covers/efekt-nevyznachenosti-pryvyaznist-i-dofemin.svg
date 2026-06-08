@@ -1,0 +1,43 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#f7efe4"/>
+
+  <!-- Skinner box outline — scientific, editorial -->
+  <rect x="400" y="100" width="400" height="320" rx="4" fill="none" stroke="#211917" stroke-width="2"/>
+  <!-- Grid floor -->
+  <line x1="400" y1="380" x2="800" y2="380" stroke="#211917" stroke-width="1.5" opacity="0.4"/>
+  <!-- Internal divider walls suggesting lab -->
+  <line x1="400" y1="200" x2="520" y2="200" stroke="#211917" stroke-width="1" opacity="0.25"/>
+  <line x1="680" y1="200" x2="800" y2="200" stroke="#211917" stroke-width="1" opacity="0.25"/>
+
+  <!-- Lever -->
+  <rect x="570" y="310" width="60" height="12" rx="3" fill="#8f1f2e" opacity="0.7"/>
+  <rect x="594" y="295" width="12" height="28" rx="2" fill="#8f1f2e" opacity="0.5"/>
+
+  <!-- Reward dispenser — sometimes active, sometimes not -->
+  <!-- Active: pellet falls -->
+  <rect x="620" y="150" width="40" height="50" rx="3" fill="none" stroke="#8f1f2e" stroke-width="1.5" opacity="0.6"/>
+  <circle cx="640" cy="220" r="8" fill="#8f1f2e" opacity="0.5"/>
+  <path d="M 640 200 L 640 212" stroke="#8f1f2e" stroke-width="1.5" opacity="0.4" stroke-dasharray="3,3"/>
+  <!-- Inactive side -->
+  <rect x="540" y="150" width="40" height="50" rx="3" fill="none" stroke="#211917" stroke-width="1" opacity="0.2"/>
+  <text x="560" y="183" font-family="Georgia, serif" font-size="18" fill="#211917" text-anchor="middle" opacity="0.2">—</text>
+
+  <!-- Probability curve — variable reinforcement -->
+  <path d="M 120 440 Q 200 200 350 350 Q 450 450 550 300 Q 650 180 750 320 Q 850 430 950 250 Q 1000 180 1080 300"
+        stroke="#8f1f2e" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="6,3"/>
+
+  <!-- Axis labels -->
+  <text x="130" y="460" font-family="Georgia, serif" font-size="13" fill="#211917" opacity="0.4">Стабільна винагорода</text>
+  <text x="960" y="460" font-family="Georgia, serif" font-size="13" fill="#8f1f2e" opacity="0.6">Варіативна</text>
+
+  <!-- Research badge -->
+  <rect x="840" y="105" width="220" height="40" rx="3" fill="none" stroke="#8f1f2e" stroke-width="1" opacity="0.4"/>
+  <text x="950" y="129" font-family="Georgia, serif" font-size="14" fill="#8f1f2e" text-anchor="middle" opacity="0.6">Skinner, 1957</text>
+
+  <!-- Title -->
+  <text x="600" y="500" font-family="Georgia, serif" font-size="22" fill="#211917" text-anchor="middle" font-style="italic">Ефект невизначеності:</text>
+  <text x="600" y="536" font-family="Georgia, serif" font-size="19" fill="#8f1f2e" text-anchor="middle">чому нестача відповіді викликає прив'язаність</text>
+
+  <line x1="200" y1="562" x2="1000" y2="562" stroke="#8f1f2e" stroke-width="1" opacity="0.4"/>
+  <text x="600" y="585" font-family="Georgia, serif" font-size="13" fill="#8f1f2e" text-anchor="middle" opacity="0.6" letter-spacing="3">ЛАБОРАТОРІЯ ПОВЕДІНКИ · ЛЮДСЬКИЙ МЕХАНІЗМ</text>
+</svg>

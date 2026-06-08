@@ -1,0 +1,42 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#f7efe4"/>
+
+  <!-- Grid background — absurdist/systematic feel -->
+  <line x1="0" y1="210" x2="1200" y2="210" stroke="#211917" stroke-width="0.5" opacity="0.08"/>
+  <line x1="0" y1="420" x2="1200" y2="420" stroke="#211917" stroke-width="0.5" opacity="0.08"/>
+  <line x1="400" y1="0" x2="400" y2="630" stroke="#211917" stroke-width="0.5" opacity="0.08"/>
+  <line x1="800" y1="0" x2="800" y2="630" stroke="#211917" stroke-width="0.5" opacity="0.08"/>
+
+  <!-- Long message bubble (left) — the 3-paragraph message -->
+  <rect x="140" y="140" width="340" height="220" rx="20" fill="none" stroke="#211917" stroke-width="2" opacity="0.7"/>
+  <path d="M 200 360 L 170 410 L 260 360 Z" fill="none" stroke="#211917" stroke-width="2" opacity="0.7"/>
+  <!-- Text lines in big bubble -->
+  <line x1="170" y1="185" x2="450" y2="185" stroke="#211917" stroke-width="2" opacity="0.25"/>
+  <line x1="170" y1="210" x2="450" y2="210" stroke="#211917" stroke-width="2" opacity="0.25"/>
+  <line x1="170" y1="235" x2="430" y2="235" stroke="#211917" stroke-width="2" opacity="0.25"/>
+  <line x1="170" y1="275" x2="450" y2="275" stroke="#211917" stroke-width="2" opacity="0.25"/>
+  <line x1="170" y1="300" x2="440" y2="300" stroke="#211917" stroke-width="2" opacity="0.25"/>
+  <line x1="170" y1="325" x2="420" y2="325" stroke="#211917" stroke-width="2" opacity="0.25"/>
+
+  <!-- Arrow -->
+  <line x1="520" y1="280" x2="660" y2="280" stroke="#8f1f2e" stroke-width="2" stroke-dasharray="6,4"/>
+  <polygon points="655,270 675,280 655,290" fill="#8f1f2e"/>
+
+  <!-- "ок" reply bubble (right) — tiny, minimal, powerful -->
+  <rect x="700" y="225" width="160" height="70" rx="14" fill="#8f1f2e"/>
+  <path d="M 730 295 L 710 330 L 790 295 Z" fill="#8f1f2e"/>
+  <text x="780" y="268" font-family="Georgia, serif" font-size="34" fill="#f7efe4" text-anchor="middle" font-weight="bold">ок</text>
+
+  <!-- Period/dot — the "ок." -->
+  <circle cx="900" cy="290" r="8" fill="#8f1f2e" opacity="0.5"/>
+
+  <!-- Status crown (ironic) above ок bubble -->
+  <path d="M 720 215 L 740 185 L 780 205 L 820 185 L 840 215 Z" fill="none" stroke="#8f1f2e" stroke-width="1.5" opacity="0.35"/>
+
+  <!-- Title -->
+  <text x="600" y="490" font-family="Georgia, serif" font-size="22" fill="#211917" text-anchor="middle" font-style="italic">Люди, які пишуть «ок»</text>
+  <text x="600" y="526" font-family="Georgia, serif" font-size="21" fill="#8f1f2e" text-anchor="middle">і думають, що це контроль</text>
+
+  <line x1="200" y1="554" x2="1000" y2="554" stroke="#8f1f2e" stroke-width="1" opacity="0.4"/>
+  <text x="600" y="577" font-family="Georgia, serif" font-size="13" fill="#8f1f2e" text-anchor="middle" opacity="0.6" letter-spacing="3">СОЦІАЛЬНИЙ БАГ · ЛЮДСЬКИЙ МЕХАНІЗМ</text>
+</svg>

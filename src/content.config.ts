@@ -32,6 +32,11 @@ const posts = defineCollection({
           "case",
           "glossary",
           "framework",
+          "psychological_fairytale",
+          "social_bug",
+          "human_scenario",
+          "dark_mechanism",
+          "behavior_lab",
         ])
         .default("article"),
       relatedPosts: z.array(z.string()).default([]),

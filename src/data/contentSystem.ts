@@ -4,7 +4,12 @@ export type ContentFormatSlug =
   | "viral_note"
   | "deep_analysis"
   | "pillar_article"
-  | "psychological_fragment";
+  | "psychological_fragment"
+  | "psychological_fairytale"
+  | "social_bug"
+  | "human_scenario"
+  | "dark_mechanism"
+  | "behavior_lab";
 
 export const CONTENT_FORMATS: Record<
   ContentFormatSlug,
@@ -38,6 +43,36 @@ export const CONTENT_FORMATS: Record<
     shortLabel: "Фрагмент",
     description: "Короткий сильний психологічний фрагмент або парадокс.",
     range: "300-1 200 знаків",
+  },
+  psychological_fairytale: {
+    label: "Психологічна казка",
+    shortLabel: "Казка",
+    description: "Метафорична притча. Мудрість через сюжет, архетипи і образи.",
+    range: "3 000-8 000 знаків",
+  },
+  social_bug: {
+    label: "Соціальний баг",
+    shortLabel: "Баг",
+    description: "Іронічний розбір людського глюку. Сміх + впізнавання.",
+    range: "2 000-5 000 знаків",
+  },
+  human_scenario: {
+    label: "Людський сценарій",
+    shortLabel: "Сценарій",
+    description: "Психологія через сюжет. Реальні ситуації з емоційною напругою.",
+    range: "4 000-10 000 знаків",
+  },
+  dark_mechanism: {
+    label: "Темний механізм",
+    shortLabel: "Механізм",
+    description: "Прихований контроль, емоційний жах і темні патерни поведінки.",
+    range: "4 000-10 000 знаків",
+  },
+  behavior_lab: {
+    label: "Лабораторія поведінки",
+    shortLabel: "Лаб",
+    description: "Реальні дослідження і поведінкова наука без академічної сухості.",
+    range: "5 000-12 000 знаків",
   },
 };
 

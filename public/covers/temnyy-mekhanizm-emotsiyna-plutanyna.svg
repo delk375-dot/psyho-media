@@ -1,0 +1,40 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#211917"/>
+
+  <!-- Dark background — psychological dread -->
+  <rect width="1200" height="630" fill="#f7efe4" opacity="0.04"/>
+
+  <!-- Labyrinth/maze — no exit visible -->
+  <!-- Outer walls -->
+  <rect x="280" y="80" width="640" height="400" rx="2" fill="none" stroke="#8f1f2e" stroke-width="2" opacity="0.6"/>
+  <!-- Inner maze walls -->
+  <line x1="280" y1="186" x2="540" y2="186" stroke="#8f1f2e" stroke-width="1.5" opacity="0.5"/>
+  <line x1="460" y1="186" x2="460" y2="293" stroke="#8f1f2e" stroke-width="1.5" opacity="0.5"/>
+  <line x1="460" y1="293" x2="700" y2="293" stroke="#8f1f2e" stroke-width="1.5" opacity="0.5"/>
+  <line x1="700" y1="186" x2="700" y2="293" stroke="#8f1f2e" stroke-width="1.5" opacity="0.5"/>
+  <line x1="700" y1="186" x2="920" y2="186" stroke="#8f1f2e" stroke-width="1.5" opacity="0.5"/>
+  <line x1="540" y1="80" x2="540" y2="186" stroke="#8f1f2e" stroke-width="1.5" opacity="0.5"/>
+  <line x1="380" y1="293" x2="380" y2="400" stroke="#8f1f2e" stroke-width="1.5" opacity="0.5"/>
+  <line x1="380" y1="400" x2="640" y2="400" stroke="#8f1f2e" stroke-width="1.5" opacity="0.5"/>
+  <line x1="820" y1="293" x2="820" y2="480" stroke="#8f1f2e" stroke-width="1.5" opacity="0.5"/>
+  <line x1="640" y1="400" x2="640" y2="480" stroke="#8f1f2e" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Figure trapped in maze center — small, lost -->
+  <ellipse cx="600" cy="250" rx="14" ry="17" fill="none" stroke="#f7efe4" stroke-width="1.5" opacity="0.5"/>
+  <path d="M 580 310 Q 582 272 600 268 Q 618 272 620 310" fill="none" stroke="#f7efe4" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Question marks orbiting the figure -->
+  <text x="548" y="252" font-family="Georgia, serif" font-size="18" fill="#8f1f2e" opacity="0.6" text-anchor="middle">?</text>
+  <text x="654" y="252" font-family="Georgia, serif" font-size="18" fill="#8f1f2e" opacity="0.6" text-anchor="middle">?</text>
+  <text x="600" y="222" font-family="Georgia, serif" font-size="18" fill="#8f1f2e" opacity="0.5" text-anchor="middle">?</text>
+
+  <!-- Exit that doesn't exist — dashed line leading nowhere -->
+  <path d="M 620 310 Q 660 340 650 380 Q 640 420 580 430" stroke="#f7efe4" stroke-width="1" fill="none" opacity="0.2" stroke-dasharray="5,6"/>
+
+  <!-- Title — on dark bg, light text -->
+  <text x="600" y="510" font-family="Georgia, serif" font-size="22" fill="#f7efe4" text-anchor="middle" font-style="italic" opacity="0.9">Чому деякі люди спеціально</text>
+  <text x="600" y="546" font-family="Georgia, serif" font-size="22" fill="#8f1f2e" text-anchor="middle">створюють емоційну плутанину</text>
+
+  <line x1="200" y1="572" x2="1000" y2="572" stroke="#8f1f2e" stroke-width="1" opacity="0.4"/>
+  <text x="600" y="595" font-family="Georgia, serif" font-size="13" fill="#8f1f2e" text-anchor="middle" opacity="0.6" letter-spacing="3">ТЕМНИЙ МЕХАНІЗМ · ЛЮДСЬКИЙ МЕХАНІЗМ</text>
+</svg>

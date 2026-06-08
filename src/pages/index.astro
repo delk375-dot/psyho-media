@@ -35,6 +35,13 @@ const navCategories = CATEGORIES.filter(c =>
   ["relationships","manipulation","jealousy","money-status","emotional-dependence","silence-ghosting","toxic-people","conflicts"].includes(c.slug)
 );
 
+// Нові жанри
+const fairytales     = byType("psychological_fairytale", 3);
+const socialBugs     = byType("social_bug", 3);
+const humanScenarios = byType("human_scenario", 3);
+const darkMechanisms = byType("dark_mechanism", 3);
+const behaviorLab    = byType("behavior_lab", 3);
+
 // Тільки перші 3 сервіси для м'якого CTA
 const featuredServices = SERVICE_CTA.slice(0, 3);
 ---
@@ -190,6 +197,111 @@ const featuredServices = SERVICE_CTA.slice(0, 3);
         {pillarArticles.map(post => <Card variant="h3" {...post} />)}
       </ul>
     </section>
+
+    <!-- ═══════════════════════════════════════
+         7A. ПСИХОЛОГІЧНІ КАЗКИ
+    ═══════════════════════════════════════ -->
+    {fairytales.length > 0 && (
+    <section id="fairytales" class="content-lane border-border border-b py-10 sm:py-14">
+      <div class="lane-header">
+        <div>
+          <FormatBadge contentType="psychological_fairytale" />
+          <h2 class="section-title mt-3">Психологічні казки</h2>
+          <p class="section-copy">Мудреці, дзеркала, архетипи і притчі. Не для дітей — для дорослих, які ще не все зрозуміли про себе.</p>
+        </div>
+        <LinkButton href={getRelativeLocaleUrl(locale, "categories/fairytales")}>
+          Усі казки
+        </LinkButton>
+      </div>
+      <ul class="mt-4">
+        {fairytales.map(post => <Card variant="h3" {...post} />)}
+      </ul>
+    </section>
+    )}
+
+    <!-- ═══════════════════════════════════════
+         7B. СОЦІАЛЬНІ БАГИ
+    ═══════════════════════════════════════ -->
+    {socialBugs.length > 0 && (
+    <section id="social-bugs" class="content-lane border-border border-b py-10 sm:py-14">
+      <div class="lane-header">
+        <div>
+          <FormatBadge contentType="social_bug" />
+          <h2 class="section-title mt-3">Соціальні баги</h2>
+          <p class="section-copy">Іронія, абсурд і людські глюки. Впізнаєш себе — сміятись або рефлексувати, вибір твій.</p>
+        </div>
+        <LinkButton href={getRelativeLocaleUrl(locale, "categories/social-bugs")}>
+          Усі баги
+        </LinkButton>
+      </div>
+      <ul class="mt-4">
+        {socialBugs.map(post => <Card variant="h3" {...post} />)}
+      </ul>
+    </section>
+    )}
+
+    <!-- ═══════════════════════════════════════
+         7C. ЛЮДСЬКІ СЦЕНАРІЇ
+    ═══════════════════════════════════════ -->
+    {humanScenarios.length > 0 && (
+    <section id="human-scenarios" class="content-lane border-border border-b py-10 sm:py-14">
+      <div class="lane-header">
+        <div>
+          <FormatBadge contentType="human_scenario" />
+          <h2 class="section-title mt-3">Людські сценарії</h2>
+          <p class="section-copy">Психологія через сюжет. Реальні або майже реальні ситуації — моральна неоднозначність включена.</p>
+        </div>
+        <LinkButton href={getRelativeLocaleUrl(locale, "categories/human-scenarios")}>
+          Усі сценарії
+        </LinkButton>
+      </div>
+      <ul class="mt-4">
+        {humanScenarios.map(post => <Card variant="h3" {...post} />)}
+      </ul>
+    </section>
+    )}
+
+    <!-- ═══════════════════════════════════════
+         7D. ТЕМНІ МЕХАНІЗМИ
+    ═══════════════════════════════════════ -->
+    {darkMechanisms.length > 0 && (
+    <section id="dark-mechanisms" class="content-lane border-border border-b py-10 sm:py-14">
+      <div class="lane-header">
+        <div>
+          <FormatBadge contentType="dark_mechanism" />
+          <h2 class="section-title mt-3">Темні механізми</h2>
+          <p class="section-copy">Газлайтинг, прихований контроль, емоційна плутанина. Те, про що не кажуть прямо — але роблять.</p>
+        </div>
+        <LinkButton href={getRelativeLocaleUrl(locale, "categories/dark-mechanisms")}>
+          Усі механізми
+        </LinkButton>
+      </div>
+      <ul class="mt-4">
+        {darkMechanisms.map(post => <Card variant="h3" {...post} />)}
+      </ul>
+    </section>
+    )}
+
+    <!-- ═══════════════════════════════════════
+         7E. ЛАБОРАТОРІЯ ПОВЕДІНКИ
+    ═══════════════════════════════════════ -->
+    {behaviorLab.length > 0 && (
+    <section id="behavior-lab" class="content-lane border-border border-b py-10 sm:py-14">
+      <div class="lane-header">
+        <div>
+          <FormatBadge contentType="behavior_lab" />
+          <h2 class="section-title mt-3">Лабораторія поведінки</h2>
+          <p class="section-copy">Готтман, Скіннер, Каннеман і реальні дослідження. Поведінкова наука — без академічної сухості.</p>
+        </div>
+        <LinkButton href={getRelativeLocaleUrl(locale, "categories/behavior-science")}>
+          Усі дослідження
+        </LinkButton>
+      </div>
+      <ul class="mt-4">
+        {behaviorLab.map(post => <Card variant="h3" {...post} />)}
+      </ul>
+    </section>
+    )}
 
     <!-- ═══════════════════════════════════════
          7. НАВІГАЦІЯ ПО ТЕМАХ
