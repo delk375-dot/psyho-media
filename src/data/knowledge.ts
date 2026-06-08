@@ -180,6 +180,118 @@ export const GLOSSARY_TERMS = [
       "Відчуття, що нестача грошей робить людину гіршою, слабшою або менш вартою любові й поваги.",
     categories: ["money-status", "self-worth"],
   },
+  {
+    slug: "passive-aggression",
+    title: "Пасивна агресія",
+    description:
+      "Приховане вираження злості через мовчання, зволікання, іронію або «забудькуватість» замість прямої розмови.",
+    categories: ["manipulation", "conflicts"],
+  },
+  {
+    slug: "emotional-dependence",
+    title: "Емоційна залежність",
+    description:
+      "Стан, у якому власний настрій, самооцінка і відчуття безпеки цілком залежать від однієї людини.",
+    categories: ["emotional-dependence", "relationships"],
+  },
+  {
+    slug: "avoidant-attachment",
+    title: "Уникаючий тип прив'язаності",
+    description:
+      "Схильність відсторонюватись при наближенні близькості — не від байдужості, а від страху поглинання або розчарування.",
+    categories: ["emotional-dependence", "relationships"],
+  },
+  {
+    slug: "zeigarnik-effect",
+    title: "Ефект Зейгарнік",
+    description:
+      "Незавершені ситуації займають більше місця в голові, ніж завершені. Саме тому ігнор і гостинг так сильно чіпляють.",
+    categories: ["silence-ghosting", "emotional-dependence"],
+  },
+  {
+    slug: "variable-reinforcement",
+    title: "Варіативне підкріплення",
+    description:
+      "Нерегулярні сигнали уваги чи тепла, які створюють звикання сильніше, ніж стабільна турбота. Механізм одноруких бандитів — і токсичних стосунків.",
+    categories: ["emotional-dependence", "manipulation"],
+  },
+  {
+    slug: "love-bombing",
+    title: "Лав-бомбінг",
+    description:
+      "Надмірна, нав'язлива увага на початку стосунків — компліменти, подарунки, «ти особлива/особливий» — яка швидко змінюється на контроль або холодність.",
+    categories: ["manipulation", "toxic-people"],
+  },
+  {
+    slug: "silent-treatment",
+    title: "Мовчазна кара",
+    description:
+      "Навмисне ігнорування як покарання — зброя, яка діє без слів і не залишає доказів, але ранить глибше за сварку.",
+    categories: ["silence-ghosting", "manipulation"],
+  },
+  {
+    slug: "cognitive-dissonance",
+    title: "Когнітивний дисонанс",
+    description:
+      "Внутрішній дискомфорт, коли наші дії суперечать переконанням. Причина, чому люди виправдовують тих, хто їх ранить.",
+    categories: ["relationships", "emotional-dependence"],
+  },
+  {
+    slug: "narcissistic-injury",
+    title: "Нарцисична рана",
+    description:
+      "Болюча реакція на будь-яку критику, ігнорування або неприйняття у людини з нарцисичними рисами. Часто виражається в агресії або різкому знеціненні.",
+    categories: ["toxic-people", "manipulation"],
+  },
+  {
+    slug: "projection",
+    title: "Проєкція",
+    description:
+      "Перенесення власних почуттів або бажань на іншу людину: «ти ревнуєш» — замість визнання власної ревнощі.",
+    categories: ["manipulation", "relationships"],
+  },
+  {
+    slug: "devaluation",
+    title: "Знецінення",
+    description:
+      "Різка зміна сприйняття людини з ідеалізації на презирство. Характерна для нарцисичної динаміки і маніпулятивних стосунків.",
+    categories: ["toxic-people", "manipulation"],
+  },
+  {
+    slug: "shame-vs-guilt",
+    title: "Сором і провина",
+    description:
+      "Провина каже: «я зробив погано». Сором каже: «я — погана людина». Перша мотивує виправити. Другий паралізує і веде до захисної агресії або самознищення.",
+    categories: ["self-worth", "emotional-dependence"],
+  },
+  {
+    slug: "halo-effect",
+    title: "Ефект ореолу",
+    description:
+      "Одна привабливість або одна якість перекриває все інше: красива людина здається і розумнішою, і добрішою. Причина, чому зовнішність і статус спотворюють оцінку.",
+    categories: ["sex-attraction", "money-status"],
+  },
+  {
+    slug: "rescuer-syndrome",
+    title: "Синдром рятівника",
+    description:
+      "Потреба «лагодити» партнера або близьких, яка маскується під любов, але часто тримається на власному страху — бути непотрібним або недостатнім.",
+    categories: ["relationships", "emotional-dependence"],
+  },
+  {
+    slug: "emotional-immaturity",
+    title: "Емоційна незрілість",
+    description:
+      "Нездатність переносити дискомфорт, брати відповідальність за свої почуття або витримувати конфлікт без бігтва чи нападу.",
+    categories: ["relationships", "toxic-people"],
+  },
+  {
+    slug: "boundaries",
+    title: "Межі в стосунках",
+    description:
+      "Не стіни, а правила: що для мене прийнятно, а що — ні. Межі без наслідків — це бажання. Межа стає реальною, тільки коли ти готовий її захистити.",
+    categories: ["relationships", "self-worth"],
+  },
 ] satisfies ReadonlyArray<{
   slug: string;
   title: string;

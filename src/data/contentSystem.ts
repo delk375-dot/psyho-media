@@ -16,7 +16,7 @@ export const CONTENT_FORMATS: Record<
   }
 > = {
   viral_note: {
-    label: "Вірусна замітка",
+    label: "Психологічна замітка",
     shortLabel: "Замітка",
     description: "Коротка психологічна замітка, яка чіпляє одну болючу ситуацію.",
     range: "2 000-5 000 знаків",
