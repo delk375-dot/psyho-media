@@ -11,40 +11,32 @@ import { getPostUrl } from "@/utils/getPostPaths";
 import { getPublishedPosts } from "@/utils/getPublishedPosts";
 import { SERVICE_CTA } from "@/data/knowledge";
 import { CATEGORIES } from "@/data/categories";
-import { CONTENT_FORMATS, SEARCH_QUERIES, TOPIC_CLUSTERS } from "@/data/contentSystem";
+import { SEARCH_QUERIES, TOPIC_CLUSTERS } from "@/data/contentSystem";
 import config from "@/config";
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const sortedPosts = await getPublishedPosts();
 const homePath = getRelativeLocaleUrl(locale, "");
 
-const byType = (type: string, limit = 4, skipIds = new Set<string>()) =>
+const byType = (type: string, limit = 4) =>
   sortedPosts
-    .filter(post => post.data.contentType === type && !skipIds.has(post.id))
+    .filter(post => post.data.contentType === type)
     .slice(0, limit);
 
-const viralNotes = byType("viral_note", 3);
-const fragments = byType("psychological_fragment", 6);
-const deepAnalysis = byType("deep_analysis", 3);
+// 3 найновіших матеріали будь-якого типу
+const freshPosts = sortedPosts.slice(0, 3);
+
+const viralNotes    = byType("viral_note", 3);
+const fragments     = byType("psychological_fragment", 6);
+const deepAnalysis  = byType("deep_analysis", 3);
 const pillarArticles = byType("pillar_article", 4);
-const lanePostIds = new Set(
-  [...viralNotes, ...fragments, ...deepAnalysis, ...pillarArticles].map(
-    post => post.id
-  )
+
+const navCategories = CATEGORIES.filter(c =>
+  ["relationships","manipulation","jealousy","money-status","emotional-dependence","silence-ghosting","toxic-people","conflicts"].includes(c.slug)
 );
-const latestPosts = sortedPosts
-  .filter(post => !lanePostIds.has(post.id))
-  .slice(0, 5);
-const popularCategories = CATEGORIES.filter(category =>
-  [
-    "relationships",
-    "manipulation",
-    "jealousy",
-    "money-status",
-    "emotional-dependence",
-    "silence-ghosting",
-  ].includes(category.slug)
-);
+
+// Тільки перші 3 сервіси для м'якого CTA
+const featuredServices = SERVICE_CTA.slice(0, 3);
 ---
 
 <Layout
@@ -58,6 +50,10 @@ const popularCategories = CATEGORIES.filter(category =>
     data-home-path={homePath}
     class="app-layout"
   >
+
+    <!-- ═══════════════════════════════════════
+         1. HERO
+    ═══════════════════════════════════════ -->
     <section id="hero" class="relative overflow-hidden border-border border-b pt-12 pb-10 sm:pt-18 sm:pb-14">
       <div class="relative z-10 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.72fr)] lg:items-center">
         <div class="max-w-3xl">
@@ -72,8 +68,8 @@ const popularCategories = CATEGORIES.filter(category =>
           </p>
 
           <p class="mt-5 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg sm:leading-8">
-            Психологія ревнощів, мовчання, залежності, бажання, грошей і
-            прихованих мотивів, які керують повсякденними драмами.
+            Розбираємо ревнощі, мовчання, маніпуляції, залежність і приховані
+            мотиви — без зайвого пафосу і псевдонаукових кліше.
           </p>
 
           <div class="mt-10 flex flex-wrap gap-3 sm:mt-12">
@@ -88,7 +84,7 @@ const popularCategories = CATEGORIES.filter(category =>
               href={getRelativeLocaleUrl(locale, "categories")}
               class="border-border border px-5 py-3 hover:text-accent"
             >
-              Карта тем
+              Усі теми
             </LinkButton>
           </div>
         </div>
@@ -101,47 +97,34 @@ const popularCategories = CATEGORIES.filter(category =>
       </div>
     </section>
 
-    <section id="search-queries" class="border-border border-b py-10 sm:py-14">
-      <div class="max-w-2xl">
-        <p class="section-kicker">Пошукові тривоги</p>
-        <h2 class="section-title">Питання, які люди шукають ночами</h2>
-      </div>
-
-      <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {SEARCH_QUERIES.map(query => (
-          <li>
-            <a href={query.href} class="query-card block min-h-full">
-              <span class="query-card-mark" aria-hidden="true"></span>
-              <strong>{query.question}</strong>
-              <span>Перейти до теми</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section id="latest-research" class="content-lane border-border border-b py-10 sm:py-14">
+    <!-- ═══════════════════════════════════════
+         2. СВІЖІ МАТЕРІАЛИ (3 останніх, будь-який тип)
+    ═══════════════════════════════════════ -->
+    <section id="fresh" class="content-lane border-border border-b py-10 sm:py-14">
       <div class="lane-header">
         <div>
-          <p class="section-kicker">Останні публікації</p>
-          <h2 class="section-title">Нові розбори</h2>
+          <p class="section-kicker">Щойно вийшло</p>
+          <h2 class="section-title">Нові матеріали</h2>
         </div>
         <LinkButton href={getRelativeLocaleUrl(locale, "posts")}>
-          Усі статті
+          Усі публікації
           <IconArrowRight class="inline-block rtl:-rotate-180" />
         </LinkButton>
       </div>
       <ul class="mt-4">
-        {latestPosts.map(post => <Card variant="h3" {...post} />)}
+        {freshPosts.map(post => <Card variant="h3" {...post} />)}
       </ul>
     </section>
 
+    <!-- ═══════════════════════════════════════
+         3. ВІРУСНІ ЗАМІТКИ
+    ═══════════════════════════════════════ -->
     <section id="viral-notes" class="content-lane border-border border-b py-10 sm:py-14">
       <div class="lane-header">
         <div>
           <FormatBadge contentType="viral_note" />
           <h2 class="section-title mt-3">Вірусні замітки</h2>
-          <p class="section-copy">{CONTENT_FORMATS.viral_note.description}</p>
+          <p class="section-copy">Коротко — але влучно. Одна болюча ситуація, один психологічний механізм.</p>
         </div>
       </div>
       <ul class="mt-4">
@@ -149,12 +132,15 @@ const popularCategories = CATEGORIES.filter(category =>
       </ul>
     </section>
 
+    <!-- ═══════════════════════════════════════
+         4. ПСИХОЛОГІЧНІ ФРАГМЕНТИ
+    ═══════════════════════════════════════ -->
     <section id="fragments" class="border-border border-b py-10 sm:py-14">
       <div class="lane-header">
         <div>
           <FormatBadge contentType="psychological_fragment" />
           <h2 class="section-title mt-3">Психологічні фрагменти</h2>
-          <p class="section-copy">{CONTENT_FORMATS.psychological_fragment.description}</p>
+          <p class="section-copy">Одна думка, яку хочеться переслати. Або зберегти і перечитати пізно вночі.</p>
         </div>
       </div>
       <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -170,13 +156,50 @@ const popularCategories = CATEGORIES.filter(category =>
       </ul>
     </section>
 
-    <section id="popular-topics" class="border-border border-b py-10 sm:py-14">
+    <!-- ═══════════════════════════════════════
+         5. ГЛИБОКІ РОЗБОРИ
+    ═══════════════════════════════════════ -->
+    <section id="deep-analysis" class="content-lane border-border border-b py-10 sm:py-14">
+      <div class="lane-header">
+        <div>
+          <FormatBadge contentType="deep_analysis" />
+          <h2 class="section-title mt-3">Глибокі розбори</h2>
+          <p class="section-copy">Механізм поведінки — від поверхні до причини. Без поспіху.</p>
+        </div>
+      </div>
+      <ul class="mt-4">
+        {deepAnalysis.map(post => <Card variant="h3" {...post} />)}
+      </ul>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         6. ФУНДАМЕНТАЛЬНІ РОЗБОРИ
+    ═══════════════════════════════════════ -->
+    <section id="pillar-articles" class="content-lane border-border border-b py-10 sm:py-14">
+      <div class="lane-header">
+        <div>
+          <FormatBadge contentType="pillar_article" />
+          <h2 class="section-title mt-3">Фундаментальні розбори</h2>
+          <p class="section-copy">Великі матеріали про те, як влаштовані стосунки, влада і поведінка людини зсередини.</p>
+        </div>
+        <LinkButton href={getRelativeLocaleUrl(locale, "topics")}>
+          Тематичні хаби
+        </LinkButton>
+      </div>
+      <ul class="mt-4">
+        {pillarArticles.map(post => <Card variant="h3" {...post} />)}
+      </ul>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         7. НАВІГАЦІЯ ПО ТЕМАХ
+    ═══════════════════════════════════════ -->
+    <section id="topics" class="border-border border-b py-10 sm:py-14">
       <div class="max-w-2xl">
-        <p class="section-kicker">Популярні теми</p>
-        <h2 class="section-title">Популярні теми</h2>
+        <p class="section-kicker">Карта тем</p>
+        <h2 class="section-title">Знайди своє питання</h2>
         <p class="section-copy">
-          Кластери для внутрішньої перелінковки, SEO і AI search: кожна тема веде
-          до хабів, категорій і серій матеріалів.
+          Стосунки, маніпуляції, ревнощі, гроші, залежність — кожна тема веде до серії матеріалів.
         </p>
       </div>
 
@@ -191,8 +214,8 @@ const popularCategories = CATEGORIES.filter(category =>
         ))}
       </ul>
 
-      <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {popularCategories.map(category => (
+      <ul class="mt-6 flex flex-wrap gap-3">
+        {navCategories.map(category => (
           <li>
             <a href={getRelativeLocaleUrl(locale, `categories/${category.slug}`)} class="topic-chip block">
               {category.title}
@@ -202,56 +225,57 @@ const popularCategories = CATEGORIES.filter(category =>
       </ul>
     </section>
 
-    <section id="deep-analysis" class="content-lane border-border border-b py-10 sm:py-14">
-      <div class="lane-header">
-        <div>
-          <FormatBadge contentType="deep_analysis" />
-          <h2 class="section-title mt-3">Глибокі розбори</h2>
-          <p class="section-copy">{CONTENT_FORMATS.deep_analysis.description}</p>
-        </div>
-      </div>
-      <ul class="mt-4">
-        {deepAnalysis.map(post => <Card variant="h3" {...post} />)}
-      </ul>
-    </section>
-
-    <section id="pillar-articles" class="content-lane border-border border-b py-10 sm:py-14">
-      <div class="lane-header">
-        <div>
-          <FormatBadge contentType="pillar_article" />
-          <h2 class="section-title mt-3">Фундаментальні розбори</h2>
-          <p class="section-copy">{CONTENT_FORMATS.pillar_article.description}</p>
-        </div>
-        <LinkButton href={getRelativeLocaleUrl(locale, "topics")}>
-          Тематичні хаби
-        </LinkButton>
-      </div>
-      <ul class="mt-4">
-        {pillarArticles.map(post => <Card variant="h3" {...post} />)}
-      </ul>
-    </section>
-
-    <section id="services" class="border-border border-b py-10 sm:py-14">
+    <!-- ═══════════════════════════════════════
+         8. ПОШУКОВІ ТРИВОГИ (SEO — внизу)
+    ═══════════════════════════════════════ -->
+    <section id="search-queries" class="border-border border-b py-10 sm:py-14">
       <div class="max-w-2xl">
-        <p class="section-kicker">Практика</p>
-        <h2 class="section-title">Практичні формати</h2>
+        <p class="section-kicker">Питання, які шукають ночами</p>
+        <h2 class="section-title">Впізнаєш себе?</h2>
+      </div>
+
+      <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {SEARCH_QUERIES.map(query => (
+          <li>
+            <a href={query.href} class="query-card block min-h-full">
+              <span class="query-card-mark" aria-hidden="true"></span>
+              <strong>{query.question}</strong>
+              <span>Перейти до теми</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         9. ДОПОМОГА — М'ЯКИЙ CTA
+         (зараз інформаційно, в майбутньому — коучинг / психолог / юрист)
+    ═══════════════════════════════════════ -->
+    <section id="help" class="border-border border-b py-10 sm:py-14">
+      <div class="max-w-2xl">
+        <p class="section-kicker">Коли читання стає замало</p>
+        <h2 class="section-title">Іноді потрібен живий розбір</h2>
         <p class="section-copy">
-          Майбутні продукти, які можна м'яко підключати до матеріалів без
-          агресивної реклами.
+          Стаття пояснює механізм. Але у твоїй ситуації — свої деталі, свій контекст і своя ставка.
+          Ми готуємо формати живої підтримки: коучинг, консультація психолога, юридичний розбір ситуації.
         </p>
       </div>
-      <ul class="mt-8 grid gap-5 sm:grid-cols-2">
-        {SERVICE_CTA.map(service => (
+      <ul class="mt-8 grid gap-5 sm:grid-cols-3">
+        {featuredServices.map(service => (
           <li class="map-card border-border bg-muted/20 border p-5 sm:p-6">
             <span class="topic-sigil" aria-hidden="true"></span>
-            <h3 class="mt-4 text-lg font-semibold">{service.title}</h3>
+            <h3 class="mt-4 text-base font-semibold">{service.title}</h3>
             <p class="mt-3 text-sm leading-7 text-muted-foreground">
               {service.description}
             </p>
           </li>
         ))}
       </ul>
+      <p class="mt-6 text-sm text-muted-foreground">
+        Формати в розробці — <a href={getRelativeLocaleUrl(locale, "about")} class="underline underline-offset-4 hover:text-accent">дізнатись більше про проєкт</a>.
+      </p>
     </section>
+
   </main>
   <Footer />
 </Layout>
