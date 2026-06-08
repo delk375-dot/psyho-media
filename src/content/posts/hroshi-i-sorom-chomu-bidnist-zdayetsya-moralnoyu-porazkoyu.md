@@ -1,4 +1,4 @@
----
+﻿---
 title: "Гроші і сором: чому бідність здається моральною поразкою"
 description: "Психологія грошового сорому: чому нестача грошей часто переживається як доказ слабкості, провалу або меншої цінності."
 pubDatetime: 2026-06-07T12:40:00.000+03:00
@@ -16,6 +16,7 @@ collection: money-sex-status
 contentType: pillar_article
 featured: true
 draft: false
+cover: "/covers/hroshi-i-sorom-chomu-bidnist-zdayetsya-moralnoyu-porazkoyu.svg"
 ogImage: /covers/money-shame-cover.svg
 cta: money-anxiety-work
 ---

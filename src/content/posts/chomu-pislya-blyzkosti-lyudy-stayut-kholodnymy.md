@@ -1,4 +1,4 @@
----
+﻿---
 title: "Чому після близькості люди стають холодними"
 description: "Пояснення постінтимної дистанції: страх близькості, сором, втрата контролю і різниця між бажанням та здатністю залишатися поруч."
 pubDatetime: 2026-06-07T12:50:00.000+03:00
@@ -16,6 +16,7 @@ collection: money-sex-status
 contentType: pillar_article
 featured: true
 draft: false
+cover: "/covers/chomu-pislya-blyzkosti-lyudy-stayut-kholodnymy.svg"
 ogImage: /covers/intimacy-coldness-cover.svg
 cta: relationship-review
 ---

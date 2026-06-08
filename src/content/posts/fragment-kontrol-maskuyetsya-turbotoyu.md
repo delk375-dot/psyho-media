@@ -1,4 +1,4 @@
----
+﻿---
 title: "Контроль часто маскується турботою"
 description: "Фрагмент про контроль у стосунках, який звучить як любов і захист."
 pubDatetime: 2026-06-07T15:12:00+03:00
@@ -8,6 +8,7 @@ topics: ["manipulation-and-control", "relationship-dramas"]
 contentType: psychological_fragment
 relatedPosts: ["manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo", "revnoshchi-strakh-vtraty-chy-bazhannya-kontrolyu"]
 recommendedReading: ["manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo"]
+cover: "/covers/fragment-kontrol-maskuyetsya-turbotoyu.svg"
 ogImage: /covers/fragment-control.svg
 hideEditPost: true
 ---

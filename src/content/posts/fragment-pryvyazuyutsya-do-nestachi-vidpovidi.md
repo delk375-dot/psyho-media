@@ -1,4 +1,4 @@
----
+﻿---
 title: "Люди часто прив’язуються не до людини, а до нестачі відповіді"
 description: "Фрагмент про те, як відсутність відповіді перетворюється на внутрішню прив'язаність."
 pubDatetime: 2026-06-08T09:00:00+03:00
@@ -8,6 +8,7 @@ topics: ["attachment-and-distance", "manipulation-and-control"]
 contentType: psychological_fragment
 relatedPosts: ["fragment-ignor-stvoryuye-fantaziyu", "deep-analysis-movchannya-yak-prykhovanyy-kontrol"]
 recommendedReading: ["chomu-lyudy-znykayut-bez-poyasnennya", "chomu-horoshykh-lyudey-chasto-ne-hochut"]
+cover: "/covers/fragment-pryvyazuyutsya-do-nestachi-vidpovidi.svg"
 ogImage: /covers/scheduled-answer-lack.svg
 hideEditPost: true
 ---

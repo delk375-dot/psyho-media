@@ -1,4 +1,4 @@
----
+﻿---
 title: "Мовчання як прихований контроль"
 description: "Глибокий розбір того, як тиша, паузи, ігнор і відсутність пояснень можуть ставати інструментом влади у стосунках."
 pubDatetime: 2026-06-07T15:30:00+03:00
@@ -7,6 +7,7 @@ tags: ["мовчання", "ігнор", "контроль", "маніпуляц
 topics: ["manipulation-and-control", "attachment-and-distance"]
 collection: "manipulation-field-notes"
 contentType: deep_analysis
+cover: "/covers/deep-analysis-movchannya-yak-prykhovanyy-kontrol.svg"
 relatedPosts: ["chomu-lyudy-znykayut-bez-poyasnennya", "manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo", "fragment-movchannya-ne-pauza"]
 recommendedReading: ["chomu-lyudy-znykayut-bez-poyasnennya", "fragment-ignor-stvoryuye-fantaziyu"]
 cta: communication-audit

@@ -1,4 +1,4 @@
----
+﻿---
 title: "Ігнор створює фантазію"
 description: "Фрагмент про те, чому відсутність відповіді може прив'язувати сильніше за чесну розмову."
 pubDatetime: 2026-06-07T15:11:00+03:00
@@ -8,6 +8,7 @@ topics: ["attachment-and-distance", "manipulation-and-control"]
 contentType: psychological_fragment
 relatedPosts: ["chomu-lyudy-znykayut-bez-poyasnennya"]
 recommendedReading: ["chomu-lyudy-znykayut-bez-poyasnennya"]
+cover: "/covers/fragment-ignor-stvoryuye-fantaziyu.svg"
 ogImage: /covers/fragment-ignore.svg
 hideEditPost: true
 ---

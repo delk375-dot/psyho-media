@@ -1,4 +1,4 @@
----
+﻿---
 title: "Ревнощі рідко про любов"
 description: "Фрагмент про ревнощі як страх втрати статусу, уваги і контролю."
 pubDatetime: 2026-06-07T15:02:00+03:00
@@ -8,6 +8,7 @@ topics: ["relationship-dramas", "attachment-and-distance"]
 contentType: psychological_fragment
 relatedPosts: ["revnoshchi-strakh-vtraty-chy-bazhannya-kontrolyu"]
 recommendedReading: ["revnoshchi-strakh-vtraty-chy-bazhannya-kontrolyu"]
+cover: "/covers/fragment-revnoshchi-ne-lyubov.svg"
 ogImage: /covers/fragment-jealousy.svg
 hideEditPost: true
 ---

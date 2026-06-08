@@ -1,4 +1,4 @@
----
+﻿---
 title: "Ревнощі: страх втрати чи бажання контролю"
 description: "Розбір ревнощів як суміші страху, порівняння, власності, тривоги і спроби повернути контроль у стосунках."
 pubDatetime: 2026-06-07T12:30:00.000+03:00
@@ -16,6 +16,7 @@ collection: relationship-psychology
 contentType: pillar_article
 featured: true
 draft: false
+cover: "/covers/revnoshchi-strakh-vtraty-chy-bazhannya-kontrolyu.svg"
 ogImage: /covers/jealousy-cover.svg
 cta: relationship-review
 ---

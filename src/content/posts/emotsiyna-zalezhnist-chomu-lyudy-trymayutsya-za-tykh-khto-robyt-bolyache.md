@@ -1,4 +1,4 @@
----
+﻿---
 title: "Емоційна залежність: чому люди тримаються за тих, хто робить їм боляче"
 description: "Фундаментальний розбір емоційної залежності: чому люди залишаються в болючих зв'язках, як працюють ігнор, невизначеність, страх втрати, фантазія і залежність від рідкісного тепла."
 pubDatetime: 2026-06-10T19:00:00+03:00
@@ -11,6 +11,7 @@ contentType: pillar_article
 featured: true
 relatedPosts: ["fragment-pryvyazuyutsya-do-nestachi-vidpovidi", "chomu-nevyznachenist-vyklykaye-sylnishi-emotsiyi", "chomu-tyagne-do-tykh-khto-ne-daye-yasnosti", "deep-analysis-movchannya-yak-prykhovanyy-kontrol"]
 recommendedReading: ["chomu-lyudy-tsinuyut-pislya-vtraty", "chomu-lyudy-povertayutsya-pislya-rozryvu", "fragment-movchannya-vyhlyadaye-hlybshym", "chomu-kholodnist-spryymayetsya-yak-syla"]
+cover: "/covers/emotsiyna-zalezhnist-chomu-lyudy-trymayutsya-za-tykh-khto-robyt-bolyache.svg"
 ogImage: /covers/scheduled-emotional-dependence-pillar.svg
 cta: relationship-review
 hideEditPost: true

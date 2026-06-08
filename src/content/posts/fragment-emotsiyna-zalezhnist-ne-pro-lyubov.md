@@ -1,4 +1,4 @@
----
+﻿---
 title: "Емоційна залежність не про любов"
 description: "Фрагмент про те, чому болючі стосунки можуть відчуватися як єдині справжні."
 pubDatetime: 2026-06-07T15:07:00+03:00
@@ -8,6 +8,7 @@ topics: ["attachment-and-distance", "self-worth-lab"]
 contentType: psychological_fragment
 relatedPosts: ["emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt"]
 recommendedReading: ["emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt"]
+cover: "/covers/fragment-emotsiyna-zalezhnist-ne-pro-lyubov.svg"
 ogImage: /covers/fragment-dependence.svg
 hideEditPost: true
 ---

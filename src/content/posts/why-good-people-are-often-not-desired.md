@@ -1,4 +1,4 @@
----
+﻿---
 title: "Чому хороших людей часто не хочуть"
 metaTitle: "Чому хороших людей часто не хочуть: психологія потягу і відторгнення"
 description: "Чому доброта, турбота і надійність не завжди викликають бажання? Психологічний розбір потягу, статусу, дефіциту уваги та емоційної напруги."
@@ -11,6 +11,7 @@ contentType: deep_analysis
 relatedPosts: ["deep-analysis-movchannya-yak-prykhovanyy-kontrol", "fragment-ignor-stvoryuye-fantaziyu", "emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt", "seks-i-status-chomu-potyah-ridko-buvaye-vypadkovym"]
 recommendedReading: ["chomu-horoshykh-lyudey-chasto-ne-hochut", "chomu-pislya-blyzkosti-lyudy-stayut-kholodnymy"]
 cta: relationship-review
+cover: "/covers/why-good-people-are-often-not-desired.svg"
 ogImage: /covers/good-people-cover.svg
 hideEditPost: true
 ---

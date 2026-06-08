@@ -1,4 +1,4 @@
----
+﻿---
 title: "Мовчання не завжди пауза"
 description: "Короткий фрагмент про мовчання як спосіб контролювати чужу тривогу."
 pubDatetime: 2026-06-07T15:01:00+03:00
@@ -8,6 +8,7 @@ topics: ["manipulation-and-control", "attachment-and-distance"]
 contentType: psychological_fragment
 relatedPosts: ["chomu-lyudy-znykayut-bez-poyasnennya", "manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo"]
 recommendedReading: ["chomu-lyudy-znykayut-bez-poyasnennya"]
+cover: "/covers/fragment-movchannya-ne-pauza.svg"
 ogImage: /covers/fragment-silence.svg
 hideEditPost: true
 ---

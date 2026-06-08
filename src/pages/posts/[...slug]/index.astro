@@ -11,8 +11,8 @@ import RecommendedReading from "@/components/RecommendedReading.astro";
 import CoachingCTA from "@/components/CoachingCTA.astro";
 import FormatBadge from "@/components/FormatBadge.astro";
 import { getPostSlug, getPostUrl } from "@/utils/getPostPaths";
-import { getSortedPosts } from "@/utils/getSortedPosts";
 import { getPublishedPosts } from "@/utils/getPublishedPosts";
+import { getGeneratedPostCoverPath } from "@/utils/generatePostCover";
 import { slugifyStr } from "@/utils/slugify";
 import { toTransitionName } from "@/utils/toTransitionName";
 import { getCategoryBySlug } from "@/data/categories";
@@ -70,6 +70,7 @@ const {
   title,
   metaTitle,
   description,
+  cover,
   ogImage: initOgImage,
   canonicalURL,
   pubDatetime,
@@ -87,8 +88,9 @@ const allPosts = await getPublishedPosts();
 const articleVisualLabel = category ?? contentType ?? "analysis";
 const currentCategory = getCategoryBySlug(category);
 const topicClusters = getClustersForCategory(category);
+const generatedCover = getGeneratedPostCoverPath(post.id);
 const coverImageUrl =
-  typeof initOgImage === "string" ? initOgImage : initOgImage?.src;
+  cover ?? (typeof initOgImage === "string" ? initOgImage : initOgImage?.src) ?? generatedCover;
 
 let ogImageUrl = coverImageUrl;
 

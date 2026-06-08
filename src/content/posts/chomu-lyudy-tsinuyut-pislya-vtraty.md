@@ -1,4 +1,4 @@
----
+﻿---
 title: "Чому люди починають цінувати когось після втрати"
 description: "Глибокий розбір запізнілих почуттів: чому дистанція, дефіцит і втрата можуть зробити людину емоційно більшою, ніж вона була поруч."
 pubDatetime: 2026-06-08T19:00:00+03:00
@@ -10,6 +10,7 @@ collection: "relationship-psychology"
 contentType: deep_analysis
 relatedPosts: ["emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt", "manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo", "deep-analysis-movchannya-yak-prykhovanyy-kontrol"]
 recommendedReading: ["chomu-lyudy-znykayut-bez-poyasnennya", "fragment-pryvyazuyutsya-do-nestachi-vidpovidi", "chomu-nevyznachenist-vyklykaye-sylnishi-emotsiyi"]
+cover: "/covers/chomu-lyudy-tsinuyut-pislya-vtraty.svg"
 ogImage: /covers/scheduled-value-after-loss.svg
 hideEditPost: true
 ---

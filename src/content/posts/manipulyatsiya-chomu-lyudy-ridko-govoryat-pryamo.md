@@ -1,4 +1,4 @@
----
+﻿---
 title: "Маніпуляція: чому люди рідко говорять прямо"
 description: "Пояснення непрямої комунікації: чому люди натякають, тиснуть провиною, мовчать і маскують бажання під мораль."
 pubDatetime: 2026-06-07T12:20:00.000+03:00
@@ -16,6 +16,7 @@ collection: manipulation-field-notes
 contentType: pillar_article
 featured: true
 draft: false
+cover: "/covers/manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo.svg"
 ogImage: /covers/manipulation-media-cover.svg
 cta: communication-audit
 ---

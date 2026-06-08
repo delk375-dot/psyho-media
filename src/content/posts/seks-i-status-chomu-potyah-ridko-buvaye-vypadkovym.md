@@ -1,4 +1,4 @@
----
+﻿---
 title: "Секс і статус: чому потяг рідко буває випадковим"
 description: "Розбір зв'язку потягу, статусу, влади, сорому і бажання бути обраним не тільки тілом, а й соціальною уявою."
 pubDatetime: 2026-06-07T13:20:00.000+03:00
@@ -16,6 +16,7 @@ collection: money-sex-status
 contentType: pillar_article
 featured: true
 draft: false
+cover: "/covers/seks-i-status-chomu-potyah-ridko-buvaye-vypadkovym.svg"
 ogImage: /covers/sex-status-cover.svg
 cta: individual-consultation
 ---

@@ -1,4 +1,4 @@
----
+﻿---
 title: "Чому одна відповідь може змінити весь день"
 description: "Коротка замітка про повідомлення, очікування і залежність самооцінки від чужої реакції."
 pubDatetime: 2026-06-07T15:21:00+03:00
@@ -6,6 +6,7 @@ category: silence-ghosting
 tags: ["повідомлення", "ігнор", "самооцінка", "тривога"]
 topics: ["attachment-and-distance", "self-worth-lab"]
 contentType: viral_note
+cover: "/covers/viral-note-chomu-vidpovid-tak-vazhlyva.svg"
 relatedPosts: ["chomu-lyudy-znykayut-bez-poyasnennya", "fragment-ignor-stvoryuye-fantaziyu"]
 recommendedReading: ["chomu-lyudy-znykayut-bez-poyasnennya"]
 hideEditPost: true

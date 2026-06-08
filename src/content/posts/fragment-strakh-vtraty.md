@@ -1,4 +1,4 @@
----
+﻿---
 title: "Страх втрати змушує тримати сильніше"
 description: "Фрагмент про те, як страх втрати перетворює близькість на контроль."
 pubDatetime: 2026-06-07T15:05:00+03:00
@@ -8,6 +8,7 @@ topics: ["attachment-and-distance", "relationship-dramas"]
 contentType: psychological_fragment
 relatedPosts: ["emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt", "revnoshchi-strakh-vtraty-chy-bazhannya-kontrolyu"]
 recommendedReading: ["emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt"]
+cover: "/covers/fragment-strakh-vtraty.svg"
 ogImage: /covers/fragment-loss.svg
 hideEditPost: true
 ---

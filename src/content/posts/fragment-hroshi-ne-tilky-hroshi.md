@@ -1,4 +1,4 @@
----
+﻿---
 title: "Гроші майже ніколи не тільки гроші"
 description: "Фрагмент про гроші як символ безпеки, сорому, влади і права хотіти."
 pubDatetime: 2026-06-07T15:09:00+03:00
@@ -8,6 +8,7 @@ topics: ["money-shame-status", "self-worth-lab"]
 contentType: psychological_fragment
 relatedPosts: ["hroshi-i-sorom-chomu-bidnist-zdayetsya-moralnoyu-porazkoyu"]
 recommendedReading: ["hroshi-i-sorom-chomu-bidnist-zdayetsya-moralnoyu-porazkoyu"]
+cover: "/covers/fragment-hroshi-ne-tilky-hroshi.svg"
 ogImage: /covers/fragment-money.svg
 hideEditPost: true
 ---

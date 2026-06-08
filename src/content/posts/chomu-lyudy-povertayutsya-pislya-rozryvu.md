@@ -1,4 +1,4 @@
----
+﻿---
 title: "Чому люди повертаються після розриву"
 description: "Психологічна замітка про те, чому повернення після розриву не завжди означає любов: самотність, его, звичка, страх порожнечі і незавершена прив'язаність."
 pubDatetime: 2026-06-09T14:00:00+03:00
@@ -9,6 +9,7 @@ collection: "relationship-psychology"
 contentType: viral_note
 relatedPosts: ["chomu-lyudy-tsinuyut-pislya-vtraty", "fragment-sumuye-za-vlasnoyu-znachushchistyu", "emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt"]
 recommendedReading: ["chomu-tyagne-do-tykh-khto-ne-daye-yasnosti", "deep-analysis-movchannya-yak-prykhovanyy-kontrol"]
+cover: "/covers/chomu-lyudy-povertayutsya-pislya-rozryvu.svg"
 ogImage: /covers/scheduled-return-after-breakup.svg
 hideEditPost: true
 ---

@@ -1,4 +1,4 @@
----
+﻿---
 title: "Маніпуляція не завжди звучить як наказ"
 description: "Фрагмент про непрямий тиск, провину і прохання, замасковані під мораль."
 pubDatetime: 2026-06-07T15:03:00+03:00
@@ -8,6 +8,7 @@ topics: ["manipulation-and-control", "conflict-lab"]
 contentType: psychological_fragment
 relatedPosts: ["manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo"]
 recommendedReading: ["manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo"]
+cover: "/covers/fragment-manipulyatsiya-bez-nakazu.svg"
 ogImage: /covers/fragment-manipulation.svg
 hideEditPost: true
 ---

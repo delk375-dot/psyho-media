@@ -1,4 +1,4 @@
----
+﻿---
 title: "Потяг бачить статус раніше за логіку"
 description: "Фрагмент про сексуальний потяг, соціальні сигнали і бажання бути обраним."
 pubDatetime: 2026-06-07T15:10:00+03:00
@@ -8,6 +8,7 @@ topics: ["sex-desire-status", "money-shame-status"]
 contentType: psychological_fragment
 relatedPosts: ["seks-i-status-chomu-potyah-ridko-buvaye-vypadkovym"]
 recommendedReading: ["seks-i-status-chomu-potyah-ridko-buvaye-vypadkovym"]
+cover: "/covers/fragment-potyah-vybyraye-status.svg"
 ogImage: /covers/fragment-desire.svg
 hideEditPost: true
 ---

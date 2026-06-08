@@ -1,4 +1,4 @@
----
+﻿---
 title: "Токсичні здаються сильними, бо не соромляться ранить"
 description: "Фрагмент про холодність, жорсткість і помилкове враження сили."
 pubDatetime: 2026-06-07T15:06:00+03:00
@@ -8,6 +8,7 @@ topics: ["manipulation-and-control", "conflict-lab"]
 contentType: psychological_fragment
 relatedPosts: ["toksychni-lyudy-chomu-vony-zdayutsya-sylnymy"]
 recommendedReading: ["toksychni-lyudy-chomu-vony-zdayutsya-sylnymy"]
+cover: "/covers/fragment-toksychni-zdayutsya-sylnymy.svg"
 ogImage: /covers/fragment-toxic.svg
 hideEditPost: true
 ---

@@ -1,4 +1,4 @@
----
+﻿---
 title: "Статус не завжди хвалиться"
 description: "Фрагмент про тихий статус, демонстрацію сили і право не пояснюватися."
 pubDatetime: 2026-06-07T15:04:00+03:00
@@ -8,6 +8,7 @@ topics: ["money-shame-status", "sex-desire-status"]
 contentType: psychological_fragment
 relatedPosts: ["hroshi-i-sorom-chomu-bidnist-zdayetsya-moralnoyu-porazkoyu", "seks-i-status-chomu-potyah-ridko-buvaye-vypadkovym"]
 recommendedReading: ["hroshi-i-sorom-chomu-bidnist-zdayetsya-moralnoyu-porazkoyu"]
+cover: "/covers/fragment-status-ne-hvalytsya.svg"
 ogImage: /covers/fragment-status.svg
 hideEditPost: true
 ---

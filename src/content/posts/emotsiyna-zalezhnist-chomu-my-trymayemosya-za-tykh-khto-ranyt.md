@@ -1,4 +1,4 @@
----
+﻿---
 title: "Емоційна залежність: чому ми тримаємось за тих, хто нас ранить"
 description: "Психологічний розбір емоційної залежності: чому болючі стосунки можуть здаватися єдино можливими і чому важко відпустити."
 pubDatetime: 2026-06-07T13:10:00.000+03:00
@@ -16,6 +16,7 @@ collection: relationship-psychology
 contentType: pillar_article
 featured: true
 draft: false
+cover: "/covers/emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt.svg"
 ogImage: /covers/emotional-dependence-cover.svg
 cta: breakup-coaching
 ---

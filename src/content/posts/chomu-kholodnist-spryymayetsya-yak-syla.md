@@ -1,4 +1,4 @@
----
+﻿---
 title: "Чому холодність часто помилково сприймається як сила"
 description: "Психологічна замітка про те, чому емоційна дистанція, контроль і холодність можуть виглядати як статус, хоча часто є лише способом не входити в близькість."
 pubDatetime: 2026-06-10T14:00:00+03:00
@@ -8,6 +8,7 @@ topics: ["manipulation-and-control", "relationship-dramas", "sex-desire-status"]
 contentType: viral_note
 relatedPosts: ["fragment-toksychni-zdayutsya-sylnymy", "chomu-tyagne-do-tykh-khto-ne-daye-yasnosti", "chomu-horoshykh-lyudey-chasto-ne-hochut"]
 recommendedReading: ["manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo", "seks-i-status-chomu-potyah-ridko-buvaye-vypadkovym"]
+cover: "/covers/chomu-kholodnist-spryymayetsya-yak-syla.svg"
 ogImage: /covers/scheduled-coldness-strength.svg
 hideEditPost: true
 ---

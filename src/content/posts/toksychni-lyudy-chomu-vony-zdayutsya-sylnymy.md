@@ -1,4 +1,4 @@
----
+﻿---
 title: "Токсичні люди: чому вони здаються сильними"
 description: "Розбір того, чому холодність, знецінення, впевнена жорсткість і відсутність сумнівів часто помилково сприймаються як сила."
 pubDatetime: 2026-06-07T13:00:00.000+03:00
@@ -16,6 +16,7 @@ collection: manipulation-field-notes
 contentType: pillar_article
 featured: true
 draft: false
+cover: "/covers/toksychni-lyudy-chomu-vony-zdayutsya-sylnymy.svg"
 ogImage: /covers/toxic-people-cover.svg
 cta: individual-consultation
 ---

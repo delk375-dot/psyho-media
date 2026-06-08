@@ -1,4 +1,4 @@
----
+﻿---
 title: "Чому хороших людей часто не хочуть"
 description: "Розбір того, чому доброта не завжди викликає потяг, а безпечність іноді плутають із нудьгою або слабкістю."
 pubDatetime: 2026-06-07T12:10:00.000+03:00
@@ -16,6 +16,7 @@ collection: relationship-psychology
 contentType: pillar_article
 featured: true
 draft: false
+cover: "/covers/chomu-horoshykh-lyudey-chasto-ne-hochut.svg"
 ogImage: /covers/good-people-cover.svg
 cta: individual-consultation
 ---

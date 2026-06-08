@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { getPostUrl } from "@/utils/getPostPaths";
+import { getGeneratedPostCoverPath } from "@/utils/generatePostCover";
 import { toTransitionName } from "@/utils/toTransitionName";
 import Datetime from "./Datetime.astro";
 import FormatBadge from "./FormatBadge.astro";
@@ -11,9 +12,11 @@ type Props = {
 
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
-const { title, description, ogImage, category, contentType, ...props } = data;
+const { title, description, cover, ogImage, category, contentType, ...props } = data;
 const postUrl = getPostUrl(id, filePath, Astro.currentLocale);
-const imageSource = typeof ogImage === "string" ? ogImage : ogImage?.src;
+const legacyImageSource = typeof ogImage === "string" ? ogImage : ogImage?.src;
+const generatedCover = getGeneratedPostCoverPath(id);
+const imageSource = cover ?? legacyImageSource ?? generatedCover;
 const emotionalLabels: Record<string, string> = {
   relationships: "БЛИЗЬКІСТЬ",
   betrayal: "ЗРАДА",

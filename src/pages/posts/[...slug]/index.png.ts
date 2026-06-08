@@ -12,7 +12,9 @@ export async function getStaticPaths() {
     return [];
   }
 
-  const posts = (await getPublishedPosts()).filter(({ data }) => !data.ogImage);
+  const posts = (await getPublishedPosts()).filter(
+    ({ data }) => !data.cover && !data.ogImage
+  );
 
   return posts.map(post => ({
     params: { slug: getPostSlug(post.id, post.filePath) },

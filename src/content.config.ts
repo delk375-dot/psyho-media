@@ -46,6 +46,7 @@ const posts = defineCollection({
           "money-anxiety-work",
         ])
         .optional(),
+      cover: z.string().optional(),
       ogImage: z.string().or(image()).optional(),
       description: z.string(),
       canonicalURL: z.string().optional(),

@@ -1,4 +1,4 @@
----
+﻿---
 title: "Чому люди зникають без пояснення"
 description: "Психологічний розбір гостингу: чому люди не відповідають, уникають пояснень і залишають інших у невизначеності."
 pubDatetime: 2026-06-07T12:00:00.000+03:00
@@ -16,6 +16,7 @@ collection: relationship-psychology
 contentType: pillar_article
 featured: true
 draft: false
+cover: "/covers/chomu-lyudy-znykayut-bez-poyasnennya.svg"
 ogImage: /covers/ghosting-cover.svg
 cta: relationship-review
 ---

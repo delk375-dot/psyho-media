@@ -1,4 +1,4 @@
----
+﻿---
 title: "Сором звужує людину"
 description: "Фрагмент про сором, який змушує поводитись меншим, ніж ти є."
 pubDatetime: 2026-06-07T15:08:00+03:00
@@ -8,6 +8,7 @@ topics: ["self-worth-lab", "money-shame-status"]
 contentType: psychological_fragment
 relatedPosts: ["hroshi-i-sorom-chomu-bidnist-zdayetsya-moralnoyu-porazkoyu"]
 recommendedReading: ["hroshi-i-sorom-chomu-bidnist-zdayetsya-moralnoyu-porazkoyu"]
+cover: "/covers/fragment-sorom-zvuzhuye.svg"
 ogImage: /covers/fragment-shame.svg
 hideEditPost: true
 ---

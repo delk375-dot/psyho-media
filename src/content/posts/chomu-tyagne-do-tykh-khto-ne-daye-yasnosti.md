@@ -1,4 +1,4 @@
----
+﻿---
 title: "Чому нас сильніше тягне до тих, хто не дає ясності"
 description: "Глибокий розбір того, як неясність, змішані сигнали і непередбачувана увага можуть створювати емоційну фіксацію сильнішу за спокійну близькість."
 pubDatetime: 2026-06-09T19:00:00+03:00
@@ -10,6 +10,7 @@ collection: "relationship-psychology"
 contentType: deep_analysis
 relatedPosts: ["chomu-nevyznachenist-vyklykaye-sylnishi-emotsiyi", "fragment-ignor-stvoryuye-fantaziyu", "deep-analysis-movchannya-yak-prykhovanyy-kontrol"]
 recommendedReading: ["chomu-lyudy-tsinuyut-pislya-vtraty", "emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt", "chomu-horoshykh-lyudey-chasto-ne-hochut"]
+cover: "/covers/chomu-tyagne-do-tykh-khto-ne-daye-yasnosti.svg"
 ogImage: /covers/scheduled-ambiguity.svg
 hideEditPost: true
 ---

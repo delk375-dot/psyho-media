@@ -1,4 +1,4 @@
----
+﻿---
 title: "Конфлікт у парі: чому сварка майже ніколи не про те, з чого почалась"
 description: "Психологія конфлікту в парі: чому побутова дрібниця часто відкриває стару образу, страх, статусну боротьбу або потребу у визнанні."
 pubDatetime: 2026-06-07T13:30:00.000+03:00
@@ -16,6 +16,7 @@ collection: relationship-psychology
 contentType: pillar_article
 featured: true
 draft: false
+cover: "/covers/konflikt-u-pari-chomu-svarka-ne-pro-te-z-choho-pochalas.svg"
 ogImage: /covers/couple-conflict-cover.svg
 cta: conflict-diagnostics
 ---

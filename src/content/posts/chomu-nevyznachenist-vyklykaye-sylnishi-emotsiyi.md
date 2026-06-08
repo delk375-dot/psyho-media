@@ -1,4 +1,4 @@
----
+﻿---
 title: "Чому невизначеність викликає сильніші емоції, ніж стабільність"
 description: "Короткий розбір того, чому очікування повідомлення, паузи і змішані сигнали можуть викликати сильнішу прив'язаність, ніж спокійна стабільність."
 pubDatetime: 2026-06-08T14:00:00+03:00
@@ -9,6 +9,7 @@ collection: "relationship-psychology"
 contentType: viral_note
 relatedPosts: ["fragment-ignor-stvoryuye-fantaziyu", "fragment-pryvyazuyutsya-do-nestachi-vidpovidi", "chomu-horoshykh-lyudey-chasto-ne-hochut"]
 recommendedReading: ["deep-analysis-movchannya-yak-prykhovanyy-kontrol", "chomu-tyagne-do-tykh-khto-ne-daye-yasnosti"]
+cover: "/covers/chomu-nevyznachenist-vyklykaye-sylnishi-emotsiyi.svg"
 ogImage: /covers/scheduled-uncertainty.svg
 hideEditPost: true
 ---
