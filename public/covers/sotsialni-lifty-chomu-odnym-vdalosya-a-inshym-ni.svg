@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Соціальні ліфти: чому одним вдалося, а іншим — ні</title>
+  <desc id="desc">Автоматична editorial SVG-обкладинка для матеріалу "Соціальні ліфти: чому одним вдалося, а іншим — ні".</desc>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="#f7efe4"/>
+
+  <!-- Grid lines -->
+  <path d="M0 132h1200M0 356h1200M0 580h1200M188 0v675M612 0v675M1036 0v675" stroke="#cbb9aa" stroke-width="1" opacity=".28"/>
+
+  <!-- Outer frame -->
+  <rect x="58" y="58" width="1084" height="559" fill="none" stroke="#cbb9aa" stroke-width="2"/>
+
+  <!-- Accent line -->
+  <path d="M92 116h130" stroke="#8f1f2e" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Category label -->
+  <text x="92" y="162" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="900" letter-spacing="8" fill="#8f1f2e">СТАТУС</text>
+
+  <!-- Content type label -->
+  <text x="92" y="210" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing="5" fill="#4a3934">ГЛИБОКИЙ РОЗБІР</text>
+
+  <!-- Title text -->
+  <text x="92" y="278" font-family="Inter, Arial, sans-serif" font-size="62" font-weight="900" fill="#211917">Соціальні ліфти:</text>
+  <text x="92" y="352" font-family="Inter, Arial, sans-serif" font-size="62" font-weight="900" fill="#211917">чому одним</text>
+  <text x="92" y="426" font-family="Inter, Arial, sans-serif" font-size="62" font-weight="900" fill="#211917">вдалося</text>
+
+  <!-- Elevator shaft illustration -->
+  <!-- Shaft vertical rails -->
+  <line x1="780" y1="100" x2="780" y2="580" stroke="#211917" stroke-width="6"/>
+  <line x1="1000" y1="100" x2="1000" y2="580" stroke="#211917" stroke-width="6"/>
+
+  <!-- Floor lines (horizontal guides inside shaft) -->
+  <line x1="780" y1="200" x2="1000" y2="200" stroke="#cbb9aa" stroke-width="1.5" opacity=".7"/>
+  <line x1="780" y1="320" x2="1000" y2="320" stroke="#cbb9aa" stroke-width="1.5" opacity=".7"/>
+  <line x1="780" y1="440" x2="1000" y2="440" stroke="#cbb9aa" stroke-width="1.5" opacity=".7"/>
+  <line x1="780" y1="560" x2="1000" y2="560" stroke="#cbb9aa" stroke-width="1.5" opacity=".7"/>
+
+  <!-- Elevator cab — top floor (wealthy) -->
+  <rect x="800" y="115" width="180" height="80" fill="#8f1f2e" opacity=".9"/>
+  <rect x="800" y="115" width="180" height="80" fill="none" stroke="#211917" stroke-width="3"/>
+  <!-- figure inside top cab -->
+  <circle cx="845" cy="143" r="12" fill="#f7efe4"/>
+  <rect x="835" y="158" width="20" height="28" rx="3" fill="#f7efe4"/>
+  <circle cx="905" cy="143" r="12" fill="#f7efe4"/>
+  <rect x="895" y="158" width="20" height="28" rx="3" fill="#f7efe4"/>
+
+  <!-- Cable from top cab -->
+  <line x1="890" y1="115" x2="890" y2="100" stroke="#211917" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Elevator cab — bottom floor (poor) -->
+  <rect x="800" y="460" width="180" height="80" fill="none" stroke="#4a3934" stroke-width="4" stroke-dasharray="8 4"/>
+  <!-- figure outline inside bottom cab -->
+  <circle cx="845" cy="488" r="12" fill="none" stroke="#4a3934" stroke-width="2.5"/>
+  <rect x="835" y="503" width="20" height="28" rx="3" fill="none" stroke="#4a3934" stroke-width="2.5"/>
+
+  <!-- Arrow pointing up — between cabs, showing movement impossible -->
+  <path d="M890 440 L890 220" stroke="#8f1f2e" stroke-width="4" stroke-dasharray="10 6" stroke-linecap="round"/>
+  <polygon points="890,200 880,225 900,225" fill="#8f1f2e"/>
+
+  <!-- Branding -->
+  <text x="92" y="558" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#4a3934">Людський механізм</text>
+</svg>
