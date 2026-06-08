@@ -52,6 +52,7 @@ jobs:
           ! grep -R "psyho-media.pages.dev" dist/index.html dist/rss.xml dist/sitemap-index.xml dist/robots.txt
           grep -q "Sitemap: https://psyho-media.pp.ua/sitemap-index.xml" dist/robots.txt
           grep -q "https://psyho-media.pp.ua" dist/sitemap-index.xml
-          ! grep -R "fragment-pryvyazuyutsya-do-nestachi-vidpovidi" dist/sitemap* dist/rss.xml
+          ! grep -R "chomu-lyudy-povertayutsya-pislya-rozryvu" dist/sitemap* dist/rss.xml
+          ! grep -R "emotsiyna-zalezhnist-chomu-lyudy-trymayutsya-za-tykh-khto-robyt-bolyache" dist/sitemap* dist/rss.xml
 
-# trigger: seo-foundation
+# trigger: seo-foundation-v2
