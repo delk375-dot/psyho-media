@@ -20,7 +20,7 @@ jobs:
 
       - name: Download prepared project archive
         run: |
-          curl -fsSL "https://files.catbox.moe/jti68j.gz" -o "$RUNNER_TEMP/cover-system.tar.gz"
+          curl -fsSL "https://files.catbox.moe/o3nd7o.gz" -o "$RUNNER_TEMP/cover-system.tar.gz"
           mkdir -p "$RUNNER_TEMP/incoming"
           tar -xzf "$RUNNER_TEMP/cover-system.tar.gz" -C "$RUNNER_TEMP/incoming"
 
