@@ -5,7 +5,7 @@ export default {
     home: "Головна",
     posts: "Статті",
     tags: "Теми",
-    about: "Про медіа",
+    about: "Про нас",
     archives: "Архів",
     search: "Пошук",
   },
