@@ -6,6 +6,7 @@ category: manipulation
 tags: ["маніпуляція", "провина", "тиск", "комунікація"]
 topics: ["manipulation-and-control", "conflict-lab"]
 contentType: psychological_fragment
+draft: false
 relatedPosts: ["manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo"]
 recommendedReading: ["manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo"]
 cover: "/covers/fragment-manipulyatsiya-bez-nakazu.svg"

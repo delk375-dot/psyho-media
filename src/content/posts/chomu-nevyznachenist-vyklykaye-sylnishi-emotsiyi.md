@@ -7,6 +7,7 @@ tags: ["стосунки", "невизначеність", "ігнор", "емо
 topics: ["attachment-and-distance", "relationship-dramas"]
 collection: "relationship-psychology"
 contentType: viral_note
+draft: false
 relatedPosts: ["fragment-ignor-stvoryuye-fantaziyu", "fragment-pryvyazuyutsya-do-nestachi-vidpovidi", "chomu-horoshykh-lyudey-chasto-ne-hochut"]
 recommendedReading: ["deep-analysis-movchannya-yak-prykhovanyy-kontrol", "chomu-tyagne-do-tykh-khto-ne-daye-yasnosti"]
 cover: "/covers/chomu-nevyznachenist-vyklykaye-sylnishi-emotsiyi.svg"

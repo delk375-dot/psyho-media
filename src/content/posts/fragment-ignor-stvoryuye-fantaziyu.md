@@ -6,6 +6,7 @@ category: silence-ghosting
 tags: ["ігнор", "гостинг", "тривога", "фантазія"]
 topics: ["attachment-and-distance", "manipulation-and-control"]
 contentType: psychological_fragment
+draft: false
 relatedPosts: ["chomu-lyudy-znykayut-bez-poyasnennya"]
 recommendedReading: ["chomu-lyudy-znykayut-bez-poyasnennya"]
 cover: "/covers/fragment-ignor-stvoryuye-fantaziyu.svg"

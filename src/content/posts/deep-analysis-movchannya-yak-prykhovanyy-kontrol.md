@@ -7,7 +7,9 @@ tags: ["мовчання", "ігнор", "контроль", "маніпуляц
 topics: ["manipulation-and-control", "attachment-and-distance"]
 collection: "manipulation-field-notes"
 contentType: deep_analysis
+draft: false
 cover: "/covers/deep-analysis-movchannya-yak-prykhovanyy-kontrol.svg"
+ogImage: "/covers/deep-analysis-movchannya-yak-prykhovanyy-kontrol.svg"
 relatedPosts: ["chomu-lyudy-znykayut-bez-poyasnennya", "manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo", "fragment-movchannya-ne-pauza"]
 recommendedReading: ["chomu-lyudy-znykayut-bez-poyasnennya", "fragment-ignor-stvoryuye-fantaziyu"]
 cta: communication-audit

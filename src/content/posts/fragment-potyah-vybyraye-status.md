@@ -6,6 +6,7 @@ category: sex-attraction
 tags: ["потяг", "секс", "статус", "бажання"]
 topics: ["sex-desire-status", "money-shame-status"]
 contentType: psychological_fragment
+draft: false
 relatedPosts: ["seks-i-status-chomu-potyah-ridko-buvaye-vypadkovym"]
 recommendedReading: ["seks-i-status-chomu-potyah-ridko-buvaye-vypadkovym"]
 cover: "/covers/fragment-potyah-vybyraye-status.svg"

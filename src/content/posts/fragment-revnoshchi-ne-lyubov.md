@@ -6,6 +6,7 @@ category: jealousy
 tags: ["ревнощі", "страх втрати", "контроль", "статус"]
 topics: ["relationship-dramas", "attachment-and-distance"]
 contentType: psychological_fragment
+draft: false
 relatedPosts: ["revnoshchi-strakh-vtraty-chy-bazhannya-kontrolyu"]
 recommendedReading: ["revnoshchi-strakh-vtraty-chy-bazhannya-kontrolyu"]
 cover: "/covers/fragment-revnoshchi-ne-lyubov.svg"

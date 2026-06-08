@@ -7,6 +7,7 @@ tags: ["розрив", "стосунки", "повернення", "емоцій
 topics: ["relationship-dramas", "attachment-and-distance", "self-worth-lab"]
 collection: "relationship-psychology"
 contentType: viral_note
+draft: false
 relatedPosts: ["chomu-lyudy-tsinuyut-pislya-vtraty", "fragment-sumuye-za-vlasnoyu-znachushchistyu", "emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt"]
 recommendedReading: ["chomu-tyagne-do-tykh-khto-ne-daye-yasnosti", "deep-analysis-movchannya-yak-prykhovanyy-kontrol"]
 cover: "/covers/chomu-lyudy-povertayutsya-pislya-rozryvu.svg"

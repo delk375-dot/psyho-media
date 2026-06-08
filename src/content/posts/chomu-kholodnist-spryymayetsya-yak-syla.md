@@ -6,6 +6,7 @@ category: toxic-people
 tags: ["токсичні люди", "холодність", "статус", "контроль", "потяг"]
 topics: ["manipulation-and-control", "relationship-dramas", "sex-desire-status"]
 contentType: viral_note
+draft: false
 relatedPosts: ["fragment-toksychni-zdayutsya-sylnymy", "chomu-tyagne-do-tykh-khto-ne-daye-yasnosti", "chomu-horoshykh-lyudey-chasto-ne-hochut"]
 recommendedReading: ["manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo", "seks-i-status-chomu-potyah-ridko-buvaye-vypadkovym"]
 cover: "/covers/chomu-kholodnist-spryymayetsya-yak-syla.svg"

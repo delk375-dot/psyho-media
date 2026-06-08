@@ -6,6 +6,7 @@ category: self-worth
 tags: ["сором", "самооцінка", "страх оцінки", "цінність"]
 topics: ["self-worth-lab", "money-shame-status"]
 contentType: psychological_fragment
+draft: false
 relatedPosts: ["hroshi-i-sorom-chomu-bidnist-zdayetsya-moralnoyu-porazkoyu"]
 recommendedReading: ["hroshi-i-sorom-chomu-bidnist-zdayetsya-moralnoyu-porazkoyu"]
 cover: "/covers/fragment-sorom-zvuzhuye.svg"

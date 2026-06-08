@@ -6,6 +6,7 @@ category: manipulation
 tags: ["контроль", "турбота", "маніпуляція", "стосунки"]
 topics: ["manipulation-and-control", "relationship-dramas"]
 contentType: psychological_fragment
+draft: false
 relatedPosts: ["manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo", "revnoshchi-strakh-vtraty-chy-bazhannya-kontrolyu"]
 recommendedReading: ["manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo"]
 cover: "/covers/fragment-kontrol-maskuyetsya-turbotoyu.svg"

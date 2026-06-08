@@ -6,6 +6,7 @@ category: emotional-dependence
 tags: ["емоційна залежність", "біль", "прив'язаність", "розрив"]
 topics: ["attachment-and-distance", "self-worth-lab"]
 contentType: psychological_fragment
+draft: false
 relatedPosts: ["emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt"]
 recommendedReading: ["emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt"]
 cover: "/covers/fragment-emotsiyna-zalezhnist-ne-pro-lyubov.svg"

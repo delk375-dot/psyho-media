@@ -6,6 +6,7 @@ category: money-status
 tags: ["статус", "гроші", "сила", "соціальна психологія"]
 topics: ["money-shame-status", "sex-desire-status"]
 contentType: psychological_fragment
+draft: false
 relatedPosts: ["hroshi-i-sorom-chomu-bidnist-zdayetsya-moralnoyu-porazkoyu", "seks-i-status-chomu-potyah-ridko-buvaye-vypadkovym"]
 recommendedReading: ["hroshi-i-sorom-chomu-bidnist-zdayetsya-moralnoyu-porazkoyu"]
 cover: "/covers/fragment-status-ne-hvalytsya.svg"

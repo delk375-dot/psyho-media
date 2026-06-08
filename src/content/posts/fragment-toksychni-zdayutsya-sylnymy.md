@@ -6,6 +6,7 @@ category: toxic-people
 tags: ["токсичні люди", "сила", "холодність", "знецінення"]
 topics: ["manipulation-and-control", "conflict-lab"]
 contentType: psychological_fragment
+draft: false
 relatedPosts: ["toksychni-lyudy-chomu-vony-zdayutsya-sylnymy"]
 recommendedReading: ["toksychni-lyudy-chomu-vony-zdayutsya-sylnymy"]
 cover: "/covers/fragment-toksychni-zdayutsya-sylnymy.svg"

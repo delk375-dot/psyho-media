@@ -1,11 +1,12 @@
 ﻿---
-title: "Іноді людина сумує не за вами, а за власним відчуттям значущості поруч із вами"
+title: "Іноді сумують не за людиною, а за власним відчуттям значущості"
 description: "Фрагмент про сум після дистанції, який може бути не стільки любов'ю, скільки втратою власної важливості."
 pubDatetime: 2026-06-09T09:00:00+03:00
 category: self-worth
 tags: ["самооцінка", "розрив", "значущість", "стосунки"]
 topics: ["self-worth-lab", "attachment-and-distance"]
 contentType: psychological_fragment
+draft: false
 relatedPosts: ["chomu-lyudy-tsinuyut-pislya-vtraty", "chomu-lyudy-povertayutsya-pislya-rozryvu"]
 recommendedReading: ["chomu-horoshykh-lyudey-chasto-ne-hochut", "fragment-pryvyazuyutsya-do-nestachi-vidpovidi"]
 cover: "/covers/fragment-sumuye-za-vlasnoyu-znachushchistyu.svg"

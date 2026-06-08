@@ -8,6 +8,7 @@ topics: ["attachment-and-distance", "relationship-dramas", "manipulation-and-con
 series: relationship-psychology
 collection: "relationship-psychology"
 contentType: pillar_article
+draft: false
 featured: true
 relatedPosts: ["fragment-pryvyazuyutsya-do-nestachi-vidpovidi", "chomu-nevyznachenist-vyklykaye-sylnishi-emotsiyi", "chomu-tyagne-do-tykh-khto-ne-daye-yasnosti", "deep-analysis-movchannya-yak-prykhovanyy-kontrol"]
 recommendedReading: ["chomu-lyudy-tsinuyut-pislya-vtraty", "chomu-lyudy-povertayutsya-pislya-rozryvu", "fragment-movchannya-vyhlyadaye-hlybshym", "chomu-kholodnist-spryymayetsya-yak-syla"]

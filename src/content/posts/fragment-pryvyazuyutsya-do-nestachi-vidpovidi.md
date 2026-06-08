@@ -1,11 +1,12 @@
 ﻿---
-title: "Люди часто прив’язуються не до людини, а до нестачі відповіді"
+title: "Прив’язуються не до людини — а до нестачі відповіді"
 description: "Фрагмент про те, як відсутність відповіді перетворюється на внутрішню прив'язаність."
 pubDatetime: 2026-06-08T09:00:00+03:00
 category: emotional-dependence
 tags: ["емоційна залежність", "ігнор", "невизначеність", "очікування"]
 topics: ["attachment-and-distance", "manipulation-and-control"]
 contentType: psychological_fragment
+draft: false
 relatedPosts: ["fragment-ignor-stvoryuye-fantaziyu", "deep-analysis-movchannya-yak-prykhovanyy-kontrol"]
 recommendedReading: ["chomu-lyudy-znykayut-bez-poyasnennya", "chomu-horoshykh-lyudey-chasto-ne-hochut"]
 cover: "/covers/fragment-pryvyazuyutsya-do-nestachi-vidpovidi.svg"

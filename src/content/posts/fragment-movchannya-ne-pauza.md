@@ -6,6 +6,7 @@ category: silence-ghosting
 tags: ["мовчання", "ігнор", "контроль", "стосунки"]
 topics: ["manipulation-and-control", "attachment-and-distance"]
 contentType: psychological_fragment
+draft: false
 relatedPosts: ["chomu-lyudy-znykayut-bez-poyasnennya", "manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo"]
 recommendedReading: ["chomu-lyudy-znykayut-bez-poyasnennya"]
 cover: "/covers/fragment-movchannya-ne-pauza.svg"

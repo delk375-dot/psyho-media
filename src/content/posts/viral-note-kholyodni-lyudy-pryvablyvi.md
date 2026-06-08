@@ -6,7 +6,9 @@ category: relationships
 tags: ["холодність", "потяг", "статус", "емоційна залежність"]
 topics: ["attachment-and-distance", "sex-desire-status"]
 contentType: viral_note
+draft: false
 cover: "/covers/viral-note-kholyodni-lyudy-pryvablyvi.svg"
+ogImage: "/covers/viral-note-kholyodni-lyudy-pryvablyvi.svg"
 relatedPosts: ["chomu-pislya-blyzkosti-lyudy-stayut-kholodnymy", "emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt"]
 recommendedReading: ["chomu-pislya-blyzkosti-lyudy-stayut-kholodnymy"]
 hideEditPost: true

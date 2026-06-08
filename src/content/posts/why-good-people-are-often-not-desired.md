@@ -8,6 +8,7 @@ tags: ["стосунки", "потяг", "доброта", "відторгнен
 topics: ["relationship-dramas", "attachment-and-distance", "sex-desire-status"]
 collection: "relationship-psychology"
 contentType: deep_analysis
+draft: false
 relatedPosts: ["deep-analysis-movchannya-yak-prykhovanyy-kontrol", "fragment-ignor-stvoryuye-fantaziyu", "emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt", "seks-i-status-chomu-potyah-ridko-buvaye-vypadkovym"]
 recommendedReading: ["chomu-horoshykh-lyudey-chasto-ne-hochut", "chomu-pislya-blyzkosti-lyudy-stayut-kholodnymy"]
 cta: relationship-review

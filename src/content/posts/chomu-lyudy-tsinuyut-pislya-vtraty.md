@@ -8,6 +8,7 @@ topics: ["attachment-and-distance", "relationship-dramas", "self-worth-lab"]
 series: relationship-psychology
 collection: "relationship-psychology"
 contentType: deep_analysis
+draft: false
 relatedPosts: ["emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt", "manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo", "deep-analysis-movchannya-yak-prykhovanyy-kontrol"]
 recommendedReading: ["chomu-lyudy-znykayut-bez-poyasnennya", "fragment-pryvyazuyutsya-do-nestachi-vidpovidi", "chomu-nevyznachenist-vyklykaye-sylnishi-emotsiyi"]
 cover: "/covers/chomu-lyudy-tsinuyut-pislya-vtraty.svg"

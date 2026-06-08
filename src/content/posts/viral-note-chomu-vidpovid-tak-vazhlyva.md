@@ -6,7 +6,9 @@ category: silence-ghosting
 tags: ["повідомлення", "ігнор", "самооцінка", "тривога"]
 topics: ["attachment-and-distance", "self-worth-lab"]
 contentType: viral_note
+draft: false
 cover: "/covers/viral-note-chomu-vidpovid-tak-vazhlyva.svg"
+ogImage: "/covers/viral-note-chomu-vidpovid-tak-vazhlyva.svg"
 relatedPosts: ["chomu-lyudy-znykayut-bez-poyasnennya", "fragment-ignor-stvoryuye-fantaziyu"]
 recommendedReading: ["chomu-lyudy-znykayut-bez-poyasnennya"]
 hideEditPost: true

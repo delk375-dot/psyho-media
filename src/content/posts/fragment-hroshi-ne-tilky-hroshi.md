@@ -6,6 +6,7 @@ category: money-status
 tags: ["гроші", "сором", "статус", "безпека"]
 topics: ["money-shame-status", "self-worth-lab"]
 contentType: psychological_fragment
+draft: false
 relatedPosts: ["hroshi-i-sorom-chomu-bidnist-zdayetsya-moralnoyu-porazkoyu"]
 recommendedReading: ["hroshi-i-sorom-chomu-bidnist-zdayetsya-moralnoyu-porazkoyu"]
 cover: "/covers/fragment-hroshi-ne-tilky-hroshi.svg"

@@ -1,11 +1,12 @@
 ﻿---
-title: "Мовчання часто виглядає глибшим за чесність тільки тому, що люди самі добудовують його сенс"
+title: "Мовчання виглядає глибшим, бо люди самі наповнюють його змістом"
 description: "Фрагмент про мовчання, яке здається загадковим, бо інша людина наповнює його власними фантазіями."
 pubDatetime: 2026-06-10T09:00:00+03:00
 category: silence-ghosting
 tags: ["мовчання", "ігнор", "неясність", "фантазія"]
 topics: ["attachment-and-distance", "manipulation-and-control"]
 contentType: psychological_fragment
+draft: false
 relatedPosts: ["deep-analysis-movchannya-yak-prykhovanyy-kontrol", "fragment-ignor-stvoryuye-fantaziyu", "chomu-tyagne-do-tykh-khto-ne-daye-yasnosti"]
 recommendedReading: ["chomu-lyudy-znykayut-bez-poyasnennya", "chomu-nevyznachenist-vyklykaye-sylnishi-emotsiyi"]
 cover: "/covers/fragment-movchannya-vyhlyadaye-hlybshym.svg"

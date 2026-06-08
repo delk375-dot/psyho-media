@@ -6,6 +6,7 @@ category: emotional-dependence
 tags: ["страх втрати", "залежність", "контроль", "близькість"]
 topics: ["attachment-and-distance", "relationship-dramas"]
 contentType: psychological_fragment
+draft: false
 relatedPosts: ["emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt", "revnoshchi-strakh-vtraty-chy-bazhannya-kontrolyu"]
 recommendedReading: ["emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt"]
 cover: "/covers/fragment-strakh-vtraty.svg"

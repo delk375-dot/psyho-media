@@ -8,6 +8,7 @@ topics: ["attachment-and-distance", "relationship-dramas", "manipulation-and-con
 series: relationship-psychology
 collection: "relationship-psychology"
 contentType: deep_analysis
+draft: false
 relatedPosts: ["chomu-nevyznachenist-vyklykaye-sylnishi-emotsiyi", "fragment-ignor-stvoryuye-fantaziyu", "deep-analysis-movchannya-yak-prykhovanyy-kontrol"]
 recommendedReading: ["chomu-lyudy-tsinuyut-pislya-vtraty", "emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt", "chomu-horoshykh-lyudey-chasto-ne-hochut"]
 cover: "/covers/chomu-tyagne-do-tykh-khto-ne-daye-yasnosti.svg"
