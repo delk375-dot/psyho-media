@@ -1,6 +1,6 @@
 ---
 title: "Деякі люди зникають, щоб подивитися, чи будуть їх шукати"
-date: 2026-03-10T07:00:00.000Z
+date: 2026-06-10T16:00:00.000Z
 type: shadow_fragment
 tone: dark
 bridgeTo: null
@@ -14,7 +14,7 @@ body: >-
   Якщо не побіжиш — ти «байдужий». Гра без виходу, де правила знає тільки
   один.
 published: false
-publishDate: 2026-03-10T07:00:00.000Z
+publishDate: 2026-06-10T16:00:00.000Z
 publishedAt: null
 telegramMessageId: null
 ---

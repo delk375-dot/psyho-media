@@ -1,6 +1,6 @@
 ---
 title: "Зникнення без пояснення — це не відсутність слів, а рішення"
-date: 2026-03-05T07:00:00.000Z
+date: 2026-06-10T06:00:00.000Z
 type: afterthought
 tone: calm
 bridgeTo: null
@@ -12,7 +12,7 @@ body: >-
   просто не хоче нести відповідальність за розмову. Відсутність слів — це теж
   відповідь. Просто не на твоє запитання, а на власний дискомфорт.
 published: false
-publishDate: 2026-03-05T07:00:00.000Z
+publishDate: 2026-06-10T06:00:00.000Z
 publishedAt: null
 telegramMessageId: null
 ---
