@@ -182,7 +182,16 @@ async function main(): Promise<void> {
   console.log(`    Channel : ${CHANNEL_ID}`);
   console.log(`    Dir     : ${CONTENT_DIR}\n`);
 
-  const posts = loadUnpublishedPosts();
+  // Optional --limit N CLI argument
+  const limitArg = process.argv.find(a => a.startsWith("--limit="));
+  const limit = limitArg ? parseInt(limitArg.split("=")[1]!, 10) : Infinity;
+
+  let posts = loadUnpublishedPosts();
+
+  if (isFinite(limit) && limit > 0) {
+    posts = posts.slice(0, limit);
+    console.log(`ℹ️   Limit: publishing only ${limit} post(s).\n`);
+  }
 
   if (posts.length === 0) {
     console.log("✅  Nothing to publish — all posts are already published.\n");
