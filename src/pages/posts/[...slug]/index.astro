@@ -17,6 +17,7 @@ import { slugifyStr } from "@/utils/slugify";
 import { toTransitionName } from "@/utils/toTransitionName";
 import { getCategoryBySlug } from "@/data/categories";
 import { getClustersForCategory } from "@/data/contentSystem";
+import { getReadingTime, getWordCount } from "@/utils/readingTime";
 import EditPost from "./_components/EditPost.astro";
 import ShareLinks from "./_components/ShareLinks.astro";
 import BackButton from "./_components/BackButton.astro";
@@ -87,6 +88,9 @@ const { Content } = await render(post);
 const allPosts = await getPublishedPosts();
 const articleVisualLabel = category ?? contentType ?? "analysis";
 const currentCategory = getCategoryBySlug(category);
+const postBody = post.body ?? "";
+const wordCount = getWordCount(postBody);
+const readingTime = getReadingTime(postBody);
 const topicClusters = getClustersForCategory(category);
 const generatedCover = getGeneratedPostCoverPath(post.id);
 const coverImageUrl =
@@ -114,6 +118,11 @@ const ogImage = ogImageUrl
   canonicalURL={canonicalURL}
   pubDatetime={pubDatetime}
   modDatetime={modDatetime}
+  tags={tags}
+  categorySlug={currentCategory?.slug}
+  categoryName={currentCategory?.title}
+  {readingTime}
+  {wordCount}
 >
   <Header />
 

@@ -5,6 +5,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import { resolveDefaultOgImagePath } from "@/utils/resolveDefaultOgImagePath";
 import { getAssetPath } from "@/utils/withBase";
 import GoogleAnalytics from "@/components/GoogleAnalytics.astro";
+import SchemaWebsite from "@/components/SchemaWebsite.astro";
 import config from "@/config";
 import "@/styles/global.css";
 
@@ -60,6 +61,7 @@ const rssHref = getRelativeLocaleUrl(
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content={site.author} />
+    <meta name="robots" content="index, follow" />
     <link rel="sitemap" href={getAssetPath("sitemap-index.xml")} />
 
     <!-- Open Graph -->
@@ -69,13 +71,16 @@ const rssHref = getRelativeLocaleUrl(
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="uk_UA" />
 
     <!-- Twitter / X -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={socialImageURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
 
     <!-- RSS autodiscovery -->
     <link
@@ -90,6 +95,9 @@ const rssHref = getRelativeLocaleUrl(
 
     <!-- Extra head content injected by child layouts (e.g. JSON-LD, article meta) -->
     <slot name="head" />
+
+    <!-- Schema.org: WebSite + Organization (all pages) -->
+    <SchemaWebsite />
 
     <!-- Google Analytics 4 (production only) -->
     <GoogleAnalytics />

@@ -9,27 +9,100 @@ type Props = {
   canonicalURL?: string;
   pubDatetime?: Date;
   modDatetime?: Date | null;
+  tags?: string[];
+  categorySlug?: string;
+  categoryName?: string;
+  readingTime?: number;
+  wordCount?: number;
 };
 
 const { site } = config;
+const siteUrl = site.url.replace(/\/$/, "");
 
-const { title, description, ogImage, canonicalURL, pubDatetime, modDatetime } =
-  Astro.props;
+const {
+  title,
+  description,
+  ogImage,
+  canonicalURL,
+  pubDatetime,
+  modDatetime,
+  tags = [],
+  categorySlug,
+  categoryName,
+  wordCount,
+} = Astro.props;
 
-const structuredData = {
+// Full absolute image URL for structured data
+const imageUrl = ogImage
+  ? ogImage.startsWith("http")
+    ? ogImage
+    : `${siteUrl}${ogImage}`
+  : undefined;
+
+// Article JSON-LD
+const articleSchema = {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
+  "@type": "Article",
   headline: title ?? site.title,
-  image: ogImage,
+  ...(imageUrl && {
+    image: {
+      "@type": "ImageObject",
+      url: imageUrl,
+      width: 1200,
+      height: 630,
+    },
+  }),
   ...(pubDatetime && { datePublished: pubDatetime.toISOString() }),
   ...(modDatetime && { dateModified: modDatetime.toISOString() }),
-  author: [
-    {
-      "@type": "Person",
-      name: site.author,
-      ...(site.profile && { url: site.profile }),
+  author: {
+    "@type": "Person",
+    name: site.author,
+    ...(site.profile && { url: site.profile }),
+  },
+  publisher: {
+    "@type": "Organization",
+    name: site.title,
+    url: siteUrl,
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteUrl}/favicon.svg`,
     },
-  ],
+  },
+  ...(description && { description }),
+  inLanguage: site.lang ?? "uk",
+  ...(wordCount && { wordCount }),
+  ...(tags.length > 0 && { keywords: tags.join(", ") }),
+  ...(canonicalURL && { url: canonicalURL }),
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": canonicalURL ?? siteUrl,
+  },
+};
+
+// BreadcrumbList JSON-LD
+const breadcrumbItems: { name: string; url: string }[] = [
+  { name: "Головна", url: siteUrl },
+];
+if (categorySlug && categoryName) {
+  breadcrumbItems.push({
+    name: categoryName,
+    url: `${siteUrl}/categories/${categorySlug}`,
+  });
+}
+breadcrumbItems.push({
+  name: title ?? site.title,
+  url: canonicalURL ?? siteUrl,
+});
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: breadcrumbItems.map((item, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: item.name,
+    item: item.url,
+  })),
 };
 ---
 
@@ -51,11 +124,17 @@ const structuredData = {
         />
       )
     }
+    {tags.map(tag => <meta property="article:tag" content={tag} />)}
 
     <script
       type="application/ld+json"
       is:inline
-      set:html={JSON.stringify(structuredData)}
+      set:html={JSON.stringify(articleSchema)}
+    />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(breadcrumbSchema)}
     />
   </Fragment>
 

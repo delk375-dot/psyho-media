@@ -1,0 +1,51 @@
+---
+/**
+ * SchemaWebsite.astro
+ * Renders WebSite + Organization JSON-LD structured data.
+ * Injected once in Layout.astro <head> for all pages.
+ */
+import config from "@/config";
+
+const siteUrl = config.site.url.replace(/\/$/, "");
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: config.site.title,
+  url: siteUrl,
+  description: config.site.description,
+  inLanguage: config.site.lang ?? "uk",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${siteUrl}/search?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: config.site.title,
+  url: siteUrl,
+  logo: {
+    "@type": "ImageObject",
+    url: `${siteUrl}/favicon.svg`,
+  },
+  description: config.site.description,
+  ...(config.site.profile && { sameAs: [config.site.profile] }),
+};
+---
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(websiteSchema)}
+/>
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(organizationSchema)}
+/>
