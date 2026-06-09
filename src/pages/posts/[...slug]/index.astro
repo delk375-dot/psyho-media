@@ -6,8 +6,8 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Datetime from "@/components/Datetime.astro";
 import Tag from "@/components/Tag.astro";
-import RelatedArticles from "@/components/RelatedArticles.astro";
-import RecommendedReading from "@/components/RecommendedReading.astro";
+import SemanticRecommendations from "@/components/SemanticRecommendations.astro";
+import RandomFragment from "@/components/RandomFragment.astro";
 import CoachingCTA from "@/components/CoachingCTA.astro";
 import FormatBadge from "@/components/FormatBadge.astro";
 import { getPostSlug, getPostUrl } from "@/utils/getPostPaths";
@@ -229,9 +229,9 @@ const ogImage = ogImageUrl
       )
     }
 
-    <RecommendedReading currentPost={post} posts={allPosts} />
+    <SemanticRecommendations currentPost={post} posts={allPosts} limit={6} />
 
-    <RelatedArticles currentPost={post} posts={allPosts} />
+    <RandomFragment posts={allPosts} />
 
     <hr class="my-8 border-dashed" />
 

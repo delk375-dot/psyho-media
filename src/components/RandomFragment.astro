@@ -1,0 +1,122 @@
+---
+/**
+ * RandomFragment.astro
+ * ─────────────────────
+ * Renders a button that navigates to a random psychological fragment or
+ * viral note from the given posts pool without a full page reload
+ * (Astro View Transitions intercepts same-origin navigations).
+ *
+ * To disable: simply remove <RandomFragment /> from the template.
+ */
+import type { CollectionEntry } from "astro:content";
+import { getPostUrl } from "@/utils/getPostPaths";
+
+type Props = {
+  posts: CollectionEntry<"posts">[];
+};
+
+const { posts } = Astro.props;
+const locale = Astro.currentLocale;
+
+const FRAGMENT_TYPES = new Set([
+  "psychological_fragment",
+  "viral_note",
+]);
+
+const fragmentUrls = posts
+  .filter(p => !p.data.draft && FRAGMENT_TYPES.has(p.data.contentType))
+  .map(p => getPostUrl(p.id, p.filePath, locale));
+---
+
+{
+  fragmentUrls.length > 0 && (
+    <div class="random-fragment-wrap">
+      <button
+        id="random-fragment-btn"
+        class="random-fragment-btn"
+        type="button"
+        data-urls={JSON.stringify(fragmentUrls)}
+        aria-label="Показати випадковий психологічний фрагмент"
+      >
+        <span class="random-fragment-icon" aria-hidden="true">⚡</span>
+        <span>Випадковий фрагмент</span>
+      </button>
+    </div>
+  )
+}
+
+<style>
+  .random-fragment-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .random-fragment-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.4rem;
+    border-radius: 999px;
+    border: 1.5px dashed var(--color-accent);
+    background: transparent;
+    color: var(--color-accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .random-fragment-btn:hover,
+  .random-fragment-btn:focus-visible {
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    transform: scale(1.03);
+    outline: none;
+  }
+
+  .random-fragment-btn:active {
+    transform: scale(0.97);
+  }
+
+  .random-fragment-icon {
+    font-size: 1rem;
+    line-height: 1;
+  }
+</style>
+
+<script>
+  /**
+   * Picks a random URL from the button's data-urls list and navigates to it.
+   * Astro's ClientRouter intercepts same-origin navigation, so View
+   * Transitions fire and the page updates without a full reload.
+   */
+  function initRandomFragment() {
+    const btn = document.getElementById("random-fragment-btn");
+    if (!btn) return;
+
+    btn.addEventListener("click", () => {
+      let urls: string[] = [];
+      try {
+        urls = JSON.parse(btn.dataset.urls ?? "[]");
+      } catch {
+        return;
+      }
+      if (urls.length === 0) return;
+
+      const currentPath = window.location.pathname;
+      // Avoid navigating to the same page
+      const others = urls.filter(u => u !== currentPath);
+      const pool = others.length > 0 ? others : urls;
+      const target = pool[Math.floor(Math.random() * pool.length)];
+
+      // Astro View Transitions intercepts window.location.href on same-origin
+      window.location.href = target;
+    });
+  }
+
+  // Run on initial load and after every View Transition swap
+  document.addEventListener("astro:page-load", initRandomFragment);
+</script>
