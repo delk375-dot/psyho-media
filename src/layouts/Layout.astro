@@ -5,6 +5,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import { resolveDefaultOgImagePath } from "@/utils/resolveDefaultOgImagePath";
 import { getAssetPath } from "@/utils/withBase";
 import GoogleAnalytics from "@/components/GoogleAnalytics.astro";
+import MicrosoftClarity from "@/components/MicrosoftClarity.astro";
 import SchemaWebsite from "@/components/SchemaWebsite.astro";
 import config from "@/config";
 import "@/styles/global.css";
@@ -104,6 +105,9 @@ const rssHref = getRelativeLocaleUrl(
 
     <!-- Google Analytics 4 (production only) -->
     <GoogleAnalytics />
+
+    <!-- Microsoft Clarity: heatmaps + session recordings (production only) -->
+    <MicrosoftClarity />
 
     {
       site.googleVerification && (

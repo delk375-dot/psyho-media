@@ -76,6 +76,11 @@ export default defineConfig({
         context: "client",
         optional: true,
       }),
+      PUBLIC_CLARITY_PROJECT_ID: envField.string({
+        access: "public",
+        context: "client",
+        optional: true,
+      }),
     },
   },
   experimental: {
