@@ -1,0 +1,144 @@
+---
+/**
+ * ReadingStreak.astro
+ * ───────────────────
+ * Session-based reading depth tracker.
+ * After 3+ articles in a session, shows an unobtrusive atmospheric badge.
+ * No numbers. No gamification. Just atmosphere.
+ *
+ * Storage:
+ *   sessionStorage["lm_session_urls"]  — array of visited article paths
+ *   sessionStorage["lm_streak_shown"]  — prevents showing badge twice per session
+ */
+---
+
+<!-- Badge injected by JS into this anchor element -->
+<div id="reading-streak-anchor" aria-live="polite" aria-atomic="true"></div>
+
+<style is:global>
+  .reading-streak-badge {
+    position: fixed;
+    bottom: 5rem;
+    left: 1.25rem;
+    z-index: 70;
+    max-width: 16rem;
+    padding: 0.65rem 1rem;
+    border-radius: 0.5rem;
+    border-left: 3px solid var(--accent);
+    background: color-mix(in srgb, var(--background) 94%, var(--accent));
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--foreground) 10%, transparent);
+    font-size: 0.83rem;
+    font-style: italic;
+    color: var(--muted-foreground);
+    line-height: 1.5;
+
+    /* Hidden → visible */
+    opacity: 0;
+    transform: translateX(-0.5rem);
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease;
+    pointer-events: none;
+  }
+
+  .reading-streak-badge.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reading-streak-badge {
+      transition: opacity 0.2s ease;
+      transform: none !important;
+    }
+  }
+
+  /* On mobile: bottom-center */
+  @media (max-width: 480px) {
+    .reading-streak-badge {
+      left: 50%;
+      transform: translateX(-50%) translateY(0.5rem);
+      bottom: 1.5rem;
+      max-width: calc(100vw - 2rem);
+    }
+
+    .reading-streak-badge.visible {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+</style>
+
+<script>
+  const MESSAGES = [
+    "Ти вже занурився в механізм.",
+    "Схоже, ти починаєш бачити патерни.",
+    "Механізм стає помітнішим з кожною сторінкою.",
+    "Мозок вже шукає зв'язки.",
+    "Так і формується нове бачення.",
+  ];
+
+  const SESSION_KEY = "lm_session_urls";
+  const SHOWN_KEY = "lm_streak_shown";
+
+  function initReadingStreak() {
+    // Only track article pages (must have #article element)
+    if (!document.getElementById("article")) return;
+
+    const currentPath = window.location.pathname;
+
+    // Load session URLs
+    let visited: string[] = [];
+    try {
+      visited = JSON.parse(sessionStorage.getItem(SESSION_KEY) ?? "[]");
+    } catch {
+      visited = [];
+    }
+
+    // Add current path if not already tracked
+    if (!visited.includes(currentPath)) {
+      visited.push(currentPath);
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(visited));
+    }
+
+    // Show badge after 3+ unique articles, once per session
+    if (visited.length >= 3 && !sessionStorage.getItem(SHOWN_KEY)) {
+      sessionStorage.setItem(SHOWN_KEY, "1");
+      showBadge(visited.length);
+    }
+  }
+
+  function showBadge(count: number) {
+    // Pick message: index based on count (clamped to array length)
+    const msgIndex = Math.min(count - 3, MESSAGES.length - 1);
+    const message = MESSAGES[msgIndex];
+
+    const badge = document.createElement("div");
+    badge.className = "reading-streak-badge";
+    badge.setAttribute("role", "status");
+    badge.textContent = message;
+
+    // Append to anchor or body
+    const anchor = document.getElementById("reading-streak-anchor");
+    (anchor ?? document.body).appendChild(badge);
+
+    // Animate in
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => badge.classList.add("visible"));
+    });
+
+    // Auto-dismiss after 5 seconds
+    setTimeout(() => {
+      badge.classList.remove("visible");
+      badge.addEventListener(
+        "transitionend",
+        () => badge.remove(),
+        { once: true }
+      );
+      // Fallback removal
+      setTimeout(() => badge.remove(), 600);
+    }, 5000);
+  }
+
+  document.addEventListener("astro:page-load", initReadingStreak);
+  initReadingStreak();
+</script>

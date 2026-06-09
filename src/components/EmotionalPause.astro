@@ -1,0 +1,134 @@
+---
+/**
+ * EmotionalPause.astro
+ * ─────────────────────
+ * Injects atmospheric pause blocks inside long-form article content.
+ * Only activates for pillar_article and deep_analysis content types.
+ * Inserts a styled separator every ~1200 words via client-side DOM manipulation.
+ *
+ * Phrases are embedded as a hidden data element at build time.
+ * The script runs after content renders and does not require any framework.
+ */
+---
+
+<!-- Hidden data element: phrases read by the client script -->
+<template id="ep-phrases" hidden>
+  <span>Іноді механізм видно тільки після втрати.</span>
+  <span>Людина рідко помічає момент, коли починає чекати.</span>
+  <span>Деякі звички виглядають як характер.</span>
+  <span>Ми засвоюємо чужі страхи ще до того, як навчаємось їх називати.</span>
+  <span>Те, що здається силою, часто виростає зі страху бути слабким.</span>
+  <span>Відстань у стосунках — це теж мова.</span>
+  <span>Іноді мовчання — це відповідь, яку людина не може дати вголос.</span>
+  <span>Ми повторюємо не тому, що хочемо. А тому, що не знаємо іншого способу.</span>
+  <span>Емоції не зникають — вони чекають дозволу.</span>
+  <span>Контроль — це зворотній бік страху втратити.</span>
+</template>
+
+<style is:global>
+  .emotional-pause {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.5rem 0;
+    padding: 0;
+    color: var(--muted-foreground);
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    user-select: none;
+  }
+
+  .emotional-pause::before,
+  .emotional-pause::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    opacity: 0.6;
+  }
+
+  .emotional-pause span {
+    flex-shrink: 0;
+    max-width: 24rem;
+    text-align: center;
+    padding: 0 0.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .emotional-pause {
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+    }
+
+    .emotional-pause::before,
+    .emotional-pause::after {
+      width: 3rem;
+      flex: none;
+    }
+  }
+</style>
+
+<script>
+  const WORDS_PER_PAUSE = 1200;
+  const ELIGIBLE_TYPES = new Set(["pillar_article", "deep_analysis"]);
+
+  function injectEmotionalPauses() {
+    const article = document.getElementById("article");
+    if (!article) return;
+
+    // Check content type (set via data attribute on <article>)
+    const contentType = article.dataset.contentType ?? "";
+    if (!ELIGIBLE_TYPES.has(contentType)) return;
+
+    // Remove any previously injected pauses (re-init on navigation)
+    article.querySelectorAll(".emotional-pause").forEach(el => el.remove());
+
+    // Load phrases from hidden template
+    const template = document.getElementById("ep-phrases") as HTMLTemplateElement | null;
+    if (!template) return;
+    const phrases = Array.from(
+      template.content.querySelectorAll("span")
+    ).map(s => s.textContent ?? "").filter(Boolean);
+    if (phrases.length === 0) return;
+
+    // Traverse block elements and count words
+    const blocks = Array.from(
+      article.querySelectorAll("p, h2, h3, h4, blockquote")
+    ) as HTMLElement[];
+
+    let wordAccumulator = 0;
+    let phraseIndex = 0;
+
+    for (const block of blocks) {
+      const wordCount = (block.textContent ?? "")
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean).length;
+
+      wordAccumulator += wordCount;
+
+      if (wordAccumulator >= WORDS_PER_PAUSE) {
+        wordAccumulator = 0;
+
+        const phrase = phrases[phraseIndex % phrases.length];
+        phraseIndex++;
+
+        const pause = document.createElement("div");
+        pause.className = "emotional-pause";
+        pause.setAttribute("aria-hidden", "true");
+
+        const inner = document.createElement("span");
+        inner.textContent = phrase;
+        pause.appendChild(inner);
+
+        // Insert before this block
+        block.parentNode?.insertBefore(pause, block);
+      }
+    }
+  }
+
+  document.addEventListener("astro:page-load", injectEmotionalPauses);
+  injectEmotionalPauses();
+</script>

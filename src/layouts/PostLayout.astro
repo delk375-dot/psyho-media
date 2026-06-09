@@ -1,5 +1,6 @@
 ---
 import Layout from "./Layout.astro";
+import ReadingProgress from "@/components/ReadingProgress.astro";
 import config from "@/config";
 
 type Props = {
@@ -125,6 +126,9 @@ const breadcrumbSchema = {
       )
     }
     {tags.map(tag => <meta property="article:tag" content={tag} />)}
+
+    <!-- Reading Progress Bar (article pages only) -->
+    <ReadingProgress />
 
     <script
       type="application/ld+json"

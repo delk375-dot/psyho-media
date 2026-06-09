@@ -1,0 +1,298 @@
+---
+/**
+ * NextMechanism.astro
+ * ───────────────────
+ * Floating "Наступний механізм" card that appears 8 seconds after
+ * the user reaches the bottom of the article.
+ *
+ * Shows the top semantic recommendation for the current post.
+ * Falls back to the most recent post from the same category.
+ */
+import type { CollectionEntry } from "astro:content";
+import { getRelatedPosts } from "@/utils/getRelatedPosts";
+import { getReadingTime } from "@/utils/readingTime";
+import { getPostUrl } from "@/utils/getPostPaths";
+import { getGeneratedPostCoverPath } from "@/utils/generatePostCover";
+
+type Props = {
+  currentPost: CollectionEntry<"posts">;
+  posts: CollectionEntry<"posts">[];
+};
+
+const { currentPost, posts } = Astro.props;
+
+const [nextPost] = getRelatedPosts(currentPost, posts, 1, {
+  useBodySimilarity: true,
+  minScore: 1,
+});
+
+if (!nextPost) return;
+
+const locale = Astro.currentLocale;
+const url = getPostUrl(nextPost.id, nextPost.filePath, locale);
+const { title, description, cover, ogImage } = nextPost.data;
+const legacyImage = typeof ogImage === "string" ? ogImage : ogImage?.src;
+const imageUrl = cover ?? legacyImage ?? getGeneratedPostCoverPath(nextPost.id);
+const readingTime = getReadingTime(nextPost.body ?? "");
+---
+
+<div
+  id="next-mechanism-card"
+  class="next-mech-card"
+  role="complementary"
+  aria-label="Наступна рекомендація"
+  aria-hidden="true"
+  data-url={url}
+>
+  <button
+    id="next-mechanism-dismiss"
+    class="next-mech-dismiss"
+    type="button"
+    aria-label="Закрити"
+  >
+    ✕
+  </button>
+
+  <p class="next-mech-eyebrow">Наступний механізм</p>
+
+  {imageUrl && (
+    <div class="next-mech-cover" aria-hidden="true">
+      <img src={imageUrl} alt="" loading="lazy" decoding="async" />
+    </div>
+  )}
+
+  <div class="next-mech-body">
+    <p class="next-mech-title">{title}</p>
+    <p class="next-mech-desc">{description}</p>
+    <p class="next-mech-meta">{readingTime} хв читання</p>
+  </div>
+
+  <a href={url} class="next-mech-cta" id="next-mechanism-link">
+    Продовжити читання →
+  </a>
+</div>
+
+<!-- Sentinel element — IntersectionObserver watches this -->
+<div id="next-mechanism-sentinel" aria-hidden="true"></div>
+
+<style>
+  .next-mech-card {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 80;
+    width: min(22rem, calc(100vw - 2rem));
+    background: var(--background);
+    border: 1.5px solid var(--border);
+    border-radius: 0.75rem;
+    box-shadow:
+      0 8px 32px color-mix(in srgb, var(--foreground) 12%, transparent),
+      0 2px 8px color-mix(in srgb, var(--foreground) 6%, transparent);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(1rem);
+    pointer-events: none;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
+  }
+
+  .next-mech-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .next-mech-card {
+      transition: opacity 0.15s ease;
+      transform: none !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .next-mech-card {
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
+      border-radius: 0.75rem 0.75rem 0 0;
+    }
+  }
+
+  .next-mech-dismiss {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    border: none;
+    background: color-mix(in srgb, var(--muted) 80%, transparent);
+    color: var(--muted-foreground);
+    font-size: 0.7rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+
+  .next-mech-dismiss:hover {
+    background: var(--muted);
+    color: var(--foreground);
+  }
+
+  .next-mech-eyebrow {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 0.85rem 1rem 0;
+    margin: 0;
+  }
+
+  .next-mech-cover {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .next-mech-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .next-mech-body { padding: 0.65rem 1rem 0; }
+
+  .next-mech-title {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--foreground);
+    margin: 0 0 0.35rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .next-mech-desc {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--muted-foreground);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .next-mech-meta {
+    font-size: 0.72rem;
+    color: var(--muted-foreground);
+    opacity: 0.7;
+    margin: 0.3rem 0 0;
+  }
+
+  .next-mech-cta {
+    display: block;
+    margin: 0.75rem 1rem 1rem;
+    padding: 0.55rem 1rem;
+    border-radius: 0.5rem;
+    background: var(--accent);
+    color: var(--accent-foreground);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .next-mech-cta:hover { opacity: 0.88; }
+</style>
+
+<script>
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  declare global {
+    interface Window { gtag?: (...args: any[]) => void; }
+  }
+
+  function initNextMechanism() {
+    const card = document.getElementById("next-mechanism-card");
+    const sentinel = document.getElementById("next-mechanism-sentinel");
+    const dismissBtn = document.getElementById("next-mechanism-dismiss");
+    const ctaLink = document.getElementById("next-mechanism-link") as HTMLAnchorElement | null;
+    if (!card || !sentinel) return;
+
+    // Capture non-null for closures
+    const cardEl: HTMLElement = card;
+
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    let shown = false;
+
+    function fireOpenEvent() {
+      try {
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "next_mechanism_open", {
+            page_location: window.location.href,
+            page_title: document.title,
+            next_url: cardEl.dataset.url ?? "",
+          });
+        }
+      } catch { /* ignore */ }
+    }
+
+    function showCard() {
+      if (shown) return;
+      shown = true;
+      cardEl.classList.add("visible");
+      cardEl.setAttribute("aria-hidden", "false");
+      fireOpenEvent();
+    }
+
+    function hideCard() {
+      cardEl.classList.remove("visible");
+      cardEl.setAttribute("aria-hidden", "true");
+    }
+
+    dismissBtn?.addEventListener("click", hideCard);
+
+    ctaLink?.addEventListener("click", () => {
+      try {
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "recommendation_click", {
+            page_location: window.location.href,
+            recommendation_url: ctaLink.getAttribute("href") ?? "",
+            source: "next_mechanism",
+          });
+        }
+      } catch { /* ignore */ }
+    });
+
+    const observer = new IntersectionObserver(
+      entries => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && !shown) {
+            timer = setTimeout(showCard, 8000);
+          } else if (!entry.isIntersecting && timer) {
+            clearTimeout(timer);
+            timer = null;
+          }
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(sentinel);
+  }
+
+  document.addEventListener("astro:page-load", initNextMechanism);
+  initNextMechanism();
+</script>
