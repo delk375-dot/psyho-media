@@ -589,10 +589,10 @@
   }
 
   .article-visual {
-    width: 7.35rem;
-    height: 5.55rem;
-    min-height: 0;
+    width: 100%;
+    height: auto;
     aspect-ratio: 4 / 3;
+    min-height: 0;
   }
 
   .article-visual img {
