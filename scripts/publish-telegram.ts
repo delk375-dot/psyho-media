@@ -98,7 +98,7 @@ function buildMessageText(post: TelegramPost): string {
 
   if (post.bridgeTo) {
     const url = `${SITE_URL}${post.bridgeTo}`;
-    parts.push(`\nМеханізм:\n${url}`);
+    parts.push(`\nПовний механізм:\n${url}`);
   }
 
   return parts.join("\n");

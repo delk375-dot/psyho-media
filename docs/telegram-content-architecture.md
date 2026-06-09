@@ -2,28 +2,70 @@
 
 ## Концепція
 
-> **Telegram — це поле. Сайт — це карта.**
+> **Telegram — after-reading layer. Сайт — deep mechanism layer.**
 
-Telegram-канал і сайт — це два шари одного контенту, пов'язані між собою.
+Telegram — це не "новини сайту" і не анонси. Це **післясмак статті**: інсайти,
+провокації, тіньові фрагменти й мікрокейси, які з'являються після того, як
+людина прочитала механізм. Стаття дає розуміння. Telegram залишає осад.
 
 | Шар | Telegram | Сайт |
 |-----|----------|------|
-| Формат | Короткий сигнал (1–5 речень) | Розгорнутий механізм (лонгрід) |
-| Роль | Поле — сирий спостережний матеріал | Карта — структурований аналіз |
-| Зв'язок | `bridgeTo` вказує на статтю | `sourceArticle` — зворотний посилання |
+| Роль | After-reading layer — короткі думки, що залишаються після статті | Deep mechanism layer — структурований розбір |
+| Формат | 2–8 речень, без вступів | Лонгрід із логікою, прикладами, висновками |
+| Час появи | Після або між статтями | Коли механізм повністю розкрито |
+| Зв'язок | `sourceArticle` + `bridgeTo` для microcase | ← приймає трафік з microcase |
 
 ---
 
-## Типи контенту (`type`)
+## After-Reading Pack
 
-| Тип | Призначення |
-|-----|-------------|
-| `signal` | Короткий сигнал — спостереження, яке ще не стало статтею |
-| `bridge` | Міст — пост, що посилається на статтю через `bridgeTo` |
-| `question` | Питання в темряві — без відповіді, з відкритим кінцем |
-| `fragment` | Фрагмент — думка без контексту, standalone |
-| `case` | Кейс — конкретний поведінковий приклад |
-| `teaser` | Анонс нової статті на сайті |
+Для кожної нової статті рекомендується створювати **4 Telegram-пости** (pack):
+
+### A. `afterthought` — Afterthought
+- Короткий інсайт після статті
+- 2–5 рядків, без переказу
+- `tone: calm` або `analytical`
+- `isTelegramOnly: true`
+- Мета: дати читачу момент тиші після прочитання
+
+### B. `provocation` — Провокація
+- Питання, яке змушує думати про себе
+- Незручне. Без відповіді.
+- `tone: provocative`
+- `isTelegramOnly: true`
+- Мета: зруйнувати комфортну позицію спостерігача
+
+### C. `shadow_fragment` — Тіньовий фрагмент
+- Темніший, гостріший кут зору
+- Те, що не завжди доречно у великій статті
+- `tone: dark`
+- `isTelegramOnly: true`
+- Мета: сказати те, що не скажеш у лонгриді
+
+### D. `microcase` — Мікрокейс
+- Коротка сцена з життя (3–6 речень)
+- Конкретна, без імен, без моралі
+- `tone: atmospheric`
+- `bridgeTo: /posts/slug/` (обов'язково)
+- `isTelegramOnly: false`
+- Мета: вхідна точка для нових читачів через сцену
+
+---
+
+## Усі типи контенту (`type`)
+
+| Тип | Призначення | Pack? |
+|-----|-------------|-------|
+| `signal` | Короткий сигнал — standalone спостереження | — |
+| `bridge` | Міст — пост із посиланням на статтю | — |
+| `question` | Питання в темряві — відкрите, без відповіді | — |
+| `fragment` | Фрагмент — одна думка, без контексту | — |
+| `case` | Кейс — поведінковий приклад | — |
+| `teaser` | Анонс нової статті | — |
+| `afterthought` | Інсайт після статті | ✅ Pack A |
+| `provocation` | Провокативне питання про себе | ✅ Pack B |
+| `shadow_fragment` | Темніший фрагмент із тіньової зони | ✅ Pack C |
+| `microcase` | Коротка сцена з `bridgeTo` | ✅ Pack D |
 
 ## Тони (`tone`)
 
@@ -38,28 +80,32 @@ Telegram-канал і сайт — це два шари одного конте
 
 ---
 
-## Структура markdown-файлу
+## Структура markdown-файлу (after-reading pack)
 
 ```yaml
 ---
-title: "Заголовок сигналу"
-date: 2026-01-15T07:00:00.000Z      # дата контенту
-type: signal                         # тип (обов'язково)
-tone: dark                           # тон (обов'язково)
+title: "Заголовок"
+date: 2026-03-05T07:00:00.000Z
+type: afterthought              # або provocation / shadow_fragment / microcase
+tone: calm                      # відповідно до типу
 
-# Зв'язок зі статтею (обидва або жоден)
-bridgeTo: /posts/slug-statti/        # URL статті на сайті
-sourceArticle: slug-statti           # slug статті (без /posts/)
+# Для afterthought / provocation / shadow_fragment:
+bridgeTo: null
+sourceArticle: slug-statti
+isTelegramOnly: true
+contentLayer: signal
 
-isTelegramOnly: true                 # false якщо є bridgeTo
-contentLayer: signal                 # signal | bridge | archive | teaser
+# Для microcase:
+bridgeTo: /posts/slug-statti/
+sourceArticle: slug-statti
+isTelegramOnly: false
+contentLayer: bridge
 
 body: >-
-  Текст сигналу. Без вступів і висновків — тільки суть.
+  Текст посту.
 
-# Автоматично заповнюється скриптом
 published: false
-publishDate: 2026-01-15T07:00:00.000Z
+publishDate: 2026-03-05T07:00:00.000Z
 publishedAt: null
 telegramMessageId: null
 ---
@@ -67,76 +113,58 @@ telegramMessageId: null
 
 ---
 
-## Bridge система
+## Bridge система (оновлено)
 
-Якщо `bridgeTo` виставлений, скрипт автоматично додає в Telegram-повідомлення:
+Якщо `bridgeTo` виставлений, скрипт додає в кінці повідомлення:
 
 ```
-Механізм:
+Повний механізм:
 https://psyho-media.pp.ua/posts/slug-statti/
 ```
 
-Це з'єднує короткий сигнал з повним розбором на сайті.
-
-**Правило:** якщо `sourceArticle` є, але `bridgeTo` відсутній — скрипт виведе попередження в логах.
-
 ---
 
-## Компонент RelatedTelegramSignals
+## Компонент RelatedTelegramSignals (оновлено)
 
-Підключається в шаблоні статті (`src/layouts/PostLayout.astro` або аналогічний):
+Назва блоку: **"Післясмак механізму"**
+Subtitle: *"Короткі думки, які залишаються після прочитання."*
 
+Показує до 4 постів. After-reading типи (`afterthought`, `provocation`,
+`shadow_fragment`, `microcase`) завжди йдуть першими, потім інші сигнали.
+
+Підключення в шаблоні статті:
 ```astro
----
-import RelatedTelegramSignals from "@/components/RelatedTelegramSignals.astro";
----
-
-<!-- В кінці статті, після основного тіла -->
-<RelatedTelegramSignals postSlug={post.slug} />
+<RelatedTelegramSignals postSlug={getPostSlug(post.id, post.filePath)} />
 ```
-
-**Логіка збігу (OR):**
-1. `sourceArticle === postSlug`
-2. `bridgeTo` містить `postSlug`
-
-Показує до 3 опублікованих сигналів, відсортованих за датою (найновіші першими).
 
 ---
 
 ## Архів `/telegram/archive`
 
-- Показує всі пости з колекції `telegram`
-- Клієнтські фільтри: за `type` та `tone`
-- Бейджі: тип (кольоровий), тон, `Є механізм` (якщо `isTelegramOnly: false`)
-- CTA: `Читати механізм →` (якщо `bridgeTo`) або `Читати в Telegram →`
+Фільтри за типом включають нові after-reading типи:
+- Afterthought
+- Провокація
+- Тіньовий фрагмент
+- Мікрокейс
 
 ---
 
-## GA4 події
+## Додавання нового after-reading pack
 
-| Подія | Де | Коли |
-|-------|----|------|
-| `telegram_landing_view` | `/telegram` | Page load |
-| `telegram_signal_click` | `/telegram`, `/telegram/archive`, sticky, footer | Клік на CTA в Telegram |
-| `telegram_archive_view` | `/telegram/archive` | Page load |
-| `telegram_archive_filter` | `/telegram/archive` | Вибір фільтра (тип або тон) |
-| `telegram_bridge_click` | `/telegram/archive` | Клік `Читати механізм →` |
-| `telegram_related_signal_click` | Стаття | Клік на сигнал у RelatedTelegramSignals |
-| `telegram_home_cta_click` | `index.astro` | Клік на блок у головній |
-| `footer_telegram_click` | `Footer.astro` | Клік на Footer CTA |
-| `telegram_cta_show` | TelegramSticky | Показ sticky |
-| `telegram_cta_click` | TelegramSticky | Клік на sticky |
-| `exit_intent_telegram_click` | ExitIntent | Клік "Увійти в поле" |
+1. Прочитати статтю й знайти 4 кути:
+   - Що залишається після прочитання? → `afterthought`
+   - Яке питання змушує думати про себе? → `provocation`
+   - Що було б занадто жорстко у лонгриді? → `shadow_fragment`
+   - Яка сцена з життя відкриває тему? → `microcase`
 
----
+2. Створити файли `NN-slug-afterthought.md`, `NN-slug-provocation.md` тощо
 
-## Додавання нового сигналу
+3. Виставити:
+   - `sourceArticle: slug-statti` у всіх 4
+   - `bridgeTo: /posts/slug-statti/` тільки в microcase
+   - `publishDate` — найближчі вільні слоти (через 1–2 дні між постами)
 
-1. Створити файл `src/content/telegram/NN-slug.md`
-2. Заповнити frontmatter відповідно до схеми вище
-3. Виставити `publishDate` — дата публікації
-4. Якщо є стаття-пара: виставити `bridgeTo` та `sourceArticle`, `isTelegramOnly: false`
-5. Запустити `pnpm telegram:publish` для ручної публікації або чекати на GitHub Actions
+4. Публікуються автоматично через GitHub Actions
 
 ---
 
@@ -145,24 +173,30 @@ import RelatedTelegramSignals from "@/components/RelatedTelegramSignals.astro";
 ```
 src/
   content/
-    telegram/          ← markdown-файли сигналів
-      01-*.md
-      02-*.md
+    telegram/
+      08-pislya-znyknennya-afterthought.md   ← Pack для статті про зникнення
+      09-pislya-znyknennya-provocation.md
+      10-pislya-znyknennya-shadow.md
+      11-pislya-znyknennya-microcase.md
       ...
   components/
-    RelatedTelegramSignals.astro   ← блок на сторінці статті
-    TelegramSticky.astro           ← floating CTA
-    Footer.astro                   ← footer CTA
-    ExitIntent.astro               ← exit intent modal
+    RelatedTelegramSignals.astro   ← "Післясмак механізму"
   pages/
-    telegram.astro                 ← лендінг /telegram
     telegram/
-      archive.astro                ← архів /telegram/archive
+      archive.astro                ← фільтри з новими типами
 scripts/
-  publish-telegram.ts              ← автопублікація
+  publish-telegram.ts              ← "Повний механізм:" замість "Механізм:"
 docs/
-  telegram-content-architecture.md  ← цей файл
-  telegram-autopublishing.md
-  scheduled-publishing.md
-  telegram-content-loop.md
+  telegram-content-architecture.md
 ```
+
+---
+
+## GA4 події
+
+| Подія | Де | Коли |
+|-------|----|------|
+| `telegram_related_signal_click` | Стаття | Клік у блоці "Післясмак механізму" |
+| `telegram_bridge_click` | Архів | Клік "Повний механізм →" |
+| `telegram_archive_filter` | Архів | Вибір фільтра (тип або тон) |
+| `telegram_signal_click` | Скрізь | Клік CTA в Telegram |

@@ -2,7 +2,10 @@
 /**
  * RelatedTelegramSignals.astro
  * ─────────────────────────────
- * Shows up to 3 published Telegram signals related to the current article.
+ * Shows up to 4 published Telegram after-reading posts related to the current article.
+ *
+ * Priority: after-reading pack types first (afterthought, provocation,
+ * shadow_fragment, microcase), then any other related signals.
  *
  * Matching logic (OR):
  *   1. sourceArticle === current post slug
@@ -22,13 +25,25 @@ const { postSlug } = Astro.props;
 const SITE_URL = "https://psyho-media.pp.ua";
 const TELEGRAM_URL = "https://t.me/psyho_media";
 
+/** After-reading pack types — shown first, prioritised in the block */
+const AFTER_READING_TYPES = new Set([
+  "afterthought",
+  "provocation",
+  "shadow_fragment",
+  "microcase",
+]);
+
 const TYPE_LABELS: Record<string, string> = {
-  signal: "Сигнал",
-  bridge: "Міст",
-  question: "Питання",
-  fragment: "Фрагмент",
-  case: "Кейс",
-  teaser: "Анонс",
+  signal:         "Сигнал",
+  bridge:         "Міст",
+  question:       "Питання",
+  fragment:       "Фрагмент",
+  case:           "Кейс",
+  teaser:         "Анонс",
+  afterthought:   "Після статті",
+  provocation:    "Провокація",
+  shadow_fragment:"Тіньовий фрагмент",
+  microcase:      "Мікрокейс",
 };
 
 const TONE_LABELS: Record<string, string> = {
@@ -42,7 +57,7 @@ const TONE_LABELS: Record<string, string> = {
 
 const allSignals = await getCollection("telegram");
 
-const related = allSignals
+const matched = allSignals
   .filter(s => s.data.published === true)
   .filter(s => {
     const src = s.data.sourceArticle ?? "";
@@ -53,20 +68,29 @@ const related = allSignals
       src.endsWith(`/${postSlug}/`) ||
       bridge.includes(postSlug)
     );
-  })
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3);
+  });
+
+// After-reading types first, then remaining by date desc
+const afterReading = matched.filter(s => AFTER_READING_TYPES.has(s.data.type));
+const others = matched
+  .filter(s => !AFTER_READING_TYPES.has(s.data.type))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const related = [
+  ...afterReading.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+  ...others,
+].slice(0, 4);
 
 const hasSignals = related.length > 0;
 ---
 
 {hasSignals && (
-  <aside class="rts-wrapper" aria-label="Сигнали з поля">
+  <aside class="rts-wrapper" aria-label="Післясмак механізму">
     <div class="rts-header">
-      <p class="rts-eyebrow">Telegram</p>
-      <h2 class="rts-title">Сигнали з поля</h2>
+      <p class="rts-eyebrow">Telegram · Після прочитання</p>
+      <h2 class="rts-title">Післясмак механізму</h2>
       <p class="rts-subtitle">
-        Короткі фрагменти, які продовжують цей механізм у Telegram.
+        Короткі думки, які залишаються після прочитання.
       </p>
     </div>
 

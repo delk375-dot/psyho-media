@@ -8,12 +8,16 @@ const TELEGRAM_URL = "https://t.me/psyho_media";
 const SITE_URL = "https://psyho-media.pp.ua";
 
 const TYPE_LABELS: Record<string, string> = {
-  signal: "Сигнал",
-  bridge: "Міст",
-  question: "Питання",
-  fragment: "Фрагмент",
-  case: "Кейс",
-  teaser: "Анонс",
+  signal:          "Сигнал",
+  bridge:          "Міст",
+  question:        "Питання",
+  fragment:        "Фрагмент",
+  case:            "Кейс",
+  teaser:          "Анонс",
+  afterthought:    "Afterthought",
+  provocation:     "Провокація",
+  shadow_fragment: "Тіньовий фрагмент",
+  microcase:       "Мікрокейс",
 };
 
 const TONE_LABELS: Record<string, string> = {
@@ -26,12 +30,16 @@ const TONE_LABELS: Record<string, string> = {
 };
 
 const TYPE_CSS: Record<string, string> = {
-  signal:   "type-signal",
-  bridge:   "type-bridge",
-  question: "type-question",
-  fragment: "type-fragment",
-  case:     "type-case",
-  teaser:   "type-teaser",
+  signal:          "type-signal",
+  bridge:          "type-bridge",
+  question:        "type-question",
+  fragment:        "type-fragment",
+  case:            "type-case",
+  teaser:          "type-teaser",
+  afterthought:    "type-afterthought",
+  provocation:     "type-provocation",
+  shadow_fragment: "type-shadow",
+  microcase:       "type-microcase",
 };
 
 const TONE_CSS: Record<string, string> = {
@@ -328,6 +336,12 @@ function formatDate(d: Date): string {
   .type-fragment  { background: color-mix(in srgb, var(--foreground) 8%, transparent); color: var(--muted-foreground); }
   .type-case      { background: color-mix(in srgb, #059669 12%, transparent); color: #059669; }
   .type-teaser    { background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent); }
+
+  /* ── After-reading pack type badges ──────────────────────── */
+  .type-afterthought  { background: color-mix(in srgb, #0891b2 10%, transparent); color: #0891b2; }
+  .type-provocation   { background: color-mix(in srgb, #dc2626 10%, transparent); color: #dc2626; }
+  .type-shadow        { background: color-mix(in srgb, var(--foreground) 14%, transparent); color: var(--foreground); }
+  .type-microcase     { background: color-mix(in srgb, #7c3aed 10%, transparent); color: #7c3aed; }
 
   /* ── Tone badges ──────────────────────────────────────────── */
   .arc-tone-badge {

@@ -78,12 +78,18 @@ const telegram = defineCollection({
 
     /** Content type — what kind of signal this is */
     type: z.enum([
+      // original signal types
       "signal",
       "bridge",
       "question",
       "fragment",
       "case",
       "teaser",
+      // after-reading pack types
+      "afterthought",    // short insight after the article
+      "provocation",     // provocative question about oneself
+      "shadow_fragment", // darker, sharper fragment that wouldn't fit the article
+      "microcase",       // short life scene with bridgeTo article
     ]).default("signal"),
 
     /** Tone of the post */
