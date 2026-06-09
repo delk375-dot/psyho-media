@@ -140,23 +140,35 @@ const isActive = (path: string) => {
         }
         {
           features.search !== false && (
-            <li class="col-span-1 flex items-center justify-center">
-              <LinkButton
-                href={getRelativeLocaleUrl(locale, "search")}
-                class:list={["focus-outline relative size-8"]}
-                title={t.nav.search}
-                aria-label={t.nav.search}
-              >
-                <IconSearch class="absolute top-1/2 left-1/2 size-6 -translate-x-1/2 -translate-y-1/2" />
-                <span class="sr-only">{t.nav.search}</span>
-                {isActive("/search") && (
-                  <IconUnderline
-                    aria-hidden="true"
-                    class="absolute bottom-0 w-6 scale-125 max-sm:inset-s-2"
-                  />
-                )}
-              </LinkButton>
-            </li>
+            <>
+              {/* Mobile: text link */}
+              <li class="col-span-2 sm:hidden">
+                <a
+                  href={getRelativeLocaleUrl(locale, "search")}
+                  class:list={{ "active-nav": isActive("/search") }}
+                >
+                  {t.nav.search}
+                </a>
+              </li>
+              {/* Desktop: icon button */}
+              <li class="col-span-1 hidden sm:flex items-center justify-center">
+                <LinkButton
+                  href={getRelativeLocaleUrl(locale, "search")}
+                  class:list={["focus-outline relative size-8"]}
+                  title={t.nav.search}
+                  aria-label={t.nav.search}
+                >
+                  <IconSearch class="absolute top-1/2 left-1/2 size-6 -translate-x-1/2 -translate-y-1/2" />
+                  <span class="sr-only">{t.nav.search}</span>
+                  {isActive("/search") && (
+                    <IconUnderline
+                      aria-hidden="true"
+                      class="absolute bottom-0 w-6 scale-125"
+                    />
+                  )}
+                </LinkButton>
+              </li>
+            </>
           )
         }
         {

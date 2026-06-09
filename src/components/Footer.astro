@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { useTranslations } from "@/i18n";
 
 type Props = {
@@ -9,6 +10,7 @@ type Props = {
 const { noMarginTop = false, class: className, ...attrs } = Astro.props;
 
 const t = useTranslations(Astro.currentLocale);
+const locale = Astro.currentLocale ?? "uk";
 const currentYear = new Date().getFullYear();
 ---
 
@@ -17,12 +19,19 @@ const currentYear = new Date().getFullYear();
   {...attrs}
 >
   <div
-    class="border-border flex flex-col items-center justify-between border-t py-6 sm:flex-row sm:py-4"
+    class="border-border flex flex-col items-center justify-between border-t py-6 sm:flex-row sm:py-4 gap-3"
   >
     <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
       <span>Людський механізм &#169; {currentYear}</span>
       <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
       <span>{t.footer.allRightsReserved}</span>
     </div>
+    <a
+      href={getRelativeLocaleUrl(locale, "search")}
+      class="text-muted-foreground hover:text-accent text-sm transition-colors"
+      aria-label="Пошук по сайту"
+    >
+      🔍 {t.nav.search}
+    </a>
   </div>
 </footer>
