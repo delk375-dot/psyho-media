@@ -1,0 +1,57 @@
+---
+/**
+ * GoogleAnalytics.astro
+ *
+ * Підключає GA4 лише в production (import.meta.env.PROD).
+ * У dev-режимі не завантажує жодних скриптів.
+ *
+ * Щоб змінити Measurement ID — оновіть змінну GA_ID нижче
+ * або передайте через props: <GoogleAnalytics id="G-XXXXXXXXXX" />
+ */
+
+interface Props {
+  id?: string;
+}
+
+const { id = "G-2BCRHKD0WJ" } = Astro.props;
+const isProd = import.meta.env.PROD;
+---
+
+{isProd && (
+  <>
+    <!-- Google Analytics 4: async loader -->
+    <script
+      is:inline
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${id}`}
+    ></script>
+
+    <!-- GA4 init + Astro View Transitions support -->
+    <script is:inline define:vars={{ gaId: id }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", gaId, {
+        // Вимикаємо автоматичний page_view — будемо надсилати вручну
+        // після кожної навігації Astro ClientRouter
+        send_page_view: false,
+      });
+
+      // Надсилаємо page_view при першому завантаженні
+      gtag("event", "page_view", {
+        page_location: window.location.href,
+        page_title: document.title,
+      });
+
+      // Надсилаємо page_view після кожного переходу Astro (SPA-навігація)
+      document.addEventListener("astro:page-load", function () {
+        gtag("event", "page_view", {
+          page_location: window.location.href,
+          page_title: document.title,
+        });
+      });
+    </script>
+  </>
+)}

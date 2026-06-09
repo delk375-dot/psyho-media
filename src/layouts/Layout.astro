@@ -4,6 +4,7 @@ import { ClientRouter } from "astro:transitions";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { resolveDefaultOgImagePath } from "@/utils/resolveDefaultOgImagePath";
 import { getAssetPath } from "@/utils/withBase";
+import GoogleAnalytics from "@/components/GoogleAnalytics.astro";
 import config from "@/config";
 import "@/styles/global.css";
 
@@ -89,6 +90,9 @@ const rssHref = getRelativeLocaleUrl(
 
     <!-- Extra head content injected by child layouts (e.g. JSON-LD, article meta) -->
     <slot name="head" />
+
+    <!-- Google Analytics 4 (production only) -->
+    <GoogleAnalytics />
 
     {
       site.googleVerification && (
