@@ -1,6 +1,7 @@
 ---
 import Layout from "./Layout.astro";
 import ReadingProgress from "@/components/ReadingProgress.astro";
+import TelegramSticky from "@/components/TelegramSticky.astro";
 import config from "@/config";
 
 type Props = {
@@ -143,4 +144,7 @@ const breadcrumbSchema = {
   </Fragment>
 
   <slot />
+
+  <!-- Telegram Sticky CTA (article pages only, shown after 45s or 60% scroll) -->
+  <TelegramSticky />
 </Layout>

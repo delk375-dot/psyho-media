@@ -1,0 +1,327 @@
+---
+/**
+ * ExitIntent.astro
+ * ─────────────────
+ * Desktop-only modal that appears when the user moves the mouse
+ * toward the top of the viewport (likely to close the tab or navigate away).
+ *
+ * Conditions:
+ *   • Desktop only (viewport width > 768px)
+ *   • At least 30 seconds on the page
+ *   • Once per session (sessionStorage)
+ *   • Not shown if TelegramSticky was dismissed within the 7-day cooldown
+ *   • Not shown on /search pages (checked client-side)
+ *   • ESC closes
+ *
+ * GA4 events: exit_intent_show / exit_intent_telegram_click / exit_intent_close
+ */
+
+const TELEGRAM_URL = "https://t.me/psyho_media";
+---
+
+<!-- Exit Intent Modal -->
+<div
+  id="exit-intent-overlay"
+  class="ei-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Запрошення в Telegram"
+  aria-hidden="true"
+>
+  <div class="ei-card" role="document">
+    <button
+      id="exit-intent-close"
+      class="ei-close"
+      type="button"
+      aria-label="Закрити"
+    >✕</button>
+
+    <p class="ei-overline">Перш ніж ти підеш</p>
+
+    <h2 class="ei-title">Ти вже зайшов у механізм.</h2>
+
+    <p class="ei-desc">
+      Раз на кілька днів у Telegram з'являються короткі фрагменти,
+      які не завжди потрапляють на сайт.
+    </p>
+
+    <div class="ei-actions">
+      <button
+        id="exit-intent-stay"
+        class="ei-btn-secondary"
+        type="button"
+      >
+        Залишитись
+      </button>
+      <a
+        id="exit-intent-tg"
+        href={TELEGRAM_URL}
+        class="ei-btn-primary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Перейти в Telegram
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ── Overlay ────────────────────────────────────────────── */
+  .ei-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--foreground) 30%, transparent);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .ei-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ei-overlay { transition: opacity 0.15s ease; }
+  }
+
+  /* ── Card ───────────────────────────────────────────────── */
+  .ei-card {
+    position: relative;
+    width: min(28rem, 100%);
+    background: var(--background);
+    border: 1.5px solid var(--border);
+    border-radius: 1rem;
+    padding: 2rem 1.75rem 1.75rem;
+    box-shadow:
+      0 24px 64px color-mix(in srgb, var(--foreground) 18%, transparent),
+      0 4px 16px color-mix(in srgb, var(--foreground) 8%, transparent);
+    transform: translateY(0.5rem) scale(0.98);
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+  }
+
+  .ei-overlay.visible .ei-card {
+    transform: translateY(0) scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ei-card { transform: none !important; }
+  }
+
+  /* ── Close button ───────────────────────────────────────── */
+  .ei-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--muted-foreground);
+    font-size: 0.7rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.14s;
+  }
+
+  .ei-close:hover {
+    background: var(--muted);
+    color: var(--foreground);
+  }
+
+  /* ── Text ───────────────────────────────────────────────── */
+  .ei-overline {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.75rem;
+  }
+
+  .ei-title {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: clamp(1.25rem, 3vw, 1.55rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--foreground);
+    margin: 0 0 0.85rem;
+  }
+
+  .ei-desc {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--muted-foreground);
+    margin: 0 0 1.5rem;
+  }
+
+  /* ── Actions ────────────────────────────────────────────── */
+  .ei-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .ei-btn-secondary {
+    flex: 1;
+    min-width: 8rem;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--muted-foreground);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      border-color 0.14s,
+      color 0.14s;
+    text-align: center;
+  }
+
+  .ei-btn-secondary:hover {
+    border-color: var(--foreground);
+    color: var(--foreground);
+  }
+
+  .ei-btn-primary {
+    flex: 2;
+    min-width: 10rem;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    background: var(--accent);
+    color: var(--accent-foreground);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: opacity 0.14s;
+  }
+
+  .ei-btn-primary:hover { opacity: 0.88; }
+</style>
+
+<script>
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  declare global {
+    interface Window { gtag?: (...args: any[]) => void; }
+  }
+
+  const SESSION_KEY = "lm_exit_shown";
+  const LS_KEY = "lm_tg_dismissed";
+  const TG_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
+  const MIN_TIME_MS = 30_000; // 30 seconds before intent detection
+  const EXIT_THRESHOLD_PX = 10; // mouseleave within 10px of top
+
+  // Pages where exit intent is suppressed
+  const EXCLUDED_PATHS = ["/search"];
+
+  function fireGA4(event: string) {
+    try {
+      if (typeof window.gtag === "function") {
+        window.gtag("event", event, {
+          page_location: window.location.href,
+          page_title: document.title,
+        });
+      }
+    } catch { /* ignore */ }
+  }
+
+  function initExitIntent() {
+    // Desktop only
+    if (window.innerWidth <= 768) return;
+
+    // Excluded pages
+    const path = window.location.pathname;
+    if (EXCLUDED_PATHS.some(p => path.startsWith(p))) return;
+
+    // Once per session
+    if (sessionStorage.getItem(SESSION_KEY)) return;
+
+    // Don't show if TelegramSticky cooldown is active
+    const tgDismissed = localStorage.getItem(LS_KEY);
+    if (tgDismissed && Date.now() - parseInt(tgDismissed, 10) < TG_COOLDOWN_MS) return;
+
+    const overlay = document.getElementById("exit-intent-overlay");
+    if (!overlay) return;
+
+    let readyToShow = false;
+    let shown = false;
+
+    // Only fire after MIN_TIME_MS
+    const readyTimer = setTimeout(() => { readyToShow = true; }, MIN_TIME_MS);
+
+    function show() {
+      if (shown || !readyToShow) return;
+      shown = true;
+      sessionStorage.setItem(SESSION_KEY, "1");
+      overlay!.classList.add("visible");
+      overlay!.setAttribute("aria-hidden", "false");
+      fireGA4("exit_intent_show");
+
+      // Focus first button for accessibility
+      const firstBtn = overlay!.querySelector<HTMLElement>("button, a");
+      firstBtn?.focus();
+    }
+
+    function hide() {
+      overlay!.classList.remove("visible");
+      overlay!.setAttribute("aria-hidden", "true");
+      fireGA4("exit_intent_close");
+    }
+
+    // mouseleave toward top
+    function onMouseLeave(e: MouseEvent) {
+      if (e.clientY <= EXIT_THRESHOLD_PX) show();
+    }
+
+    document.addEventListener("mouseleave", onMouseLeave);
+
+    // Backdrop click closes
+    overlay.addEventListener("click", (e: MouseEvent) => {
+      if (e.target === overlay) hide();
+    });
+
+    // Buttons
+    document.getElementById("exit-intent-close")?.addEventListener("click", hide);
+    document.getElementById("exit-intent-stay")?.addEventListener("click", hide);
+
+    // Telegram link GA4
+    document.getElementById("exit-intent-tg")?.addEventListener("click", () => {
+      fireGA4("exit_intent_telegram_click");
+    });
+
+    // ESC key
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") hide();
+    }
+    document.addEventListener("keydown", onKeyDown);
+
+    // Cleanup on page navigation
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        clearTimeout(readyTimer);
+        document.removeEventListener("mouseleave", onMouseLeave);
+        document.removeEventListener("keydown", onKeyDown);
+      },
+      { once: true }
+    );
+  }
+
+  document.addEventListener("astro:page-load", initExitIntent);
+  initExitIntent();
+</script>

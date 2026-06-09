@@ -26,12 +26,23 @@ const currentYear = new Date().getFullYear();
       <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
       <span>{t.footer.allRightsReserved}</span>
     </div>
-    <a
-      href={getRelativeLocaleUrl(locale, "search")}
-      class="text-muted-foreground hover:text-accent text-sm transition-colors"
-      aria-label="Пошук по сайту"
-    >
-      🔍 {t.nav.search}
-    </a>
+    <div class="flex items-center gap-4">
+      <a
+        href="https://t.me/psyho_media"
+        class="text-muted-foreground hover:text-accent text-sm transition-colors"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Telegram-канал Людського механізму"
+      >
+        ✈ Telegram
+      </a>
+      <a
+        href={getRelativeLocaleUrl(locale, "search")}
+        class="text-muted-foreground hover:text-accent text-sm transition-colors"
+        aria-label="Пошук по сайту"
+      >
+        🔍 {t.nav.search}
+      </a>
+    </div>
   </div>
 </footer>

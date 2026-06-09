@@ -7,6 +7,7 @@ import { getAssetPath } from "@/utils/withBase";
 import GoogleAnalytics from "@/components/GoogleAnalytics.astro";
 import MicrosoftClarity from "@/components/MicrosoftClarity.astro";
 import SchemaWebsite from "@/components/SchemaWebsite.astro";
+import ExitIntent from "@/components/ExitIntent.astro";
 import config from "@/config";
 import "@/styles/global.css";
 
@@ -143,6 +144,10 @@ const rssHref = getRelativeLocaleUrl(
     class="bg-background font-app text-foreground selection:bg-accent/75 selection:text-accent-foreground flex min-h-svh flex-col"
   >
     <slot />
+
+    <!-- Exit Intent Modal (desktop only, 30s delay, once per session) -->
+    <ExitIntent />
+
     <script>
       import "@/scripts/theme";
     </script>
