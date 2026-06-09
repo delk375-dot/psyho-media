@@ -82,6 +82,9 @@ const telegram = defineCollection({
       "article_teaser",
     ]),
     body: z.string().optional(),
+    published: z.boolean().default(false),
+    publishedAt: z.date().optional().nullable(),
+    telegramMessageId: z.number().optional().nullable(),
   }),
 });
 
