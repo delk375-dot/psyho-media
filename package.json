@@ -15,7 +15,8 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "telegram:publish": "node --env-file=.env -- node_modules/tsx/dist/cli.mjs scripts/publish-telegram.ts",
-    "telegram:publish:txt": "node --env-file=.env.txt -- node_modules/tsx/dist/cli.mjs scripts/publish-telegram.ts"
+    "telegram:publish:txt": "node --env-file=.env.txt -- node_modules/tsx/dist/cli.mjs scripts/publish-telegram.ts",
+    "telegram:publish:ci": "node_modules/tsx/dist/cli.mjs scripts/publish-telegram.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^6.0.1",

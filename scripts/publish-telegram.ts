@@ -1,10 +1,16 @@
 /**
  * publish-telegram.ts
  * ───────────────────
- * Publishes unpublished Telegram posts from src/content/telegram/ to a Telegram channel.
+ * Publishes scheduled Telegram posts from src/content/telegram/ to a Telegram channel.
+ *
+ * A post is eligible for publishing when ALL conditions are met:
+ *   1. published: false
+ *   2. publishDate <= now  (if publishDate is absent, falls back to date field)
  *
  * Usage:
- *   pnpm telegram:publish
+ *   pnpm telegram:publish            # local (reads from .env or .env.txt)
+ *   pnpm telegram:publish:ci         # CI (reads env vars directly from environment)
+ *   pnpm telegram:publish -- --limit=1   # publish only N posts
  *
  * Required env variables:
  *   TELEGRAM_BOT_TOKEN   — bot token from @BotFather
@@ -32,8 +38,9 @@ const CHANNEL_ID = process.env.TELEGRAM_CHANNEL_ID;
 if (!BOT_TOKEN) {
   console.error(
     "\n❌  TELEGRAM_BOT_TOKEN is not set.\n" +
-    "    Add it to your .env file or export it before running:\n\n" +
-    "    export TELEGRAM_BOT_TOKEN=your_token_here\n"
+    "    Add it to your .env file or set via GitHub Secrets.\n\n" +
+    "    Local:  export TELEGRAM_BOT_TOKEN=your_token_here\n" +
+    "    CI:     add secret TELEGRAM_BOT_TOKEN to repo Settings → Secrets\n"
   );
   process.exit(1);
 }
@@ -41,8 +48,8 @@ if (!BOT_TOKEN) {
 if (!CHANNEL_ID) {
   console.error(
     "\n❌  TELEGRAM_CHANNEL_ID is not set.\n" +
-    "    Add it to your .env file or export it before running:\n\n" +
-    "    export TELEGRAM_CHANNEL_ID=@psyho_media\n"
+    "    Local:  export TELEGRAM_CHANNEL_ID=@psyho_media\n" +
+    "    CI:     add secret TELEGRAM_CHANNEL_ID to repo Settings → Secrets\n"
   );
   process.exit(1);
 }
@@ -54,6 +61,7 @@ interface TelegramPost {
   body: string;
   type: string;
   date: Date;
+  publishDate: Date;        // scheduled send time (falls back to date)
   published: boolean;
   publishedAt: Date | null;
   telegramMessageId: number | null;
@@ -70,8 +78,14 @@ interface TelegramApiResponse {
 
 // ── Helpers ───────────────────────────────────────────────────
 
-/** Read all .md files from content dir, return unpublished ones sorted by date asc */
-function loadUnpublishedPosts(): TelegramPost[] {
+/**
+ * Read all .md files from content dir.
+ * Returns posts where:
+ *   - published === false
+ *   - publishDate <= now
+ * Sorted oldest publishDate first.
+ */
+function loadEligiblePosts(now: Date): TelegramPost[] {
   if (!fs.existsSync(CONTENT_DIR)) {
     console.error(`\n❌  Content directory not found: ${CONTENT_DIR}\n`);
     process.exit(1);
@@ -91,20 +105,35 @@ function loadUnpublishedPosts(): TelegramPost[] {
     // Skip already published
     if (data.published === true) continue;
 
+    const date: Date = data.date ? new Date(data.date) : new Date();
+    // publishDate falls back to date if not explicitly set
+    const publishDate: Date = data.publishDate
+      ? new Date(data.publishDate)
+      : date;
+
+    // Skip posts not yet scheduled
+    if (publishDate > now) {
+      console.log(
+        `  ⏳ Skipping "${data.title}" — scheduled for ${publishDate.toISOString()}`
+      );
+      continue;
+    }
+
     posts.push({
       filePath,
       title: String(data.title ?? ""),
       body: String(data.body ?? ""),
       type: String(data.type ?? ""),
-      date: data.date ? new Date(data.date) : new Date(),
+      date,
+      publishDate,
       published: false,
       publishedAt: null,
       telegramMessageId: null,
     });
   }
 
-  // Oldest first — publish in chronological order
-  return posts.sort((a, b) => a.date.getTime() - b.date.getTime());
+  // Oldest publishDate first — chronological order
+  return posts.sort((a, b) => a.publishDate.getTime() - b.publishDate.getTime());
 }
 
 /** Build the message text for Telegram (MarkdownV2 format) */
@@ -166,41 +195,46 @@ function markAsPublished(
   parsed.data.publishedAt = publishedAt.toISOString();
   parsed.data.telegramMessageId = messageId;
 
-  // Rebuild file: stringify produces "---\n...\n---\n" + original content
   const updated = matter.stringify(parsed.content, parsed.data);
   fs.writeFileSync(filePath, updated, "utf-8");
 }
 
-/** Delay between posts to respect Telegram rate limits (1 msg/sec safe) */
+/** Delay between posts to respect Telegram rate limits */
 function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // ── Main ──────────────────────────────────────────────────────
 async function main(): Promise<void> {
+  const now = new Date();
+
   console.log("\n🤖  Telegram Autopublisher — Людський механізм");
   console.log(`    Channel : ${CHANNEL_ID}`);
-  console.log(`    Dir     : ${CONTENT_DIR}\n`);
+  console.log(`    Dir     : ${CONTENT_DIR}`);
+  console.log(`    Now     : ${now.toISOString()}\n`);
 
-  // Optional --limit N CLI argument
+  // Optional --limit=N CLI argument
   const limitArg = process.argv.find(a => a.startsWith("--limit="));
   const limit = limitArg ? parseInt(limitArg.split("=")[1]!, 10) : Infinity;
 
-  let posts = loadUnpublishedPosts();
+  let posts = loadEligiblePosts(now);
 
   if (isFinite(limit) && limit > 0) {
     posts = posts.slice(0, limit);
     console.log(`ℹ️   Limit: publishing only ${limit} post(s).\n`);
   }
 
+  // Graceful exit — nothing to publish
   if (posts.length === 0) {
-    console.log("✅  Nothing to publish — all posts are already published.\n");
-    return;
+    console.log("✅  Nothing to publish — no eligible posts at this time.\n");
+    process.exit(0);
   }
 
-  console.log(`📋  Found ${posts.length} unpublished post(s):\n`);
+  console.log(`📋  Found ${posts.length} eligible post(s):\n`);
   posts.forEach((p, i) =>
-    console.log(`    ${i + 1}. ${path.basename(p.filePath)} — "${p.title}"`)
+    console.log(
+      `    ${i + 1}. ${path.basename(p.filePath)} — "${p.title}" (scheduled: ${p.publishDate.toISOString()})`
+    )
   );
   console.log();
 
@@ -221,22 +255,21 @@ async function main(): Promise<void> {
       console.log(`✅  message_id: ${messageId}`);
       published++;
 
-      // Pause 1.2s between messages to avoid hitting Telegram rate limits
+      // 1.2s pause between messages — safe under Telegram rate limit
       if (posts.indexOf(post) < posts.length - 1) {
         await sleep(1200);
       }
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
-      console.log(`❌  FAILED — ${message}`);
-      console.log(`    File: ${fileName}`);
+      console.error(`❌  FAILED — ${message}`);
+      console.error(`    File: ${fileName}`);
       failed++;
     }
   }
 
-  console.log(
-    `\n📊  Done: ${published} published, ${failed} failed.\n`
-  );
+  console.log(`\n📊  Done: ${published} published, ${failed} failed.\n`);
 
+  // Non-zero exit so GitHub Actions marks the step as failed
   if (failed > 0) {
     process.exit(1);
   }

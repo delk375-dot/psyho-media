@@ -1,0 +1,71 @@
+name: Telegram Scheduled Publishing
+
+on:
+  schedule:
+    # Every 30 minutes
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Max posts to publish (leave empty for all eligible)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write  # needed to commit updated markdown files back to main
+
+jobs:
+  publish:
+    name: Publish Telegram posts
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: "☁️ Checkout repository"
+        uses: actions/checkout@v4
+        with:
+          # Use a PAT or the default GITHUB_TOKEN with write permissions
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "📦 Install pnpm"
+        uses: pnpm/action-setup@v4
+        with:
+          version: "11.3.0"
+
+      - name: "🟢 Setup Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "pnpm"
+
+      - name: "📦 Install dependencies"
+        run: pnpm install --frozen-lockfile
+
+      - name: "🤖 Publish Telegram posts"
+        id: publish
+        run: |
+          if [ -n "${{ github.event.inputs.limit }}" ]; then
+            pnpm telegram:publish:ci -- --limit=${{ github.event.inputs.limit }}
+          else
+            pnpm telegram:publish:ci
+          fi
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+
+      - name: "💾 Commit updated markdown files"
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Stage only the telegram content files that were updated
+          git add src/content/telegram/
+
+          # Commit only if there are actual changes
+          if git diff --cached --quiet; then
+            echo "No markdown files changed — nothing to commit."
+          else
+            git commit -m "chore: mark Telegram posts as published [skip ci]"
+            git push origin main
+            echo "✅ Changes committed and pushed."
+          fi
