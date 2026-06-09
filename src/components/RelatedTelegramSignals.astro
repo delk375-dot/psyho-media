@@ -1,0 +1,283 @@
+---
+/**
+ * RelatedTelegramSignals.astro
+ * ─────────────────────────────
+ * Shows up to 3 published Telegram signals related to the current article.
+ *
+ * Matching logic (OR):
+ *   1. sourceArticle === current post slug
+ *   2. bridgeTo contains the current post slug
+ *
+ * Only shown when there are ≥1 matching signals.
+ */
+
+import { getCollection } from "astro:content";
+
+interface Props {
+  postSlug: string;
+}
+
+const { postSlug } = Astro.props;
+
+const SITE_URL = "https://psyho-media.pp.ua";
+const TELEGRAM_URL = "https://t.me/psyho_media";
+
+const TYPE_LABELS: Record<string, string> = {
+  signal: "Сигнал",
+  bridge: "Міст",
+  question: "Питання",
+  fragment: "Фрагмент",
+  case: "Кейс",
+  teaser: "Анонс",
+};
+
+const TONE_LABELS: Record<string, string> = {
+  atmospheric: "Атмосферний",
+  dark: "Темний",
+  ironic: "Іронічний",
+  analytical: "Аналітичний",
+  provocative: "Провокативний",
+  calm: "Спокійний",
+};
+
+const allSignals = await getCollection("telegram");
+
+const related = allSignals
+  .filter(s => s.data.published === true)
+  .filter(s => {
+    const src = s.data.sourceArticle ?? "";
+    const bridge = s.data.bridgeTo ?? "";
+    return (
+      src === postSlug ||
+      src.endsWith(`/${postSlug}`) ||
+      src.endsWith(`/${postSlug}/`) ||
+      bridge.includes(postSlug)
+    );
+  })
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const hasSignals = related.length > 0;
+---
+
+{hasSignals && (
+  <aside class="rts-wrapper" aria-label="Сигнали з поля">
+    <div class="rts-header">
+      <p class="rts-eyebrow">Telegram</p>
+      <h2 class="rts-title">Сигнали з поля</h2>
+      <p class="rts-subtitle">
+        Короткі фрагменти, які продовжують цей механізм у Telegram.
+      </p>
+    </div>
+
+    <ul class="rts-grid">
+      {related.map(signal => (
+        <li class="rts-card">
+          <div class="rts-card-meta">
+            <span class="rts-type-badge">
+              {TYPE_LABELS[signal.data.type] ?? signal.data.type}
+            </span>
+            {signal.data.tone && (
+              <span class="rts-tone-badge">
+                {TONE_LABELS[signal.data.tone] ?? signal.data.tone}
+              </span>
+            )}
+          </div>
+          <p class="rts-card-title">{signal.data.title}</p>
+          {signal.data.body && (
+            <p class="rts-card-body">{signal.data.body}</p>
+          )}
+          <a
+            href={signal.data.bridgeTo ? `${SITE_URL}${signal.data.bridgeTo}` : TELEGRAM_URL}
+            class="rts-card-cta"
+            data-telegram-related-signal
+            {...(signal.data.bridgeTo
+              ? {}
+              : { target: "_blank", rel: "noopener noreferrer" })}
+          >
+            {signal.data.bridgeTo ? "Читати механізм →" : "Читати в Telegram →"}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="rts-footer">
+      <a
+        href="/telegram/archive"
+        class="rts-archive-link"
+        aria-label="Переглянути всі сигнали в архіві"
+      >
+        Дивитись більше сигналів →
+      </a>
+    </div>
+  </aside>
+)}
+
+<style>
+  .rts-wrapper {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1.5px solid var(--border);
+  }
+
+  /* ── Header ───────────────────────────────────────────────── */
+  .rts-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.8;
+    margin: 0 0 0.5rem;
+  }
+
+  .rts-title {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--foreground);
+    margin: 0 0 0.4rem;
+  }
+
+  .rts-subtitle {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--muted-foreground);
+    margin: 0 0 1.5rem;
+    max-width: 38rem;
+  }
+
+  /* ── Grid ─────────────────────────────────────────────────── */
+  .rts-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem;
+  }
+
+  /* ── Card ─────────────────────────────────────────────────── */
+  .rts-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 1.25rem 1.35rem;
+    border: 1.5px solid var(--border);
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--accent) 3%, var(--background));
+    transition: border-color 0.2s;
+  }
+
+  @media (hover: hover) {
+    .rts-card:hover {
+      border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+    }
+  }
+
+  .rts-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  /* ── Badges ───────────────────────────────────────────────── */
+  .rts-type-badge {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.5rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent);
+  }
+
+  .rts-tone-badge {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.5rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--foreground) 7%, transparent);
+    color: var(--muted-foreground);
+  }
+
+  .rts-card-title {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--foreground);
+    margin: 0;
+  }
+
+  .rts-card-body {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: var(--muted-foreground);
+    margin: 0;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .rts-card-cta {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    align-self: flex-start;
+    transition: opacity 0.15s;
+  }
+
+  @media (hover: hover) {
+    .rts-card-cta:hover { opacity: 0.72; }
+  }
+
+  /* ── Footer ───────────────────────────────────────────────── */
+  .rts-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .rts-archive-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--muted-foreground);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  @media (hover: hover) {
+    .rts-archive-link:hover { color: var(--accent); }
+  }
+</style>
+
+<script>
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  declare global { interface Window { gtag?: (...args: any[]) => void; } }
+
+  function initRelatedSignals() {
+    document.querySelectorAll("[data-telegram-related-signal]").forEach(el => {
+      el.addEventListener("click", () => {
+        try {
+          if (typeof window.gtag === "function") {
+            window.gtag("event", "telegram_related_signal_click", {
+              page_location: window.location.href,
+              page_title: document.title,
+            });
+          }
+        } catch { /* ignore */ }
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", initRelatedSignals);
+  initRelatedSignals();
+</script>

@@ -1,7 +1,12 @@
 ---
-title: 'Соціальний статус починається з того, кого вам не треба переконувати'
+title: "Соціальний статус починається з того, кого вам не треба переконувати"
 date: 2026-02-12T07:00:00.000Z
-type: short_fragment
+type: fragment
+tone: analytical
+bridgeTo: null
+sourceArticle: null
+isTelegramOnly: true
+contentLayer: signal
 body: >-
   Не з грошей, не з посади. З того, чиє слово приймають без доказів. Чиє
   мовчання не потребує пояснень. Чия присутність вже щось означає. Статус — це
@@ -11,4 +16,3 @@ publishDate: 2026-02-12T07:00:00.000Z
 publishedAt: '2026-06-09T13:44:53.754Z'
 telegramMessageId: 6
 ---
-

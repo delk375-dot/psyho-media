@@ -75,17 +75,51 @@ const telegram = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.date(),
+
+    /** Content type — what kind of signal this is */
     type: z.enum([
-      "psycho_glitch",
-      "short_fragment",
-      "dark_observation",
-      "article_teaser",
-    ]),
+      "signal",
+      "bridge",
+      "question",
+      "fragment",
+      "case",
+      "teaser",
+    ]).default("signal"),
+
+    /** Tone of the post */
+    tone: z.enum([
+      "atmospheric",
+      "dark",
+      "ironic",
+      "analytical",
+      "provocative",
+      "calm",
+    ]).default("atmospheric"),
+
+    /** Optional path to a site article this post leads to, e.g. /posts/some-slug/ */
+    bridgeTo: z.string().optional().nullable(),
+
+    /** Slug or path of the site article this signal was born from */
+    sourceArticle: z.string().optional().nullable(),
+
+    /** True = Telegram-only content, not a site article */
+    isTelegramOnly: z.boolean().default(true),
+
+    /** Content layer classification */
+    contentLayer: z.enum([
+      "signal",
+      "bridge",
+      "archive",
+      "teaser",
+    ]).default("signal"),
+
+    /** Main text body of the post */
     body: z.string().optional(),
+
     published: z.boolean().default(false),
     publishDate: z.coerce.date().optional().nullable(),
     publishedAt: z.coerce.date().optional().nullable(),
-    telegramMessageId: z.number().optional().nullable(),
+    telegramMessageId: z.union([z.number(), z.string()]).optional().nullable(),
   }),
 });
 

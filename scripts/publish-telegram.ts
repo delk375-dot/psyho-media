@@ -1,25 +1,24 @@
 /**
  * publish-telegram.ts
  * ───────────────────
- * Publishes scheduled Telegram posts from src/content/telegram/ to a Telegram channel.
+ * Publishes scheduled Telegram posts from src/content/telegram/.
  *
- * A post is eligible for publishing when ALL conditions are met:
+ * Eligibility:
  *   1. published: false
- *   2. publishDate <= now  (if publishDate is absent, falls back to date field)
+ *   2. publishDate <= now  (falls back to date if publishDate absent)
+ *
+ * Bridge logic:
+ *   - if bridgeTo is set → appends "Механізм:\n{SITE_URL}{bridgeTo}"
+ *   - if sourceArticle is set but bridgeTo is absent → warning in logs
+ *   - if neither → no footer link
+ *
+ * Format: Telegram HTML (parse_mode: HTML) — avoids MarkdownV2 escaping issues.
  *
  * Usage:
- *   pnpm telegram:publish            # local (reads from .env or .env.txt)
- *   pnpm telegram:publish:ci         # CI (reads env vars directly from environment)
- *   pnpm telegram:publish -- --limit=1   # publish only N posts
- *
- * Required env variables:
- *   TELEGRAM_BOT_TOKEN   — bot token from @BotFather
- *   TELEGRAM_CHANNEL_ID  — channel id or @username (e.g. @psyho_media)
- *
- * After a successful publish the script updates the markdown file:
- *   published: true
- *   publishedAt: <ISO timestamp>
- *   telegramMessageId: <message_id from Telegram API>
+ *   pnpm telegram:publish           — local, reads .env
+ *   pnpm telegram:publish:txt       — local Windows, reads .env.txt
+ *   pnpm telegram:publish:ci        — CI, env from environment
+ *   pnpm telegram:publish -- --limit=1
  */
 
 import fs from "node:fs";
@@ -28,7 +27,6 @@ import matter from "gray-matter";
 
 // ── Config ────────────────────────────────────────────────────
 const SITE_URL = "https://psyho-media.pp.ua";
-const TELEGRAM_LANDING_PATH = "/telegram";
 const CONTENT_DIR = path.resolve(process.cwd(), "src/content/telegram");
 
 // ── Env validation ────────────────────────────────────────────
@@ -38,7 +36,6 @@ const CHANNEL_ID = process.env.TELEGRAM_CHANNEL_ID;
 if (!BOT_TOKEN) {
   console.error(
     "\n❌  TELEGRAM_BOT_TOKEN is not set.\n" +
-    "    Add it to your .env file or set via GitHub Secrets.\n\n" +
     "    Local:  export TELEGRAM_BOT_TOKEN=your_token_here\n" +
     "    CI:     add secret TELEGRAM_BOT_TOKEN to repo Settings → Secrets\n"
   );
@@ -60,30 +57,56 @@ interface TelegramPost {
   title: string;
   body: string;
   type: string;
+  tone: string;
   date: Date;
-  publishDate: Date;        // scheduled send time (falls back to date)
-  published: boolean;
-  publishedAt: Date | null;
-  telegramMessageId: number | null;
+  publishDate: Date;
+  bridgeTo: string | null;
+  sourceArticle: string | null;
+  isTelegramOnly: boolean;
 }
 
 interface TelegramApiResponse {
   ok: boolean;
-  result?: {
-    message_id: number;
-    [key: string]: unknown;
-  };
+  result?: { message_id: number; [key: string]: unknown };
   description?: string;
 }
 
 // ── Helpers ───────────────────────────────────────────────────
 
+/** Escape HTML special chars for Telegram HTML parse mode */
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 /**
- * Read all .md files from content dir.
- * Returns posts where:
- *   - published === false
- *   - publishDate <= now
- * Sorted oldest publishDate first.
+ * Build Telegram message in HTML format.
+ * Format (signal style):
+ *   <b>Title</b>\n\nBody\n\nМеханізм:\n{url}
+ */
+function buildMessageText(post: TelegramPost): string {
+  const parts: string[] = [];
+
+  parts.push(`<b>${escapeHtml(post.title)}</b>`);
+
+  if (post.body.trim()) {
+    parts.push(`\n${escapeHtml(post.body.trim())}`);
+  }
+
+  if (post.bridgeTo) {
+    const url = `${SITE_URL}${post.bridgeTo}`;
+    parts.push(`\nМеханізм:\n${url}`);
+  }
+
+  return parts.join("\n");
+}
+
+/**
+ * Load eligible posts: published === false AND publishDate <= now.
+ * Warns if sourceArticle set but bridgeTo missing.
  */
 function loadEligiblePosts(now: Date): TelegramPost[] {
   if (!fs.existsSync(CONTENT_DIR)) {
@@ -102,16 +125,11 @@ function loadEligiblePosts(now: Date): TelegramPost[] {
     const raw = fs.readFileSync(filePath, "utf-8");
     const { data } = matter(raw);
 
-    // Skip already published
     if (data.published === true) continue;
 
     const date: Date = data.date ? new Date(data.date) : new Date();
-    // publishDate falls back to date if not explicitly set
-    const publishDate: Date = data.publishDate
-      ? new Date(data.publishDate)
-      : date;
+    const publishDate: Date = data.publishDate ? new Date(data.publishDate) : date;
 
-    // Skip posts not yet scheduled
     if (publishDate > now) {
       console.log(
         `  ⏳ Skipping "${data.title}" — scheduled for ${publishDate.toISOString()}`
@@ -119,44 +137,34 @@ function loadEligiblePosts(now: Date): TelegramPost[] {
       continue;
     }
 
+    const bridgeTo: string | null = data.bridgeTo ?? null;
+    const sourceArticle: string | null = data.sourceArticle ?? null;
+
+    if (sourceArticle && !bridgeTo) {
+      console.warn(
+        `  ⚠️  "${data.title}" has sourceArticle="${sourceArticle}" but no bridgeTo. ` +
+        `No link will be appended.`
+      );
+    }
+
     posts.push({
       filePath,
       title: String(data.title ?? ""),
       body: String(data.body ?? ""),
-      type: String(data.type ?? ""),
+      type: String(data.type ?? "signal"),
+      tone: String(data.tone ?? "atmospheric"),
       date,
       publishDate,
-      published: false,
-      publishedAt: null,
-      telegramMessageId: null,
+      bridgeTo,
+      sourceArticle,
+      isTelegramOnly: data.isTelegramOnly !== false,
     });
   }
 
-  // Oldest publishDate first — chronological order
   return posts.sort((a, b) => a.publishDate.getTime() - b.publishDate.getTime());
 }
 
-/** Build the message text for Telegram (MarkdownV2 format) */
-function buildMessageText(post: TelegramPost): string {
-  const readMoreUrl = `${SITE_URL}${TELEGRAM_LANDING_PATH}`;
-
-  // Escape characters that are special in Telegram MarkdownV2
-  const escape = (s: string): string =>
-    s.replace(/[_*[\]()~`>#+\-=|{}.!\\]/g, "\\$&");
-
-  const titleEscaped = escape(post.title);
-  const bodyEscaped = post.body ? escape(post.body) : "";
-  const urlEscaped = escape(readMoreUrl);
-
-  const parts: string[] = [];
-  parts.push(`*${titleEscaped}*`);
-  if (bodyEscaped) parts.push(`\n${bodyEscaped}`);
-  parts.push(`\n\n[Читати більше](${urlEscaped})`);
-
-  return parts.join("\n");
-}
-
-/** Call Telegram Bot API sendMessage */
+/** POST to Telegram Bot API */
 async function sendToTelegram(text: string): Promise<number> {
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
@@ -166,8 +174,9 @@ async function sendToTelegram(text: string): Promise<number> {
     body: JSON.stringify({
       chat_id: CHANNEL_ID,
       text,
-      parse_mode: "MarkdownV2",
+      parse_mode: "HTML",
       disable_web_page_preview: false,
+      link_preview_options: { is_disabled: false },
     }),
   });
 
@@ -175,19 +184,15 @@ async function sendToTelegram(text: string): Promise<number> {
 
   if (!json.ok || !json.result) {
     throw new Error(
-      `Telegram API error: ${json.description ?? "unknown error"} (HTTP ${response.status})`
+      `Telegram API error: ${json.description ?? "unknown"} (HTTP ${response.status})`
     );
   }
 
   return json.result.message_id;
 }
 
-/** Rewrite the frontmatter of a published file */
-function markAsPublished(
-  filePath: string,
-  messageId: number,
-  publishedAt: Date
-): void {
+/** Update frontmatter after successful publish */
+function markAsPublished(filePath: string, messageId: number, publishedAt: Date): void {
   const raw = fs.readFileSync(filePath, "utf-8");
   const parsed = matter(raw);
 
@@ -195,11 +200,9 @@ function markAsPublished(
   parsed.data.publishedAt = publishedAt.toISOString();
   parsed.data.telegramMessageId = messageId;
 
-  const updated = matter.stringify(parsed.content, parsed.data);
-  fs.writeFileSync(filePath, updated, "utf-8");
+  fs.writeFileSync(filePath, matter.stringify(parsed.content, parsed.data), "utf-8");
 }
 
-/** Delay between posts to respect Telegram rate limits */
 function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -213,7 +216,6 @@ async function main(): Promise<void> {
   console.log(`    Dir     : ${CONTENT_DIR}`);
   console.log(`    Now     : ${now.toISOString()}\n`);
 
-  // Optional --limit=N CLI argument
   const limitArg = process.argv.find(a => a.startsWith("--limit="));
   const limit = limitArg ? parseInt(limitArg.split("=")[1]!, 10) : Infinity;
 
@@ -224,7 +226,6 @@ async function main(): Promise<void> {
     console.log(`ℹ️   Limit: publishing only ${limit} post(s).\n`);
   }
 
-  // Graceful exit — nothing to publish
   if (posts.length === 0) {
     console.log("✅  Nothing to publish — no eligible posts at this time.\n");
     process.exit(0);
@@ -233,7 +234,9 @@ async function main(): Promise<void> {
   console.log(`📋  Found ${posts.length} eligible post(s):\n`);
   posts.forEach((p, i) =>
     console.log(
-      `    ${i + 1}. ${path.basename(p.filePath)} — "${p.title}" (scheduled: ${p.publishDate.toISOString()})`
+      `    ${i + 1}. ${path.basename(p.filePath)} — "${p.title}"` +
+      (p.bridgeTo ? ` [bridge → ${p.bridgeTo}]` : "") +
+      (p.sourceArticle && !p.bridgeTo ? ` [⚠️ sourceArticle without bridgeTo]` : "")
     )
   );
   console.log();
@@ -251,11 +254,9 @@ async function main(): Promise<void> {
       const publishedAt = new Date();
 
       markAsPublished(post.filePath, messageId, publishedAt);
-
       console.log(`✅  message_id: ${messageId}`);
       published++;
 
-      // 1.2s pause between messages — safe under Telegram rate limit
       if (posts.indexOf(post) < posts.length - 1) {
         await sleep(1200);
       }
@@ -269,10 +270,7 @@ async function main(): Promise<void> {
 
   console.log(`\n📊  Done: ${published} published, ${failed} failed.\n`);
 
-  // Non-zero exit so GitHub Actions marks the step as failed
-  if (failed > 0) {
-    process.exit(1);
-  }
+  if (failed > 0) process.exit(1);
 }
 
 main().catch(err => {

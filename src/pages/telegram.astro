@@ -8,35 +8,35 @@ const TELEGRAM_URL = "https://t.me/psyho_media";
 const CONTENT_TYPES = [
   {
     icon: "⚡",
-    title: "Психо-глюки",
-    desc: "Короткі спостереження про те, як мозок обманює себе і нас — у стосунках, рішеннях, самооцінці.",
+    title: "Сигнали",
+    desc: "Короткі спостереження, які ловиш на льоту — до того, як вони стали статтею або зникли.",
   },
   {
     icon: "◼",
-    title: "Короткі фрагменти",
-    desc: "Одна думка, яку хочеться переслати або зберегти. Без вступів і висновків — тільки суть.",
+    title: "Фрагменти",
+    desc: "Одна думка без вступу і висновку. Точка входу в механізм, а не повний розбір.",
   },
   {
     icon: "◐",
     title: "Темні спостереження",
-    desc: "Про людей, якими ми не хочемо бути — але іноді все одно є. Без засудження, з розумінням механізму.",
+    desc: "Про людей, якими ми не хочемо бути — але іноді все одно є. Без засудження, з розумінням.",
   },
   {
-    icon: "→",
-    title: "Анонси нових статей",
-    desc: "Коли з'являється новий матеріал на сайті — перші дізнаються читачі каналу.",
+    icon: "⤴",
+    title: "Мости",
+    desc: "Telegram-пост, який починає тему. Стаття на сайті — де вона розкривається повністю.",
   },
   {
-    icon: "✂",
-    title: "Тексти, які не потрапили на сайт",
-    desc: "Думки, які були занадто короткими для статті, але занадто важливими, щоб їх не написати.",
+    icon: "◎",
+    title: "Питання в темряві",
+    desc: "Не відповіді. Питання, від яких стає некомфортно — і саме тому варто залишитися з ними.",
   },
 ];
 ---
 
 <Layout
-  title="Telegram — продовження людського механізму"
-  description="Короткі психо-глюки, фрагменти, темні спостереження і нові механізми, які не завжди потрапляють у статті."
+  title="Telegram — поле Людського механізму"
+  description="Telegram — це поле. Сайт — це карта. Сигнали, фрагменти, мости між короткою думкою і повним розбором."
 >
   <Header />
   <main id="main-content" class="app-layout">
@@ -45,11 +45,12 @@ const CONTENT_TYPES = [
     <section class="tg-hero border-border border-b pt-14 pb-12 sm:pt-20 sm:pb-16">
       <p class="section-kicker">Канал</p>
       <h1 class="tg-hero-title">
-        Механізм продовжується<br class="hidden sm:block" /> в Telegram
+        Telegram — це поле.<br class="hidden sm:block" />
+        Сайт — це карта.
       </h1>
       <p class="tg-hero-desc">
-        Короткі психо-глюки, фрагменти, темні спостереження і нові механізми —<br class="hidden sm:block" />
-        які не завжди потрапляють у статті.
+        Тут з'являється те, що ще не стало статтею або ніколи нею не стане.<br class="hidden sm:block" />
+        Сигнали, фрагменти, провокативні питання — між рядків.
       </p>
       <div class="mt-10 flex flex-wrap gap-3">
         <a
@@ -58,22 +59,23 @@ const CONTENT_TYPES = [
           class="tg-btn-primary"
           target="_blank"
           rel="noopener noreferrer"
+          data-tg-signal-click
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
           </svg>
-          Перейти в Telegram
+          Увійти в поле
         </a>
         <a href="/telegram/archive" class="tg-btn-secondary">
-          Архів фрагментів →
+          Читати сигнали →
         </a>
       </div>
     </section>
 
     <!-- What's inside -->
     <section class="border-border border-b py-12 sm:py-16">
-      <p class="section-kicker">Що там є</p>
-      <h2 class="section-title mb-10">Що буде в Telegram</h2>
+      <p class="section-kicker">Що в полі</p>
+      <h2 class="section-title mb-10">П'ять типів сигналів</h2>
       <ul class="tg-features-grid">
         {CONTENT_TYPES.map(item => (
           <li class="tg-feature-card">
@@ -87,10 +89,10 @@ const CONTENT_TYPES = [
 
     <!-- Final CTA -->
     <section class="py-14 sm:py-20 flex flex-col items-center text-center">
-      <p class="tg-final-eyebrow">Прихована кімната</p>
-      <h2 class="tg-final-title">Там продовжується те,<br />що починається тут</h2>
+      <p class="tg-final-eyebrow">Поле активне</p>
+      <h2 class="tg-final-title">Сигнали виходять<br />між статтями</h2>
       <p class="tg-final-desc">
-        Сайт — це статті. Telegram — це між рядків.
+        Деякі з них стануть механізмами. Деякі залишаться тільки там.
       </p>
       <a
         id="tg-landing-cta-bottom"
@@ -98,11 +100,12 @@ const CONTENT_TYPES = [
         class="tg-btn-primary mt-8"
         target="_blank"
         rel="noopener noreferrer"
+        data-tg-signal-click
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
         </svg>
-        Відкрити канал
+        Читати сигнали
       </a>
     </section>
 
@@ -137,15 +140,17 @@ const CONTENT_TYPES = [
     padding: 0.75rem 1.6rem;
     min-height: 44px;
     border-radius: 0.55rem;
-    background: var(--accent);
-    color: var(--accent-foreground, #fff);
+    background: linear-gradient(135deg, #8f1028 0%, #b61f39 100%);
+    color: #fff;
     font-size: 0.95rem;
     font-weight: 700;
     text-decoration: none;
     transition: opacity 0.15s;
   }
 
-  .tg-btn-primary:hover { opacity: 0.88; }
+  @media (hover: hover) {
+    .tg-btn-primary:hover { opacity: 0.88; }
+  }
 
   .tg-btn-secondary {
     display: inline-flex;
@@ -162,9 +167,11 @@ const CONTENT_TYPES = [
     transition: border-color 0.15s, color 0.15s;
   }
 
-  .tg-btn-secondary:hover {
-    border-color: var(--foreground);
-    color: var(--foreground);
+  @media (hover: hover) {
+    .tg-btn-secondary:hover {
+      border-color: var(--foreground);
+      color: var(--foreground);
+    }
   }
 
   /* ── Features grid ────────────────────────────────────────── */
@@ -185,8 +192,10 @@ const CONTENT_TYPES = [
     transition: border-color 0.2s;
   }
 
-  .tg-feature-card:hover {
-    border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  @media (hover: hover) {
+    .tg-feature-card:hover {
+      border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+    }
   }
 
   .tg-feature-icon {
@@ -242,30 +251,26 @@ const CONTENT_TYPES = [
     interface Window { gtag?: (...args: any[]) => void; }
   }
 
-  function fireGA4(event: string) {
+  function fireGA4(event: string, extra?: Record<string, unknown>) {
     try {
       if (typeof window.gtag === "function") {
         window.gtag("event", event, {
           page_location: window.location.href,
           page_title: document.title,
+          ...extra,
         });
       }
     } catch { /* ignore */ }
   }
 
   function initTelegramLanding() {
-    // Only on /telegram page
     if (!window.location.pathname.startsWith("/telegram") ||
         window.location.pathname.startsWith("/telegram/archive")) return;
 
-    // Page view event
     fireGA4("telegram_landing_view");
 
-    // Click events on CTA buttons
-    ["tg-landing-cta", "tg-landing-cta-bottom"].forEach(id => {
-      document.getElementById(id)?.addEventListener("click", () => {
-        fireGA4("telegram_landing_click");
-      });
+    document.querySelectorAll("[data-tg-signal-click]").forEach(el => {
+      el.addEventListener("click", () => fireGA4("telegram_signal_click"));
     });
   }
 
