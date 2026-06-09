@@ -13,6 +13,7 @@ import ReadingStreak from "@/components/ReadingStreak.astro";
 import EmotionalPause from "@/components/EmotionalPause.astro";
 import CoachingCTA from "@/components/CoachingCTA.astro";
 import FormatBadge from "@/components/FormatBadge.astro";
+import RelatedTelegramSignals from "@/components/RelatedTelegramSignals.astro";
 import { getPostSlug, getPostUrl } from "@/utils/getPostPaths";
 import { getPublishedPosts } from "@/utils/getPublishedPosts";
 import { getGeneratedPostCoverPath } from "@/utils/generatePostCover";
@@ -235,6 +236,8 @@ const ogImage = ogImageUrl
         </section>
       )
     }
+
+    <RelatedTelegramSignals postSlug={getPostSlug(post.id, post.filePath)} />
 
     <div data-content-zone="recommendations">
       <SemanticRecommendations currentPost={post} posts={allPosts} limit={6} />
