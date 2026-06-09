@@ -1,0 +1,308 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+
+const TELEGRAM_URL = "https://t.me/psyho_media";
+
+const TYPE_LABELS: Record<string, string> = {
+  psycho_glitch: "Психо-глюк",
+  short_fragment: "Фрагмент",
+  dark_observation: "Темне спостереження",
+  article_teaser: "Анонс",
+};
+
+const TYPE_COLORS: Record<string, string> = {
+  psycho_glitch: "type-glitch",
+  short_fragment: "type-fragment",
+  dark_observation: "type-dark",
+  article_teaser: "type-teaser",
+};
+
+const allPosts = await getCollection("telegram");
+const sorted = allPosts.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+function formatDate(d: Date): string {
+  return d.toLocaleDateString("uk-UA", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+---
+
+<Layout
+  title="Архів Telegram-фрагментів — Людський механізм"
+  description="Короткі психо-глюки, темні спостереження і фрагменти з Telegram-каналу Людського механізму."
+>
+  <Header />
+  <main id="main-content" class="app-layout">
+
+    <!-- Header -->
+    <section class="border-border border-b pt-12 pb-10 sm:pt-16 sm:pb-12">
+      <nav class="arc-breadcrumb" aria-label="Навігація">
+        <a href="/telegram">← Telegram</a>
+      </nav>
+      <p class="section-kicker mt-6">Архів</p>
+      <h1 class="arc-title">Фрагменти з каналу</h1>
+      <p class="arc-desc">
+        Те, що виходило між статтями. Коротко — але іноді точніше, ніж у лонгриді.
+      </p>
+    </section>
+
+    <!-- Cards -->
+    <section class="py-10 sm:py-14">
+      <ul class="arc-grid">
+        {sorted.map(post => (
+          <li class="arc-card">
+            <div class="arc-card-meta">
+              <span class:list={["arc-type-badge", TYPE_COLORS[post.data.type] ?? "type-fragment"]}>
+                {TYPE_LABELS[post.data.type] ?? post.data.type}
+              </span>
+              <time class="arc-date" datetime={post.data.date.toISOString()}>
+                {formatDate(post.data.date)}
+              </time>
+            </div>
+            <h2 class="arc-card-title">{post.data.title}</h2>
+            {post.data.body && (
+              <p class="arc-card-body">{post.data.body}</p>
+            )}
+            <a
+              href={TELEGRAM_URL}
+              class="arc-card-cta"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-archive-cta
+            >
+              Читати в Telegram →
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="border-border border-t py-12 sm:py-16 flex flex-col items-center text-center">
+      <p class="arc-bottom-kicker">Більше — в каналі</p>
+      <h2 class="arc-bottom-title">Це тільки частина</h2>
+      <p class="arc-bottom-desc">
+        Нові фрагменти виходять у Telegram кілька разів на тиждень.
+      </p>
+      <a
+        href={TELEGRAM_URL}
+        id="arc-main-cta"
+        class="arc-cta-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Перейти в Telegram
+      </a>
+    </section>
+
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  /* ── Breadcrumb ───────────────────────────────────────────── */
+  .arc-breadcrumb a {
+    font-size: 0.85rem;
+    color: var(--muted-foreground);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .arc-breadcrumb a:hover { color: var(--accent); }
+
+  /* ── Header ───────────────────────────────────────────────── */
+  .arc-title {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--foreground);
+    margin: 0.5rem 0 0;
+  }
+
+  .arc-desc {
+    margin-top: 1rem;
+    max-width: 38rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--muted-foreground);
+  }
+
+  /* ── Grid ─────────────────────────────────────────────────── */
+  .arc-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* ── Card ─────────────────────────────────────────────────── */
+  .arc-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 1.5rem;
+    border: 1.5px solid var(--border);
+    border-radius: 0.75rem;
+    background: var(--background);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .arc-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--foreground) 6%, transparent);
+  }
+
+  .arc-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  /* ── Type badge ───────────────────────────────────────────── */
+  .arc-type-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+  }
+
+  .type-glitch {
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent);
+  }
+  .type-fragment {
+    background: color-mix(in srgb, var(--foreground) 8%, transparent);
+    color: var(--muted-foreground);
+  }
+  .type-dark {
+    background: color-mix(in srgb, var(--foreground) 12%, transparent);
+    color: var(--foreground);
+  }
+  .type-teaser {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+
+  .arc-date {
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+  }
+
+  .arc-card-title {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--foreground);
+    margin: 0;
+  }
+
+  .arc-card-body {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--muted-foreground);
+    margin: 0;
+    flex: 1;
+  }
+
+  .arc-card-cta {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    margin-top: 0.25rem;
+    align-self: flex-start;
+    transition: opacity 0.15s;
+  }
+
+  .arc-card-cta:hover { opacity: 0.75; }
+
+  /* ── Bottom section ───────────────────────────────────────── */
+  .arc-bottom-kicker {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.75rem;
+  }
+
+  .arc-bottom-title {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: clamp(1.35rem, 3vw, 1.9rem);
+    font-weight: 700;
+    color: var(--foreground);
+    margin: 0 0 0.65rem;
+  }
+
+  .arc-bottom-desc {
+    font-size: 0.92rem;
+    color: var(--muted-foreground);
+    margin: 0 0 1.5rem;
+  }
+
+  .arc-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.6rem;
+    min-height: 44px;
+    border-radius: 0.55rem;
+    background: var(--accent);
+    color: var(--accent-foreground, #fff);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .arc-cta-btn:hover { opacity: 0.88; }
+</style>
+
+<script>
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  declare global {
+    interface Window { gtag?: (...args: any[]) => void; }
+  }
+
+  function fireGA4(event: string) {
+    try {
+      if (typeof window.gtag === "function") {
+        window.gtag("event", event, {
+          page_location: window.location.href,
+          page_title: document.title,
+        });
+      }
+    } catch { /* ignore */ }
+  }
+
+  function initArchive() {
+    if (!window.location.pathname.startsWith("/telegram/archive")) return;
+
+    fireGA4("telegram_archive_view");
+
+    // Track card CTA clicks via delegation
+    document.querySelectorAll("[data-archive-cta]").forEach(el => {
+      el.addEventListener("click", () => fireGA4("telegram_landing_click"));
+    });
+    document.getElementById("arc-main-cta")?.addEventListener("click", () => {
+      fireGA4("telegram_landing_click");
+    });
+  }
+
+  document.addEventListener("astro:page-load", initArchive);
+  initArchive();
+</script>

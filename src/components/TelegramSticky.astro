@@ -13,7 +13,7 @@
  * GA4 events: telegram_cta_show / telegram_cta_click / telegram_cta_close
  */
 
-const TELEGRAM_URL = "https://t.me/psyho_media";
+const TELEGRAM_LANDING = "/telegram";
 ---
 
 <div
@@ -43,11 +43,9 @@ const TELEGRAM_URL = "https://t.me/psyho_media";
 
     <a
       id="tg-sticky-link"
-      href={TELEGRAM_URL}
+      href={TELEGRAM_LANDING}
       class="tg-cta"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Перейти в Telegram-канал Людського механізму"
+      aria-label="Дізнатись про Telegram-канал Людського механізму"
     >
       Перейти в Telegram
     </a>
@@ -57,10 +55,8 @@ const TELEGRAM_URL = "https://t.me/psyho_media";
   <div class="tg-bar">
     <span class="tg-bar-text">Продовжуй у Telegram</span>
     <a
-      href={TELEGRAM_URL}
+      href={TELEGRAM_LANDING}
       class="tg-bar-btn"
-      target="_blank"
-      rel="noopener noreferrer"
       id="tg-bar-link"
     >
       Перейти →

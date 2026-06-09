@@ -13,7 +13,7 @@ const t = useTranslations(Astro.currentLocale);
 const locale = Astro.currentLocale ?? "uk";
 const currentYear = new Date().getFullYear();
 
-const TELEGRAM_URL = "https://t.me/psyho_media";
+const TELEGRAM_LANDING = "/telegram";
 ---
 
 <footer
@@ -24,11 +24,9 @@ const TELEGRAM_URL = "https://t.me/psyho_media";
   <div class="ft-tg-wrapper">
     <a
       id="footer-telegram-cta"
-      href={TELEGRAM_URL}
+      href={TELEGRAM_LANDING}
       class="ft-tg-block"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Перейти в Telegram-канал Людського механізму"
+      aria-label="Дізнатись про Telegram-канал Людського механізму"
     >
       <p class="ft-tg-overline">Продовження</p>
       <h2 class="ft-tg-title">Механізм продовжується в Telegram</h2>

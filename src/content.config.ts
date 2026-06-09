@@ -70,4 +70,19 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { posts, pages };
+const telegram = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/telegram" }),
+  schema: z.object({
+    title: z.string(),
+    date: z.date(),
+    type: z.enum([
+      "psycho_glitch",
+      "short_fragment",
+      "dark_observation",
+      "article_teaser",
+    ]),
+    body: z.string().optional(),
+  }),
+});
+
+export const collections = { posts, pages, telegram };

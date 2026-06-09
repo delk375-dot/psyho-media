@@ -360,6 +360,29 @@ const featuredServices = SERVICE_CTA.slice(0, 3);
     </section>
 
     <!-- ═══════════════════════════════════════
+         8B. TELEGRAM — ATMOSPHERIC BLOCK
+    ═══════════════════════════════════════ -->
+    <section id="telegram-cta" class="border-border border-b py-10 sm:py-14">
+      <div class="tg-home-block">
+        <div class="tg-home-text">
+          <p class="section-kicker">Telegram</p>
+          <h2 class="tg-home-title">Не всі механізми стають статтями</h2>
+          <p class="tg-home-desc">
+            Короткі фрагменти, психо-глюки й спостереження виходять у Telegram.
+          </p>
+        </div>
+        <a
+          id="home-telegram-cta"
+          href="/telegram"
+          class="tg-home-btn"
+          aria-label="Дивитись Telegram-стрічку Людського механізму"
+        >
+          Дивитись Telegram-стрічку →
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
          9. ДОПОМОГА — М'ЯКИЙ CTA
          (зараз інформаційно, в майбутньому — коучинг / психолог / юрист)
     ═══════════════════════════════════════ -->
@@ -392,7 +415,78 @@ const featuredServices = SERVICE_CTA.slice(0, 3);
   <Footer />
 </Layout>
 
+<style>
+  /* ── Telegram home block ─────────────────────────────────── */
+  .tg-home-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    border: 1.5px solid var(--border);
+    border-radius: 1rem;
+    background: color-mix(in srgb, var(--accent) 4%, var(--background));
+    max-width: 44rem;
+    transition: border-color 0.2s;
+  }
+
+  .tg-home-block:has(#home-telegram-cta:hover) {
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  }
+
+  @media (min-width: 40rem) {
+    .tg-home-block {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .tg-home-text { flex: 1; }
+
+  .tg-home-title {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--foreground);
+    margin: 0.4rem 0 0;
+  }
+
+  .tg-home-desc {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--muted-foreground);
+  }
+
+  .tg-home-btn {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 0.65rem 1.3rem;
+    min-height: 44px;
+    border-radius: 0.55rem;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--foreground);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+  }
+
+  .tg-home-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 6%, transparent);
+  }
+</style>
+
 <script>
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  declare global { interface Window { gtag?: (...args: any[]) => void; } }
+
   document.addEventListener("astro:page-load", () => {
     const indexLayout = (document.querySelector("#main-content") as HTMLElement)
       ?.dataset;
@@ -400,5 +494,17 @@ const featuredServices = SERVICE_CTA.slice(0, 3);
     if (indexLayout?.layout) {
       sessionStorage.setItem("backUrl", indexLayout.homePath ?? baseRoot);
     }
+
+    // GA4: home Telegram CTA click
+    document.getElementById("home-telegram-cta")?.addEventListener("click", () => {
+      try {
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "telegram_home_cta_click", {
+            page_location: window.location.href,
+            page_title: document.title,
+          });
+        }
+      } catch { /* ignore */ }
+    });
   });
 </script>

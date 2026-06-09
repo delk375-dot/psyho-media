@@ -1,0 +1,274 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+
+const TELEGRAM_URL = "https://t.me/psyho_media";
+
+const CONTENT_TYPES = [
+  {
+    icon: "⚡",
+    title: "Психо-глюки",
+    desc: "Короткі спостереження про те, як мозок обманює себе і нас — у стосунках, рішеннях, самооцінці.",
+  },
+  {
+    icon: "◼",
+    title: "Короткі фрагменти",
+    desc: "Одна думка, яку хочеться переслати або зберегти. Без вступів і висновків — тільки суть.",
+  },
+  {
+    icon: "◐",
+    title: "Темні спостереження",
+    desc: "Про людей, якими ми не хочемо бути — але іноді все одно є. Без засудження, з розумінням механізму.",
+  },
+  {
+    icon: "→",
+    title: "Анонси нових статей",
+    desc: "Коли з'являється новий матеріал на сайті — перші дізнаються читачі каналу.",
+  },
+  {
+    icon: "✂",
+    title: "Тексти, які не потрапили на сайт",
+    desc: "Думки, які були занадто короткими для статті, але занадто важливими, щоб їх не написати.",
+  },
+];
+---
+
+<Layout
+  title="Telegram — продовження людського механізму"
+  description="Короткі психо-глюки, фрагменти, темні спостереження і нові механізми, які не завжди потрапляють у статті."
+>
+  <Header />
+  <main id="main-content" class="app-layout">
+
+    <!-- Hero -->
+    <section class="tg-hero border-border border-b pt-14 pb-12 sm:pt-20 sm:pb-16">
+      <p class="section-kicker">Канал</p>
+      <h1 class="tg-hero-title">
+        Механізм продовжується<br class="hidden sm:block" /> в Telegram
+      </h1>
+      <p class="tg-hero-desc">
+        Короткі психо-глюки, фрагменти, темні спостереження і нові механізми —<br class="hidden sm:block" />
+        які не завжди потрапляють у статті.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a
+          id="tg-landing-cta"
+          href={TELEGRAM_URL}
+          class="tg-btn-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+          </svg>
+          Перейти в Telegram
+        </a>
+        <a href="/telegram/archive" class="tg-btn-secondary">
+          Архів фрагментів →
+        </a>
+      </div>
+    </section>
+
+    <!-- What's inside -->
+    <section class="border-border border-b py-12 sm:py-16">
+      <p class="section-kicker">Що там є</p>
+      <h2 class="section-title mb-10">Що буде в Telegram</h2>
+      <ul class="tg-features-grid">
+        {CONTENT_TYPES.map(item => (
+          <li class="tg-feature-card">
+            <span class="tg-feature-icon" aria-hidden="true">{item.icon}</span>
+            <h3 class="tg-feature-title">{item.title}</h3>
+            <p class="tg-feature-desc">{item.desc}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-14 sm:py-20 flex flex-col items-center text-center">
+      <p class="tg-final-eyebrow">Прихована кімната</p>
+      <h2 class="tg-final-title">Там продовжується те,<br />що починається тут</h2>
+      <p class="tg-final-desc">
+        Сайт — це статті. Telegram — це між рядків.
+      </p>
+      <a
+        id="tg-landing-cta-bottom"
+        href={TELEGRAM_URL}
+        class="tg-btn-primary mt-8"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+        </svg>
+        Відкрити канал
+      </a>
+    </section>
+
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  /* ── Hero ─────────────────────────────────────────────────── */
+  .tg-hero-title {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--foreground);
+    margin: 0.75rem 0 0;
+  }
+
+  .tg-hero-desc {
+    margin-top: 1.25rem;
+    max-width: 44rem;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    line-height: 1.7;
+    color: var(--muted-foreground);
+  }
+
+  /* ── Buttons ──────────────────────────────────────────────── */
+  .tg-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.6rem;
+    min-height: 44px;
+    border-radius: 0.55rem;
+    background: var(--accent);
+    color: var(--accent-foreground, #fff);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .tg-btn-primary:hover { opacity: 0.88; }
+
+  .tg-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.4rem;
+    min-height: 44px;
+    border-radius: 0.55rem;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--muted-foreground);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .tg-btn-secondary:hover {
+    border-color: var(--foreground);
+    color: var(--foreground);
+  }
+
+  /* ── Features grid ────────────────────────────────────────── */
+  .tg-features-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tg-feature-card {
+    padding: 1.5rem;
+    border: 1.5px solid var(--border);
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--accent) 3%, var(--background));
+    transition: border-color 0.2s;
+  }
+
+  .tg-feature-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  }
+
+  .tg-feature-icon {
+    display: block;
+    font-size: 1.4rem;
+    margin-bottom: 0.85rem;
+    line-height: 1;
+  }
+
+  .tg-feature-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--foreground);
+    margin: 0 0 0.5rem;
+  }
+
+  .tg-feature-desc {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--muted-foreground);
+    margin: 0;
+  }
+
+  /* ── Final CTA section ────────────────────────────────────── */
+  .tg-final-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1rem;
+  }
+
+  .tg-final-title {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--foreground);
+    margin: 0 0 0.85rem;
+  }
+
+  .tg-final-desc {
+    font-size: 1rem;
+    color: var(--muted-foreground);
+    margin: 0;
+  }
+</style>
+
+<script>
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  declare global {
+    interface Window { gtag?: (...args: any[]) => void; }
+  }
+
+  function fireGA4(event: string) {
+    try {
+      if (typeof window.gtag === "function") {
+        window.gtag("event", event, {
+          page_location: window.location.href,
+          page_title: document.title,
+        });
+      }
+    } catch { /* ignore */ }
+  }
+
+  function initTelegramLanding() {
+    // Only on /telegram page
+    if (!window.location.pathname.startsWith("/telegram") ||
+        window.location.pathname.startsWith("/telegram/archive")) return;
+
+    // Page view event
+    fireGA4("telegram_landing_view");
+
+    // Click events on CTA buttons
+    ["tg-landing-cta", "tg-landing-cta-bottom"].forEach(id => {
+      document.getElementById(id)?.addEventListener("click", () => {
+        fireGA4("telegram_landing_click");
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", initTelegramLanding);
+  initTelegramLanding();
+</script>
