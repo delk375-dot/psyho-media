@@ -16,7 +16,8 @@
     "lint": "eslint .",
     "telegram:publish": "node --env-file=.env -- node_modules/tsx/dist/cli.mjs scripts/publish-telegram.ts",
     "telegram:publish:txt": "node --env-file=.env.txt -- node_modules/tsx/dist/cli.mjs scripts/publish-telegram.ts",
-    "telegram:publish:ci": "node_modules/tsx/dist/cli.mjs scripts/publish-telegram.ts"
+    "telegram:publish:ci": "node_modules/tsx/dist/cli.mjs scripts/publish-telegram.ts",
+    "editorial:audit": "node_modules/tsx/dist/cli.mjs scripts/editorial-audit.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^6.0.1",
