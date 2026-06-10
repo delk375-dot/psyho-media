@@ -1,48 +1,48 @@
 {
-  "generatedAt": "2026-06-10T06:42:50.420Z",
+  "generatedAt": "2026-06-10T07:09:43.782Z",
   "stats": {
     "totalPosts": 54,
     "publishedPosts": 54,
     "draftPosts": 0,
-    "totalTelegramPosts": 11,
+    "totalTelegramPosts": 51,
     "publishedTelegramPosts": 7,
-    "afterReadingPosts": 4,
-    "bridgePosts": 3,
-    "telegramOnlyPosts": 8,
+    "afterReadingPosts": 44,
+    "bridgePosts": 13,
+    "telegramOnlyPosts": 38,
     "categories": 15,
     "uniqueTags": 81,
     "avgReadingTime": 2
   },
   "strongClusters": [
     {
-      "name": "silence-ghosting",
-      "articles": 10,
-      "signals": 6,
-      "score": 26
-    },
-    {
       "name": "emotional-dependence",
       "articles": 12,
-      "signals": 1,
-      "score": 25
+      "signals": 9,
+      "score": 33
+    },
+    {
+      "name": "silence-ghosting",
+      "articles": 10,
+      "signals": 10,
+      "score": 30
     },
     {
       "name": "relationships",
       "articles": 5,
-      "signals": 0,
-      "score": 10
+      "signals": 4,
+      "score": 14
     },
     {
       "name": "toxic-people",
       "articles": 5,
-      "signals": 0,
-      "score": 10
+      "signals": 4,
+      "score": 14
     },
     {
       "name": "manipulation",
       "articles": 5,
-      "signals": 0,
-      "score": 10
+      "signals": 4,
+      "score": 14
     }
   ],
   "weakClusters": [
@@ -68,14 +68,14 @@
       "reason": "Лише 1 стаття"
     },
     {
-      "name": "conflicts",
+      "name": "social-bugs",
       "articles": 1,
       "signals": 0,
       "score": 2,
       "reason": "Лише 1 стаття"
     },
     {
-      "name": "social-bugs",
+      "name": "dark-mechanisms",
       "articles": 1,
       "signals": 0,
       "score": 2,
@@ -87,11 +87,6 @@
       "slug": "cholovik-yakyi-vidpovivav-cherez-try-dni",
       "title": "Чоловік, який відповідав через три дні",
       "category": "human-scenarios"
-    },
-    {
-      "slug": "chomu-horoshykh-lyudey-chasto-ne-hochut",
-      "title": "Чому хороших людей часто не хочуть",
-      "category": "relationships"
     },
     {
       "slug": "chomu-ignor-stvoryuye-fantaziyu",
@@ -129,11 +124,6 @@
       "category": "relationships"
     },
     {
-      "slug": "chomu-pislya-blyzkosti-lyudy-stayut-kholodnymy",
-      "title": "Чому після близькості люди стають холодними",
-      "category": "sex-attraction"
-    },
-    {
       "slug": "chomu-pryvyazuyemos-do-nestachi-vidpovidi",
       "title": "Чому прив'язуємось до нестачі відповіді",
       "category": "emotional-dependence"
@@ -144,19 +134,9 @@
       "category": "emotional-dependence"
     },
     {
-      "slug": "deep-analysis-movchannya-yak-prykhovanyy-kontrol",
-      "title": "Мовчання як прихований контроль",
-      "category": "silence-ghosting"
-    },
-    {
       "slug": "efekt-nevyznachenosti-pryvyaznist-i-dofemin",
       "title": "Ефект невизначеності: чому нестача відповіді викликає сильнішу прив'язаність",
       "category": "behavior-science"
-    },
-    {
-      "slug": "emotsiyna-zalezhnist-chomu-lyudy-trymayutsya-za-tykh-khto-robyt-bolyache",
-      "title": "Емоційна залежність: чому люди тримаються за тих, хто робить їм боляче",
-      "category": "emotional-dependence"
     },
     {
       "slug": "emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt",
@@ -279,34 +259,9 @@
       "category": "toxic-people"
     },
     {
-      "slug": "hroshi-i-sorom-chomu-bidnist-zdayetsya-moralnoyu-porazkoyu",
-      "title": "Гроші і сором: чому бідність здається моральною поразкою",
-      "category": "money-status"
-    },
-    {
       "slug": "kazka-staryi-yakyi-prodavav-dzerkala",
       "title": "Старий, який продавав людям дзеркала",
       "category": "fairytales"
-    },
-    {
-      "slug": "konflikt-u-pari-chomu-svarka-ne-pro-te-z-choho-pochalas",
-      "title": "Конфлікт у парі: чому сварка майже ніколи не про те, з чого почалась",
-      "category": "conflicts"
-    },
-    {
-      "slug": "manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo",
-      "title": "Маніпуляція: чому люди рідко говорять прямо",
-      "category": "manipulation"
-    },
-    {
-      "slug": "nevyznachenist-yak-dzherelo-zaleznosti",
-      "title": "Невизначеність як джерело залежності",
-      "category": "emotional-dependence"
-    },
-    {
-      "slug": "revnoshchi-strakh-vtraty-chy-bazhannya-kontrolyu",
-      "title": "Ревнощі: страх втрати чи бажання контролю",
-      "category": "jealousy"
     },
     {
       "slug": "seks-i-status-chomu-potyah-ridko-buvaye-vypadkovym",
@@ -327,11 +282,6 @@
       "slug": "temnyy-mekhanizm-emotsiyna-plutanyna",
       "title": "Чому деякі люди спеціально створюють емоційну плутанину",
       "category": "dark-mechanisms"
-    },
-    {
-      "slug": "toksychni-lyudy-chomu-vony-zdayutsya-sylnymy",
-      "title": "Токсичні люди: чому вони здаються сильними",
-      "category": "toxic-people"
     },
     {
       "slug": "viral-note-chomu-vidpovid-tak-vazhlyva",
@@ -356,11 +306,6 @@
       "category": "human-scenarios"
     },
     {
-      "slug": "chomu-horoshykh-lyudey-chasto-ne-hochut",
-      "title": "Чому хороших людей часто не хочуть",
-      "category": "relationships"
-    },
-    {
       "slug": "chomu-ignor-stvoryuye-fantaziyu",
       "title": "Чому ігнор створює фантазію",
       "category": "silence-ghosting"
@@ -396,11 +341,6 @@
       "category": "relationships"
     },
     {
-      "slug": "chomu-pislya-blyzkosti-lyudy-stayut-kholodnymy",
-      "title": "Чому після близькості люди стають холодними",
-      "category": "sex-attraction"
-    },
-    {
       "slug": "chomu-pryvyazuyemos-do-nestachi-vidpovidi",
       "title": "Чому прив'язуємось до нестачі відповіді",
       "category": "emotional-dependence"
@@ -414,11 +354,6 @@
       "slug": "efekt-nevyznachenosti-pryvyaznist-i-dofemin",
       "title": "Ефект невизначеності: чому нестача відповіді викликає сильнішу прив'язаність",
       "category": "behavior-science"
-    },
-    {
-      "slug": "emotsiyna-zalezhnist-chomu-lyudy-trymayutsya-za-tykh-khto-robyt-bolyache",
-      "title": "Емоційна залежність: чому люди тримаються за тих, хто робить їм боляче",
-      "category": "emotional-dependence"
     },
     {
       "slug": "emotsiyna-zalezhnist-chomu-my-trymayemosya-za-tykh-khto-ranyt",
@@ -541,34 +476,9 @@
       "category": "toxic-people"
     },
     {
-      "slug": "hroshi-i-sorom-chomu-bidnist-zdayetsya-moralnoyu-porazkoyu",
-      "title": "Гроші і сором: чому бідність здається моральною поразкою",
-      "category": "money-status"
-    },
-    {
       "slug": "kazka-staryi-yakyi-prodavav-dzerkala",
       "title": "Старий, який продавав людям дзеркала",
       "category": "fairytales"
-    },
-    {
-      "slug": "konflikt-u-pari-chomu-svarka-ne-pro-te-z-choho-pochalas",
-      "title": "Конфлікт у парі: чому сварка майже ніколи не про те, з чого почалась",
-      "category": "conflicts"
-    },
-    {
-      "slug": "manipulyatsiya-chomu-lyudy-ridko-govoryat-pryamo",
-      "title": "Маніпуляція: чому люди рідко говорять прямо",
-      "category": "manipulation"
-    },
-    {
-      "slug": "nevyznachenist-yak-dzherelo-zaleznosti",
-      "title": "Невизначеність як джерело залежності",
-      "category": "emotional-dependence"
-    },
-    {
-      "slug": "revnoshchi-strakh-vtraty-chy-bazhannya-kontrolyu",
-      "title": "Ревнощі: страх втрати чи бажання контролю",
-      "category": "jealousy"
     },
     {
       "slug": "seks-i-status-chomu-potyah-ridko-buvaye-vypadkovym",
@@ -589,11 +499,6 @@
       "slug": "temnyy-mekhanizm-emotsiyna-plutanyna",
       "title": "Чому деякі люди спеціально створюють емоційну плутанину",
       "category": "dark-mechanisms"
-    },
-    {
-      "slug": "toksychni-lyudy-chomu-vony-zdayutsya-sylnymy",
-      "title": "Токсичні люди: чому вони здаються сильними",
-      "category": "toxic-people"
     },
     {
       "slug": "viral-note-chomu-vidpovid-tak-vazhlyva",
@@ -674,6 +579,156 @@
       {
         "slug": "10-pislya-znyknennya-shadow",
         "title": "Деякі люди зникають, щоб подивитися, чи будуть їх шукати",
+        "type": "shadow_fragment"
+      },
+      {
+        "slug": "12-manipulyatsiya-afterthought",
+        "title": "Маніпуляція рідко виникає зі злості",
+        "type": "afterthought"
+      },
+      {
+        "slug": "13-movchannya-afterthought",
+        "title": "Мовчання важить рівно стільки, скільки нерви того, хто мовчить першим",
+        "type": "afterthought"
+      },
+      {
+        "slug": "14-emotsiyna-zalezhnist-afterthought",
+        "title": "Ми залишаємось не тому що слабкі",
+        "type": "afterthought"
+      },
+      {
+        "slug": "15-toksychni-afterthought",
+        "title": "Токсичні люди рідко знають, що вони токсичні",
+        "type": "afterthought"
+      },
+      {
+        "slug": "16-horoshykh-afterthought",
+        "title": "Безпека — не відсутність пристрасті",
+        "type": "afterthought"
+      },
+      {
+        "slug": "17-pislya-blyzkosti-afterthought",
+        "title": "Відстань після близькості — це не відторгнення",
+        "type": "afterthought"
+      },
+      {
+        "slug": "18-nevyznachenist-afterthought",
+        "title": "Непередбачуваність прив'язує сильніше, ніж стабільність",
+        "type": "afterthought"
+      },
+      {
+        "slug": "19-revnoshchi-afterthought",
+        "title": "Ревнощі рідко кажуть «я тебе люблю»",
+        "type": "afterthought"
+      },
+      {
+        "slug": "20-hroshi-sorom-afterthought",
+        "title": "Грошовий сором — це не про гроші",
+        "type": "afterthought"
+      },
+      {
+        "slug": "21-konflikt-afterthought",
+        "title": "Більшість конфліктів у парі — це метарозмова",
+        "type": "afterthought"
+      },
+      {
+        "slug": "22-manipulyatsiya-provocation",
+        "title": "Ти завжди говориш прямо, чого хочеш?",
+        "type": "provocation"
+      },
+      {
+        "slug": "23-movchannya-provocation",
+        "title": "Коли ти замовкав у конфлікті — навіщо?",
+        "type": "provocation"
+      },
+      {
+        "slug": "24-emotsiyna-zalezhnist-provocation",
+        "title": "Якби вони поводились так кожного дня — ти б залишився?",
+        "type": "provocation"
+      },
+      {
+        "slug": "25-toksychni-provocation",
+        "title": "Ти коли-небудь був токсичним — і не знав?",
+        "type": "provocation"
+      },
+      {
+        "slug": "26-horoshykh-provocation",
+        "title": "Тобі потрібна безпечна людина — чи стабільність від небезпечної?",
+        "type": "provocation"
+      },
+      {
+        "slug": "27-pislya-blyzkosti-provocation",
+        "title": "Ти першим ставав холодним після близькості?",
+        "type": "provocation"
+      },
+      {
+        "slug": "28-nevyznachenist-provocation",
+        "title": "Якби вони сказали чітке «ні» — ти б відпустив швидше?",
+        "type": "provocation"
+      },
+      {
+        "slug": "29-revnoshchi-provocation",
+        "title": "Ти боїшся втратити людину чи програти комусь?",
+        "type": "provocation"
+      },
+      {
+        "slug": "30-hroshi-sorom-provocation",
+        "title": "Ти коли-небудь думав, що більше грошей = більше гідності?",
+        "type": "provocation"
+      },
+      {
+        "slug": "31-konflikt-provocation",
+        "title": "Востаннє, коли сварились — про що це було насправді?",
+        "type": "provocation"
+      },
+      {
+        "slug": "32-manipulyatsiya-shadow",
+        "title": "Маніпуляція — це часто не зла воля",
+        "type": "shadow_fragment"
+      },
+      {
+        "slug": "33-movchannya-shadow",
+        "title": "Найпотужніша форма контролю — не крик",
+        "type": "shadow_fragment"
+      },
+      {
+        "slug": "34-emotsiyna-zalezhnist-shadow",
+        "title": "Кохання не завжди болить",
+        "type": "shadow_fragment"
+      },
+      {
+        "slug": "35-toksychni-shadow",
+        "title": "Токсичність — це завжди про когось іншого",
+        "type": "shadow_fragment"
+      },
+      {
+        "slug": "36-horoshykh-shadow",
+        "title": "Доброта може стати невидимою",
+        "type": "shadow_fragment"
+      },
+      {
+        "slug": "37-pislya-blyzkosti-shadow",
+        "title": "Деякі люди відчувають безпеку лише до близькості",
+        "type": "shadow_fragment"
+      },
+      {
+        "slug": "38-nevyznachenist-shadow",
+        "title": "Ми закохуємось не в людей",
+        "type": "shadow_fragment"
+      },
+      {
+        "slug": "39-revnoshchi-shadow",
+        "title": "Ревнощі іноді — це тест не партнера, а себе",
+        "type": "shadow_fragment"
+      },
+      {
+        "slug": "40-hroshi-sorom-shadow",
+        "title": "Нас соромить не бідність",
+        "type": "shadow_fragment"
+      },
+      {
+        "slug": "41-konflikt-shadow",
+        "title": "В парній сварці одна людина часто знає, що не права",
         "type": "shadow_fragment"
       }
     ]
@@ -829,7 +884,7 @@
       "what": "Написати 1 deep_analysis + after-reading pack (4 пости)"
     },
     {
-      "topic": "conflicts",
+      "topic": "social-bugs",
       "why": "Слабкий кластер — мало статей або немає Telegram-шару",
       "what": "Написати 1 deep_analysis + after-reading pack (4 пости)"
     },
@@ -839,12 +894,12 @@
       "what": "Створити afterthought + provocation + shadow_fragment + microcase"
     },
     {
-      "topic": "Чому хороших людей часто не хочуть",
+      "topic": "Чому ігнор створює фантазію",
       "why": "Стаття без Telegram after-reading layer",
       "what": "Створити afterthought + provocation + shadow_fragment + microcase"
     },
     {
-      "topic": "Чому ігнор створює фантазію",
+      "topic": "Чому холодність часто помилково сприймається як сила",
       "why": "Стаття без Telegram after-reading layer",
       "what": "Створити afterthought + provocation + shadow_fragment + microcase"
     },
@@ -877,7 +932,7 @@
     },
     {
       "day": "Ср",
-      "task": "After-reading pack для «Чому хороших людей часто не хочуть»",
+      "task": "After-reading pack для «Чому ігнор створює фантазію»",
       "type": "telegram"
     },
     {
