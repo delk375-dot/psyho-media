@@ -85,7 +85,7 @@ const hasSignals = related.length > 0;
 ---
 
 {hasSignals && (
-  <aside class="rts-wrapper" aria-label="Післясмак механізму">
+  <aside class="rts-wrapper" aria-label="Післясмак механізму" data-post-slug={postSlug}>
     <div class="rts-header">
       <p class="rts-eyebrow">Telegram · Після прочитання</p>
       <h2 class="rts-title">Післясмак механізму</h2>
@@ -115,6 +115,9 @@ const hasSignals = related.length > 0;
             href={signal.data.bridgeTo ? `${SITE_URL}${signal.data.bridgeTo}` : TELEGRAM_URL}
             class="rts-card-cta"
             data-telegram-related-signal
+            data-signal-type={signal.data.type}
+            data-signal-tone={signal.data.tone ?? ""}
+            data-has-bridge={signal.data.bridgeTo ? "true" : "false"}
             {...(signal.data.bridgeTo
               ? {}
               : { target: "_blank", rel: "noopener noreferrer" })}
@@ -284,22 +287,41 @@ const hasSignals = related.length > 0;
 </style>
 
 <script>
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  declare global { interface Window { gtag?: (...args: any[]) => void; } }
+  import { trackEvent, trackRelatedSignalClick, trackAfterReadingOpen } from "@/utils/analytics";
 
   function initRelatedSignals() {
-    document.querySelectorAll("[data-telegram-related-signal]").forEach(el => {
+    // ── Click tracking ────────────────────────────────────────
+    document.querySelectorAll<HTMLElement>("[data-telegram-related-signal]").forEach(el => {
       el.addEventListener("click", () => {
-        try {
-          if (typeof window.gtag === "function") {
-            window.gtag("event", "telegram_related_signal_click", {
-              page_location: window.location.href,
-              page_title: document.title,
-            });
-          }
-        } catch { /* ignore */ }
+        const type = el.dataset.signalType ?? "";
+        const tone = el.dataset.signalTone ?? "";
+        const hasBridge = el.dataset.hasBridge === "true";
+
+        // Legacy event (kept for backward-compat with existing GA4 custom reports)
+        trackEvent("telegram_related_signal_click");
+        // New standardised event
+        trackRelatedSignalClick({ signal_type: type, signal_tone: tone, has_bridge: hasBridge });
       });
     });
+
+    // ── Visibility tracking: fire after_reading_open once when section enters viewport
+    const wrapper = document.querySelector<HTMLElement>(".rts-wrapper");
+    if (!wrapper) return;
+
+    const postSlug = wrapper.dataset.postSlug ?? "";
+    let opened = false;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        if (!opened && entries[0]?.isIntersecting) {
+          opened = true;
+          trackAfterReadingOpen(postSlug);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(wrapper);
   }
 
   document.addEventListener("astro:page-load", initRelatedSignals);

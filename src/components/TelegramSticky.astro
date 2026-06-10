@@ -286,10 +286,7 @@ const TELEGRAM_LANDING = "/telegram";
 </style>
 
 <script>
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  declare global {
-    interface Window { gtag?: (...args: any[]) => void; }
-  }
+  import { trackEvent, trackTelegramClick } from "@/utils/analytics";
 
   const LS_KEY = "lm_tg_dismissed";
   const COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
@@ -297,14 +294,7 @@ const TELEGRAM_LANDING = "/telegram";
   const SCROLL_THRESHOLD = 0.60;                 // 60% of page
 
   function fireGA4(event: string) {
-    try {
-      if (typeof window.gtag === "function") {
-        window.gtag("event", event, {
-          page_location: window.location.href,
-          page_title: document.title,
-        });
-      }
-    } catch { /* ignore */ }
+    trackEvent(event);
   }
 
   function initTelegramSticky() {
@@ -355,7 +345,10 @@ const TELEGRAM_LANDING = "/telegram";
     document.getElementById("tg-bar-close")?.addEventListener("click", dismiss);
 
     // GA4 click events
-    function onCtaClick() { fireGA4("telegram_cta_click"); }
+    function onCtaClick() {
+      fireGA4("telegram_cta_click"); // legacy — kept for existing GA4 reports
+      trackTelegramClick("sticky");
+    }
     document.getElementById("tg-sticky-link")?.addEventListener("click", onCtaClick);
     document.getElementById("tg-bar-link")?.addEventListener("click", onCtaClick);
   }

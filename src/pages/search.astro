@@ -88,6 +88,8 @@ const SUGGESTIONS = [
 </Layout>
 
 <script>
+  import { trackSearchUsed } from "@/utils/analytics";
+
   /**
    * Initialise Pagefind UI and wire up search suggestions.
    * Loaded only on /search — not on the rest of the site.
@@ -140,6 +142,10 @@ const SUGGESTIONS = [
           );
           sessionStorage.setItem("backUrl", window.location.href);
           updateSuggestions(term);
+          // Track search when query is meaningful (≥2 chars)
+          if (term.trim().length >= 2) {
+            trackSearchUsed(term.trim());
+          }
           return term;
         },
       });

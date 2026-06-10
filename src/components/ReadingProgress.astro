@@ -42,10 +42,7 @@
 </style>
 
 <script>
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  declare global {
-    interface Window { gtag?: (...args: any[]) => void; }
-  }
+  import { trackArticleDepth, trackEvent } from "@/utils/analytics";
 
   function initReadingProgress() {
     const bar = document.getElementById("reading-progress-bar");
@@ -56,24 +53,12 @@
       return;
     }
 
-    // Capture non-null refs for use inside closures
     const progressBar: HTMLElement = bar;
     const articleEl: HTMLElement = article;
 
     progressBar.style.display = "";
 
     const fired = new Set<number>();
-
-    function fireGA4(pct: number) {
-      try {
-        if (typeof window.gtag === "function") {
-          window.gtag("event", `article_read_${pct}`, {
-            page_location: window.location.href,
-            page_title: document.title,
-          });
-        }
-      } catch { /* GA4 not loaded */ }
-    }
 
     function update() {
       const articleRect = articleEl.getBoundingClientRect();
@@ -85,10 +70,13 @@
       progressBar.style.width = `${pct}%`;
       progressBar.setAttribute("aria-valuenow", String(pct));
 
-      for (const milestone of [25, 50, 75, 100]) {
+      for (const milestone of [25, 50, 75, 100] as const) {
         if (!fired.has(milestone) && pct >= milestone) {
           fired.add(milestone);
-          fireGA4(milestone);
+          // Legacy event name (kept for backward-compat with existing GA4 reports)
+          trackEvent(`article_read_${milestone}`);
+          // New standardised event name
+          trackArticleDepth(milestone);
         }
       }
     }
