@@ -119,8 +119,23 @@ telegramMessageId: null
 
 ```
 Повний механізм:
-https://psyho-media.pp.ua/posts/slug-statti/
+https://psyho-media.pp.ua/posts/slug-statti/?utm_source=telegram&utm_medium=after_reading&utm_campaign=mechanism_loop&utm_content={type}
 ```
+
+### UTM strategy (Telegram return loop)
+
+Кожен bridge-лінк автоматично отримує UTM-мітки (`withUtm()` у
+`publish-telegram.ts`):
+
+- `utm_source=telegram` · `utm_medium=after_reading` ·
+  `utm_campaign=mechanism_loop` · `utm_content={post_type}`
+- існуючі query-параметри зберігаються, utm ніколи не дублюються
+- мітки додаються ТІЛЬКИ до лінків, що публікуються в Telegram —
+  внутрішні лінки сайту лишаються чистими
+
+Це робить видимим зворотний шлях Telegram → сайт у GA4 (раніше він
+розчинявся в direct traffic) і дозволяє порівнювати, який тип
+after-reading поста повертає читачів.
 
 ---
 
@@ -194,9 +209,24 @@ docs/
 
 ## GA4 події
 
+Clean naming: одна дія → один primary event (mapping legacy-імен —
+у `docs/behavioral-analytics.md`).
+
 | Подія | Де | Коли |
 |-------|----|------|
-| `telegram_related_signal_click` | Стаття | Клік у блоці "Післясмак механізму" |
-| `telegram_bridge_click` | Архів | Клік "Повний механізм →" |
+| `related_signal_click` | Стаття | Клік у блоці "Післясмак механізму" (+`signal_type`/`signal_tone`/`has_bridge`) |
+| `after_reading_open` | Стаття | Блок "Післясмак" увійшов у viewport |
+| `telegram_bridge_click` | Архів | Клік "Повний механізм →" (внутрішній перехід на статтю) |
 | `telegram_archive_filter` | Архів | Вибір фільтра (тип або тон) |
-| `telegram_signal_click` | Скрізь | Клік CTA в Telegram |
+| `telegram_click` | Скрізь | Будь-який перехід у Telegram; джерело в параметрі `source` (sticky / footer / home / exit_intent / telegram_page / archive) |
+
+---
+
+## SEO / індексація Telegram-шару
+
+- `/telegram` — індексується (лендінг каналу)
+- `/telegram/archive` — **noindex + поза sitemap**: повні тексти
+  after-reading постів дублюються на сторінках статей; архів живе
+  для людей всередині екосистеми, не для пошуку
+- Telegram markdown-файли НЕ генерують окремих сторінок сайту
+- Лейбли типів/тонів — спільний модуль `src/utils/telegramLabels.ts`

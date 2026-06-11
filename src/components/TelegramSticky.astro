@@ -285,6 +285,16 @@ const TELEGRAM_LANDING = "/telegram";
   }
 </style>
 
+<style is:global>
+  /* When the mobile Telegram bar is visible, lift the BackToTop button
+     above it so the two fixed elements never overlap (narrow screens). */
+  @media (max-width: 560px) {
+    body:has(.tg-sticky.visible) #btt-btn-container {
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 4rem);
+    }
+  }
+</style>
+
 <script>
   import { trackEvent, trackTelegramClick } from "@/utils/analytics";
 
@@ -344,9 +354,8 @@ const TELEGRAM_LANDING = "/telegram";
     document.getElementById("tg-sticky-close")?.addEventListener("click", dismiss);
     document.getElementById("tg-bar-close")?.addEventListener("click", dismiss);
 
-    // GA4 click events
+    // GA4 click events — one action, one primary event
     function onCtaClick() {
-      fireGA4("telegram_cta_click"); // legacy — kept for existing GA4 reports
       trackTelegramClick("sticky");
     }
     document.getElementById("tg-sticky-link")?.addEventListener("click", onCtaClick);

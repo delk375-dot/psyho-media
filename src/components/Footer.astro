@@ -185,24 +185,12 @@ const TELEGRAM_LANDING = "/telegram";
 </style>
 
 <script>
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  declare global {
-    interface Window { gtag?: (...args: any[]) => void; }
-  }
+  import { trackTelegramClick } from "@/utils/analytics";
 
   function initFooterTelegram() {
     const cta = document.getElementById("footer-telegram-cta");
     if (!cta) return;
-    cta.addEventListener("click", () => {
-      try {
-        if (typeof window.gtag === "function") {
-          window.gtag("event", "footer_telegram_click", {
-            page_location: window.location.href,
-            page_title: document.title,
-          });
-        }
-      } catch { /* ignore */ }
-    });
+    cta.addEventListener("click", () => trackTelegramClick("footer"));
   }
 
   document.addEventListener("astro:page-load", initFooterTelegram);

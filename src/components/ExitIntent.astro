@@ -213,10 +213,7 @@ const TELEGRAM_URL = "/telegram";
 </style>
 
 <script>
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  declare global {
-    interface Window { gtag?: (...args: any[]) => void; }
-  }
+  import { trackEvent, trackTelegramClick } from "@/utils/analytics";
 
   const SESSION_KEY = "lm_exit_shown";
   const LS_KEY = "lm_tg_dismissed";
@@ -228,14 +225,7 @@ const TELEGRAM_URL = "/telegram";
   const EXCLUDED_PATHS = ["/search"];
 
   function fireGA4(event: string) {
-    try {
-      if (typeof window.gtag === "function") {
-        window.gtag("event", event, {
-          page_location: window.location.href,
-          page_title: document.title,
-        });
-      }
-    } catch { /* ignore */ }
+    trackEvent(event);
   }
 
   function initExitIntent() {
@@ -297,9 +287,9 @@ const TELEGRAM_URL = "/telegram";
     document.getElementById("exit-intent-close")?.addEventListener("click", hide);
     document.getElementById("exit-intent-stay")?.addEventListener("click", hide);
 
-    // Telegram link GA4
+    // Telegram link GA4 — unified telegram_click with source param
     document.getElementById("exit-intent-tg")?.addEventListener("click", () => {
-      fireGA4("exit_intent_telegram_click");
+      trackTelegramClick("exit_intent");
     });
 
     // ESC key

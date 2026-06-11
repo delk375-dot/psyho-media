@@ -25,7 +25,9 @@ export default defineConfig({
     mdx(),
     sitemap({
       filter: page =>
-        config.features?.showArchives !== false || !page.endsWith("/archives/"),
+        // /telegram/archive is noindex (duplicate content guard) — keep it out of the sitemap
+        !page.endsWith("/telegram/archive/") &&
+        (config.features?.showArchives !== false || !page.endsWith("/archives/")),
     }),
   ],
   i18n: {

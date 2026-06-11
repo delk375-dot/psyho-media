@@ -246,31 +246,16 @@ const CONTENT_TYPES = [
 </style>
 
 <script>
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  declare global {
-    interface Window { gtag?: (...args: any[]) => void; }
-  }
-
-  function fireGA4(event: string, extra?: Record<string, unknown>) {
-    try {
-      if (typeof window.gtag === "function") {
-        window.gtag("event", event, {
-          page_location: window.location.href,
-          page_title: document.title,
-          ...extra,
-        });
-      }
-    } catch { /* ignore */ }
-  }
+  import { trackEvent, trackTelegramClick } from "@/utils/analytics";
 
   function initTelegramLanding() {
     if (!window.location.pathname.startsWith("/telegram") ||
         window.location.pathname.startsWith("/telegram/archive")) return;
 
-    fireGA4("telegram_landing_view");
+    trackEvent("telegram_landing_view");
 
     document.querySelectorAll("[data-tg-signal-click]").forEach(el => {
-      el.addEventListener("click", () => fireGA4("telegram_signal_click"));
+      el.addEventListener("click", () => trackTelegramClick("telegram_page"));
     });
   }
 

@@ -25,35 +25,11 @@ const { postSlug } = Astro.props;
 const SITE_URL = "https://psyho-media.pp.ua";
 const TELEGRAM_URL = "https://t.me/psyho_media";
 
-/** After-reading pack types — shown first, prioritised in the block */
-const AFTER_READING_TYPES = new Set([
-  "afterthought",
-  "provocation",
-  "shadow_fragment",
-  "microcase",
-]);
-
-const TYPE_LABELS: Record<string, string> = {
-  signal:         "Сигнал",
-  bridge:         "Міст",
-  question:       "Питання",
-  fragment:       "Фрагмент",
-  case:           "Кейс",
-  teaser:         "Анонс",
-  afterthought:   "Після статті",
-  provocation:    "Провокація",
-  shadow_fragment:"Тіньовий фрагмент",
-  microcase:      "Мікрокейс",
-};
-
-const TONE_LABELS: Record<string, string> = {
-  atmospheric: "Атмосферний",
-  dark: "Темний",
-  ironic: "Іронічний",
-  analytical: "Аналітичний",
-  provocative: "Провокативний",
-  calm: "Спокійний",
-};
+import {
+  AFTER_READING_TYPES,
+  TYPE_LABELS,
+  TONE_LABELS,
+} from "@/utils/telegramLabels";
 
 const allSignals = await getCollection("telegram");
 
@@ -287,7 +263,7 @@ const hasSignals = related.length > 0;
 </style>
 
 <script>
-  import { trackEvent, trackRelatedSignalClick, trackAfterReadingOpen } from "@/utils/analytics";
+  import { trackRelatedSignalClick, trackAfterReadingOpen } from "@/utils/analytics";
 
   function initRelatedSignals() {
     // ── Click tracking ────────────────────────────────────────
@@ -297,9 +273,6 @@ const hasSignals = related.length > 0;
         const tone = el.dataset.signalTone ?? "";
         const hasBridge = el.dataset.hasBridge === "true";
 
-        // Legacy event (kept for backward-compat with existing GA4 custom reports)
-        trackEvent("telegram_related_signal_click");
-        // New standardised event
         trackRelatedSignalClick({ signal_type: type, signal_tone: tone, has_bridge: hasBridge });
       });
     });

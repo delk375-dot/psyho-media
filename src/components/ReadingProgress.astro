@@ -42,7 +42,7 @@
 </style>
 
 <script>
-  import { trackArticleDepth, trackEvent } from "@/utils/analytics";
+  import { trackArticleDepth } from "@/utils/analytics";
 
   function initReadingProgress() {
     const bar = document.getElementById("reading-progress-bar");
@@ -73,9 +73,6 @@
       for (const milestone of [25, 50, 75, 100] as const) {
         if (!fired.has(milestone) && pct >= milestone) {
           fired.add(milestone);
-          // Legacy event name (kept for backward-compat with existing GA4 reports)
-          trackEvent(`article_read_${milestone}`);
-          // New standardised event name
           trackArticleDepth(milestone);
         }
       }

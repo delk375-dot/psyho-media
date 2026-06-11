@@ -83,6 +83,22 @@ function escapeHtml(s: string): string {
 }
 
 /**
+ * Append UTM params to a bridge URL so Telegram→site returns are visible
+ * in GA4 (otherwise they dissolve into direct traffic).
+ * Existing query params are preserved; utm_* are never duplicated.
+ */
+function withUtm(url: string, postType: string): string {
+  const u = new URL(url);
+  if (!u.searchParams.has("utm_source")) {
+    u.searchParams.set("utm_source", "telegram");
+    u.searchParams.set("utm_medium", "after_reading");
+    u.searchParams.set("utm_campaign", "mechanism_loop");
+    u.searchParams.set("utm_content", postType);
+  }
+  return u.toString();
+}
+
+/**
  * Build Telegram message in HTML format.
  * Format (signal style):
  *   <b>Title</b>\n\nBody\n\nМеханізм:\n{url}
@@ -97,7 +113,7 @@ function buildMessageText(post: TelegramPost): string {
   }
 
   if (post.bridgeTo) {
-    const url = `${SITE_URL}${post.bridgeTo}`;
+    const url = withUtm(`${SITE_URL}${post.bridgeTo}`, post.type);
     parts.push(`\nПовний механізм:\n${url}`);
   }
 

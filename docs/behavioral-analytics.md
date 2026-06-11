@@ -36,14 +36,30 @@ src/utils/analytics.ts          ← єдиний центр логіки
 | `search_used` | search.astro | `search_term`, `result_count` | Пошук використано |
 | `telegram_click` | TelegramSticky + компоненти | `source` | Будь-який клік на Telegram |
 
-### Legacy Events (збережені для наявних GA4-звітів)
+### Clean naming strategy — одна дія, один primary event
 
-| Legacy | Новий аналог |
+Подвійний облік (legacy + нові імена паралельно) **знятий** 2026-06-11.
+Кожна дія тепер шле рівно один event. Якщо у старих GA4 explorations
+використовувались legacy-імена — мігруй звіти за цією таблицею:
+
+| Legacy (більше НЕ шлеться) | Замінено на |
 |---|---|
 | `article_read_25/50/75/100` | `article_depth_25/50/75/100` |
 | `telegram_related_signal_click` | `related_signal_click` |
-| `telegram_cta_click` | `telegram_click` source=sticky |
-| `footer_telegram_click` | — (поки без рефакторингу) |
+| `telegram_cta_click` | `telegram_click` `source=sticky` |
+| `footer_telegram_click` | `telegram_click` `source=footer` |
+| `telegram_home_cta_click` | `telegram_click` `source=home` |
+| `exit_intent_telegram_click` | `telegram_click` `source=exit_intent` |
+| `telegram_signal_click` | `telegram_click` `source=telegram_page` / `source=archive` |
+
+Усі переходи в Telegram = один event `telegram_click`, сегментація через
+параметр `source`. Звіт "всі Telegram-кліки" — один фільтр, не сума 5 імен.
+
+Події, що лишилися унікальними (не кліки в Telegram):
+`telegram_cta_show/close`, `exit_intent_show/close`, `telegram_landing_view`,
+`telegram_archive_view`, `telegram_archive_filter`, `telegram_bridge_click`
+(внутрішній перехід архів → стаття), `next_mechanism_open`,
+`recommendation_click`.
 
 ### Microsoft Clarity Custom Tags
 
@@ -172,6 +188,47 @@ Sort: desc
 | `src/pages/search.astro` | `search_used` |
 | `src/components/GoogleAnalytics.astro` | GA4 loader + page_view |
 | `src/components/MicrosoftClarity.astro` | Clarity loader |
+
+---
+
+## UTM strategy — Telegram return loop
+
+Всі bridge-лінки, які `publish-telegram.ts` публікує в канал, автоматично
+отримують UTM-мітки:
+
+```
+?utm_source=telegram
+&utm_medium=after_reading
+&utm_campaign=mechanism_loop
+&utm_content={post_type}     ← afterthought / provocation / microcase / …
+```
+
+Навіщо: без міток повернення з Telegram розчинялись у direct traffic —
+єдина сліпа пляма воронки. Тепер у GA4:
+
+```
+Reports → Acquisition → Traffic acquisition
+Filter: session source = telegram, medium = after_reading
+Breakdown: utm_content → який тип after-reading поста повертає людей
+```
+
+UTM додаються тільки до лінків, що публікуються В Telegram. Внутрішні
+лінки сайту (RelatedTelegramSignals, archive) UTM не отримують —
+self-referral мітки ламали б атрибуцію сесій.
+
+---
+
+## Noindex strategy
+
+| Сторінка | Стан | Чому |
+|---|---|---|
+| `/search` | `noindex, follow` | UI-сторінка без власного контенту |
+| `/telegram/archive` | `noindex, follow` + поза sitemap | Повні тексти after-reading постів дублюються на сторінках статей; архів — внутрішній інструмент, не SEO-актив |
+| `/telegram` | індексується | Лендінг каналу — самостійна сторінка-пояснення |
+| Статті, категорії, теги | індексуються | Основна карта механізмів |
+
+`robots.txt` (`public/robots.txt`): allow all, `Disallow: /search`,
+явна `Sitemap:` директива.
 
 ---
 

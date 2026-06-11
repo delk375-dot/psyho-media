@@ -7,49 +7,12 @@ import Footer from "@/components/Footer.astro";
 const TELEGRAM_URL = "https://t.me/psyho_media";
 const SITE_URL = "https://psyho-media.pp.ua";
 
-const TYPE_LABELS: Record<string, string> = {
-  signal:          "Сигнал",
-  bridge:          "Міст",
-  question:        "Питання",
-  fragment:        "Фрагмент",
-  case:            "Кейс",
-  teaser:          "Анонс",
-  afterthought:    "Afterthought",
-  provocation:     "Провокація",
-  shadow_fragment: "Тіньовий фрагмент",
-  microcase:       "Мікрокейс",
-};
-
-const TONE_LABELS: Record<string, string> = {
-  atmospheric: "Атмосферний",
-  dark: "Темний",
-  ironic: "Іронічний",
-  analytical: "Аналітичний",
-  provocative: "Провокативний",
-  calm: "Спокійний",
-};
-
-const TYPE_CSS: Record<string, string> = {
-  signal:          "type-signal",
-  bridge:          "type-bridge",
-  question:        "type-question",
-  fragment:        "type-fragment",
-  case:            "type-case",
-  teaser:          "type-teaser",
-  afterthought:    "type-afterthought",
-  provocation:     "type-provocation",
-  shadow_fragment: "type-shadow",
-  microcase:       "type-microcase",
-};
-
-const TONE_CSS: Record<string, string> = {
-  atmospheric: "tone-atmospheric",
-  dark:        "tone-dark",
-  ironic:      "tone-ironic",
-  analytical:  "tone-analytical",
-  provocative: "tone-provocative",
-  calm:        "tone-calm",
-};
+import {
+  TYPE_LABELS,
+  TONE_LABELS,
+  TYPE_CSS,
+  TONE_CSS,
+} from "@/utils/telegramLabels";
 
 const allPosts = await getCollection("telegram");
 const sorted = allPosts.sort(
@@ -71,6 +34,7 @@ function formatDate(d: Date): string {
 <Layout
   title="Архів сигналів — Telegram-поле Людського механізму"
   description="Фрагменти, сигнали, мости і питання з Telegram-каналу. Те, що з'являється між статтями."
+  noindex={true}
 >
   <Header />
   <main id="main-content" class="app-layout">
@@ -474,21 +438,10 @@ function formatDate(d: Date): string {
 </style>
 
 <script>
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  declare global {
-    interface Window { gtag?: (...args: any[]) => void; }
-  }
+  import { trackEvent, trackTelegramClick } from "@/utils/analytics";
 
   function fireGA4(event: string, extra?: Record<string, unknown>) {
-    try {
-      if (typeof window.gtag === "function") {
-        window.gtag("event", event, {
-          page_location: window.location.href,
-          page_title: document.title,
-          ...extra,
-        });
-      }
-    } catch { /* ignore */ }
+    trackEvent(event, extra);
   }
 
   // ── Filter state ────────────────────────────────────────────
@@ -550,12 +503,12 @@ function formatDate(d: Date): string {
       el.addEventListener("click", () => fireGA4("telegram_bridge_click"));
     });
 
-    // Telegram CTA clicks
+    // Telegram CTA clicks — unified telegram_click with source param
     document.querySelectorAll("[data-archive-cta]").forEach(el => {
-      el.addEventListener("click", () => fireGA4("telegram_signal_click"));
+      el.addEventListener("click", () => trackTelegramClick("archive"));
     });
     document.getElementById("arc-main-cta")?.addEventListener("click", () => {
-      fireGA4("telegram_signal_click");
+      trackTelegramClick("archive");
     });
   }
 

@@ -484,8 +484,7 @@ const featuredServices = SERVICE_CTA.slice(0, 3);
 </style>
 
 <script>
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  declare global { interface Window { gtag?: (...args: any[]) => void; } }
+  import { trackTelegramClick } from "@/utils/analytics";
 
   document.addEventListener("astro:page-load", () => {
     const indexLayout = (document.querySelector("#main-content") as HTMLElement)
@@ -495,16 +494,9 @@ const featuredServices = SERVICE_CTA.slice(0, 3);
       sessionStorage.setItem("backUrl", indexLayout.homePath ?? baseRoot);
     }
 
-    // GA4: home Telegram CTA click
+    // GA4: home Telegram CTA — unified telegram_click with source param
     document.getElementById("home-telegram-cta")?.addEventListener("click", () => {
-      try {
-        if (typeof window.gtag === "function") {
-          window.gtag("event", "telegram_home_cta_click", {
-            page_location: window.location.href,
-            page_title: document.title,
-          });
-        }
-      } catch { /* ignore */ }
+      trackTelegramClick("home");
     });
   });
 </script>

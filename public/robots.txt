@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Internal UI page (already noindex via meta)
+Disallow: /search
+
+Sitemap: https://psyho-media.pp.ua/sitemap-index.xml
