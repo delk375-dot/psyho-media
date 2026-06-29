@@ -1,5 +1,5 @@
 ---
-title: "Він бачив її повідомлення тому хлопцю"
+title: Він бачив її повідомлення тому хлопцю
 date: 2026-06-29T11:00:00.000Z
 type: microcase
 tone: atmospheric
@@ -12,8 +12,9 @@ body: >-
   Він не сказав нічого. Пішов у себе. Вона помітила, що щось не так, але не
   знала що. Він ревнував не до хлопця. Він ревнував до того, що вона з кимось
   іншим така ж відкрита, як із ним.
-published: false
+published: true
 publishDate: 2026-06-29T11:00:00.000Z
-publishedAt: null
-telegramMessageId: null
+publishedAt: '2026-06-29T14:51:16.586Z'
+telegramMessageId: 51
 ---
+
